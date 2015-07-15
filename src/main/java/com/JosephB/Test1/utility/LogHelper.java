@@ -1,8 +1,8 @@
-package com.JosephB.Test1.utility;
+package com.josephb.test1.utility;
 
 import org.apache.logging.log4j.Level;
 
-import com.JosephB.Test1.reference.Reference;
+import com.josephb.test1.reference.Reference;
 
 import net.minecraftforge.fml.common.FMLLog;
 

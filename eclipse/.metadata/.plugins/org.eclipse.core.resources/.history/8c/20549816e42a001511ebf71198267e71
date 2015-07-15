@@ -1,0 +1,26 @@
+package com.JosephB.Test1.item;
+
+import com.JosephB.Test1.reference.Reference;
+
+import net.minecraft.item.Item;
+
+public class ItemTest1 extends Item
+{
+	public ItemTest1()
+	{
+		super();
+		
+	}
+
+	
+	@Override
+	public String getUnlocalizedName()
+	{
+		return String.format("item.%s%s", Reference.MOD_ID.toLowerCase(), getUnwrappedUnlocalizedName(super.getUnlocalizedName()));
+	}
+	
+	protected String getUnwrappedUnlocalizedName(String unlocalizedName)
+	{
+		return unlocalizedName.substring(unlocalizedName.indexOf(".") + 1);
+	}
+}

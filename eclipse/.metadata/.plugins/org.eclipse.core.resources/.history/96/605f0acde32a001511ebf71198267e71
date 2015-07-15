@@ -1,0 +1,13 @@
+package com.JosephB.Test1.item;
+
+import net.minecraft.item.Item;
+
+public class ItemTest1 extends Item
+{
+	public ItemTest1()
+	{
+		super();
+		
+	}
+
+}

@@ -1,8 +1,8 @@
-package com.JosephB.Test1.handler;
+package com.josephb.test1.handler;
 
 import java.io.File;
 
-import com.JosephB.Test1.reference.Reference;
+import com.josephb.test1.reference.Reference;
 
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;

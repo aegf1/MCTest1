@@ -1,0 +1,7 @@
+package com.josephb.test1.block;
+
+public class Magnet extends BlockTest1
+{
+	public BlockMagnet
+
+}

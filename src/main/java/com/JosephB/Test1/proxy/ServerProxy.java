@@ -1,4 +1,4 @@
-package com.JosephB.Test1.proxy;
+package com.josephb.test1.proxy;
 
 public class ServerProxy extends CommonProxy {
 

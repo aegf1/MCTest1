@@ -1,7 +1,7 @@
-package com.JosephB.Test1.client.gui;
+package com.josephb.test1.client.gui;
 
-import com.JosephB.Test1.handler.ConfigurationHandler;
-import com.JosephB.Test1.reference.Reference;
+import com.josephb.test1.handler.ConfigurationHandler;
+import com.josephb.test1.reference.Reference;
 
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraftforge.common.config.ConfigElement;

@@ -1,0 +1,42 @@
+package com.JosephB.Test1;
+
+import com.JosephB.Test1.proxy.IProxy;
+
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.Mod.Instance;
+import net.minecraftforge.fml.common.SidedProxy;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+
+@Mod(modid="Test1", name="First Test Mod", version="0.1")
+public class Test1 
+{
+	
+	@Mod.Instance("Test1")
+	public static Test1 Instance;
+	
+	@SidedProxy(clientSide = "com.JosephB.Test1.proxy.ClientProxy", serverSide = "com.JosephB.Test1.proxy.ServerProxy")
+	public static IProxy proxy;
+	
+	@Mod.EventHandler
+	public void preInit(FMLPreInitializationEvent event)
+	{
+		//Code for config, blocks, items etc
+		System.out.println("PreInit Stage");
+	}
+	
+	@Mod.EventHandler
+	public void init(FMLInitializationEvent event)
+	{
+		//Code for GUIs, tile entities, recipes etc
+		System.out.println("Init Stage");
+	}
+	
+	@Mod.EventHandler
+	public void postInit(FMLPostInitializationEvent event)
+	{
+		//??
+		System.out.println("PostInit Stage");
+	}
+}

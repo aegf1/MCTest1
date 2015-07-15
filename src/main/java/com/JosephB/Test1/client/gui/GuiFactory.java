@@ -1,4 +1,4 @@
-package com.JosephB.Test1.client.gui;
+package com.josephb.test1.client.gui;
 
 import java.util.Set;
 

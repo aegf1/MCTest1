@@ -1,0 +1,11 @@
+package com.JosephB.Test1.item;
+
+public class ItemProton extends ItemTest1
+{
+	public ItemProton()
+	{
+		super();
+		this.setUnlocalizedName("Proton");
+	}
+
+}

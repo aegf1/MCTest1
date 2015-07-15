@@ -1,0 +1,5 @@
+package com.JosephB.Test1.proxy;
+
+public class CommonProxy implements IProxy {
+
+}

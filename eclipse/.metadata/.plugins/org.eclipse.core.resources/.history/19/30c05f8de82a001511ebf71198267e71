@@ -1,0 +1,17 @@
+package com.JosephB.Test1.item;
+
+public class ItemProton extends ItemTest1
+{
+	private final String name = "Proton";
+	
+	public ItemProton()
+	{
+		super();
+		this.setUnlocalizedName(name);
+	}
+
+	public String getName()
+	{
+		return name;
+	}
+}

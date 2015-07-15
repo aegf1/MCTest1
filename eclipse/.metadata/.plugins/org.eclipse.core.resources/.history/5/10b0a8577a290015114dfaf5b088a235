@@ -1,0 +1,8 @@
+package com.JosephB.Test1;
+
+import net.minecraftforge.fml.common.Mod;
+
+@Mod(modid="Test1", name="Test1", version="1.0")
+public class Test1 {
+
+}
