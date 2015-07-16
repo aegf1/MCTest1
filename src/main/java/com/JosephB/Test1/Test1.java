@@ -2,6 +2,7 @@ package com.josephb.test1;
 
 import com.josephb.test1.handler.ConfigurationHandler;
 import com.josephb.test1.init.ModBlocks;
+import com.josephb.test1.init.ModEntities;
 import com.josephb.test1.init.ModItems;
 import com.josephb.test1.proxy.IProxy;
 import com.josephb.test1.reference.Reference;
@@ -41,6 +42,9 @@ public class Test1
 		
 		//Initialise all blocks
 		ModBlocks.init();
+		
+		//Initialise all entities
+		ModEntities.init(this);
 	}
 	
 	@Mod.EventHandler
@@ -57,6 +61,9 @@ public class Test1
 			
 			//Initialise all block item renders
 			ModBlocks.initRenders();
+			
+			//Initialise all entity renders
+			ModEntities.initRenders();
 		}
 	}
 	

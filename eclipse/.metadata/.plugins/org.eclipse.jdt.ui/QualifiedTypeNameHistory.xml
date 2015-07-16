@@ -20,4 +20,26 @@
 <fullyQualifiedTypeName name="com.JosephB.Test1.reference.Reference"/>
 <fullyQualifiedTypeName name="com.JosephB.Test1.utility.LogHelper"/>
 <fullyQualifiedTypeName name="net.minecraftforge.fml.common.FMLCommonHandler"/>
+<fullyQualifiedTypeName name="net.minecraft.block.Block"/>
+<fullyQualifiedTypeName name="net.minecraft.block.material.Material"/>
+<fullyQualifiedTypeName name="com.josephb.test1.block.BlockMagnet"/>
+<fullyQualifiedTypeName name="com.josephb.test1.block.BlockTest1"/>
+<fullyQualifiedTypeName name="com.josephb.test1.init.ModBlocks"/>
+<fullyQualifiedTypeName name="net.minecraft.creativetab.CreativeTabs"/>
+<fullyQualifiedTypeName name="com.josephb.test1.reference.Reference"/>
+<fullyQualifiedTypeName name="net.minecraft.item.Item"/>
+<fullyQualifiedTypeName name="com.josephb.test1.creativetab.CreativeTabTest1"/>
+<fullyQualifiedTypeName name="net.minecraft.entity.projectile.EntityFireball"/>
+<fullyQualifiedTypeName name="net.minecraft.entity.projectile.EntityThrowable"/>
+<fullyQualifiedTypeName name="net.minecraft.world.World"/>
+<fullyQualifiedTypeName name="net.minecraft.entity.EntityLivingBase"/>
+<fullyQualifiedTypeName name="net.minecraftforge.fml.common.registry.EntityRegistry"/>
+<fullyQualifiedTypeName name="net.minecraftforge.fml.client.registry.RenderingRegistry"/>
+<fullyQualifiedTypeName name="com.josephb.test1.renderers.RenderEntityProton"/>
+<fullyQualifiedTypeName name="net.minecraft.client.renderer.entity.RenderManager"/>
+<fullyQualifiedTypeName name="net.minecraft.client.renderer.entity.Render"/>
+<fullyQualifiedTypeName name="com.josephb.test1.init.ModEntities"/>
+<fullyQualifiedTypeName name="org.lwjgl.opengl.GL11"/>
+<fullyQualifiedTypeName name="com.josephb.test1.init.ModItems"/>
+<fullyQualifiedTypeName name="com.josephb.test1.entity.EntityThrownProton"/>
 </qualifiedTypeNameHistroy>

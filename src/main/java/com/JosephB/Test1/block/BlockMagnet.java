@@ -10,6 +10,7 @@ public class BlockMagnet extends BlockTest1
 	{
 		super(Material.iron);
 		this.setUnlocalizedName(name);
+		
 	}
 	
 	@Override

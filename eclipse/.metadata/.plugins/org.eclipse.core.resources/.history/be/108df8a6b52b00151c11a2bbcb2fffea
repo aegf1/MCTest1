@@ -1,0 +1,22 @@
+package com.josephb.test1.item;
+
+import com.josephb.test1.creativetab.CreativeTabTest1;
+
+public class ItemProton extends ItemTest1
+{
+	
+	private final String name = "Proton";
+	
+	public ItemProton()
+	{
+		super();
+		this.setUnlocalizedName(name);
+		this.setCreativeTab(CreativeTabTest1.Test1_Tab);
+	}
+
+	@Override
+	public String getName()
+	{
+		return name;
+	}
+}

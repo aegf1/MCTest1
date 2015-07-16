@@ -1,5 +1,6 @@
 package com.josephb.test1.block;
 
+import com.josephb.test1.creativetab.CreativeTabTest1;
 import com.josephb.test1.reference.Reference;
 
 import net.minecraft.block.Block;
@@ -15,6 +16,7 @@ public class BlockTest1 extends Block
 	public BlockTest1(Material material)
 	{
 		super(material);
+		this.setCreativeTab(CreativeTabTest1.Test1_Tab);
 	}
 
 	/**

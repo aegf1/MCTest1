@@ -1,3 +1,4 @@
 # Item localizations
 item.test1:Proton.name=Proton
 tile.test1:Magnet.name=Magnet
+itemGroup.test1=First Test Mod

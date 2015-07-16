@@ -1,5 +1,6 @@
 package com.josephb.test1.item;
 
+import com.josephb.test1.creativetab.CreativeTabTest1;
 import com.josephb.test1.reference.Reference;
 
 import net.minecraft.item.Item;
@@ -12,7 +13,7 @@ public class ItemTest1 extends Item
 	public ItemTest1()
 	{
 		super();
-		
+		this.setCreativeTab(CreativeTabTest1.Test1_Tab);
 	}
 
 	
