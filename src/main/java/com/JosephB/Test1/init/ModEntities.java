@@ -21,7 +21,7 @@ public class ModEntities
 	
 	public static void init(Object mod)
 	{
-		EntityRegistry.registerModEntity(EntityThrownProton.class, "Proton", 1, mod, 120, 3, true );
+		EntityRegistry.registerModEntity(EntityThrownProton.class, "Proton", 1, mod, 200, 3, true );
 		//Do this for every entity
 	}
 	
