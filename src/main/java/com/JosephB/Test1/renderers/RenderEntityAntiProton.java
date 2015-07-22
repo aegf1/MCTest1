@@ -1,6 +1,6 @@
 package com.josephb.test1.renderers;
 
-import com.josephb.test1.entity.EntityThrownProton;
+import com.josephb.test1.entity.EntityThrownAntiProton;
 import com.josephb.test1.init.ModItems;
 
 import net.minecraft.client.Minecraft;
@@ -8,16 +8,16 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.entity.Entity;
 
-public class RenderEntityProton extends RenderEntityChargedParticle
+public class RenderEntityAntiProton extends RenderEntityChargedParticle
 {
 	private float scale = 1F;
-
-	public RenderEntityProton()
+	
+	public RenderEntityAntiProton()
 	{
 		super(Minecraft.getMinecraft().getRenderManager());
 	}
 	
-	public RenderEntityProton(RenderManager renderManager) 
+	public RenderEntityAntiProton(RenderManager renderManager) 
 	{
 		super(renderManager);
 	}
@@ -25,13 +25,12 @@ public class RenderEntityProton extends RenderEntityChargedParticle
 	@Override
 	public void doRender(Entity entity, double x, double y, double z, float p_76986_8_, float partialTicks)
     {
-        this.doRender((EntityThrownProton)entity, x, y, z, p_76986_8_, partialTicks);
+        this.doRender((EntityThrownAntiProton)entity, x, y, z, p_76986_8_, partialTicks);
     }
-
 
 	@Override
 	public TextureAtlasSprite getTextureAtlasSprite()
 	{
-		return Minecraft.getMinecraft().getRenderItem().getItemModelMesher().getParticleIcon(ModItems.proton);
+		return Minecraft.getMinecraft().getRenderItem().getItemModelMesher().getParticleIcon(ModItems.antiProton);
 	}
 }

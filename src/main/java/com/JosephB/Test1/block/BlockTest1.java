@@ -5,7 +5,6 @@ import com.josephb.test1.reference.Reference;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.item.ItemStack;
 
 public class BlockTest1 extends Block
 {

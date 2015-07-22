@@ -1,5 +1,7 @@
 package com.josephb.test1.utility.physics;
 
+import com.josephb.test1.utility.LogHelper;
+
 public class EMField 
 {
 	private static Vector3 BDir = new Vector3(0,1,0);
@@ -52,6 +54,7 @@ public class EMField
 	{
 		Vector3 force = E;								// F = E
 		force.increaseBy(Vector3.crossProduct(vel, B));	// F = E + v X B
+		LogHelper.info(Vector3.crossProduct(vel, B).toString());
 		force.scaleBy(charge);							// F = q(E + v X B)
 		return force;
 	}

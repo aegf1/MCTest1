@@ -1,5 +1,9 @@
 package com.josephb.test1.init;
 
+import com.josephb.test1.block.BlockMagnet;
+import com.josephb.test1.block.BlockTest1;
+import com.josephb.test1.reference.Reference;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.resources.model.ModelResourceLocation;
@@ -7,11 +11,6 @@ import net.minecraft.item.Item;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import com.josephb.test1.block.BlockMagnet;
-import com.josephb.test1.block.BlockTest1;
-import com.josephb.test1.item.*;
-import com.josephb.test1.reference.Reference;
 
 /**
  * Class with methods to initialise all blocks in mod

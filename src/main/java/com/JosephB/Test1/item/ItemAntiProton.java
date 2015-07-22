@@ -1,6 +1,6 @@
 package com.josephb.test1.item;
 
-import com.josephb.test1.entity.EntityThrownProton;
+import com.josephb.test1.entity.EntityThrownAntiProton;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -8,12 +8,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatList;
 import net.minecraft.world.World;
 
-public class ItemProton extends ItemTest1
+public class ItemAntiProton extends ItemTest1
 {
 	
-	private final String name = "Proton";
+	private final String name = "AntiProton";
 	
-	public ItemProton()
+	public ItemAntiProton()
 	{
 		super();
 		this.setUnlocalizedName(name);
@@ -35,11 +35,11 @@ public class ItemProton extends ItemTest1
             --itemStackIn.stackSize;
         }
 
-        worldIn.playSoundAtEntity(playerIn, "item.fireCharge.use", 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 1.2F));
+        worldIn.playSoundAtEntity(playerIn, "item.fireCharge.use", 0.5F, 0.8F / (itemRand.nextFloat() * 0.4F + 1.2F));
 
         if (!worldIn.isRemote)
         {
-            worldIn.spawnEntityInWorld(new EntityThrownProton(worldIn, playerIn));
+            worldIn.spawnEntityInWorld(new EntityThrownAntiProton(worldIn, playerIn));
         }
 
         playerIn.triggerAchievement(StatList.objectUseStats[Item.getIdFromItem(this)]);

@@ -1,4 +1,7 @@
 package com.josephb.test1.utility.physics;
+
+import net.minecraft.util.Vec3;
+
 /**
  * Represents a 3d vector
  * 
@@ -188,5 +191,15 @@ public class Vector3
 		diff.decreaseBy(v);
 		if(diff.magnitude()<1e-34) { return true; }
 		else { return false; }
+	}
+	
+	public Vec3 getVec3()
+	{
+		return new Vec3(this.vectorComponents[0],this.vectorComponents[1],this.vectorComponents[2]);
+	}
+	
+	public String toString()
+	{
+		return vectorComponents[0] + ", " + vectorComponents[1] + ", " + vectorComponents[2];
 	}
 }
