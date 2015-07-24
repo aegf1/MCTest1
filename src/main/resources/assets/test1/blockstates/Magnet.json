@@ -3,9 +3,9 @@
     {
         "facing=up": { "model": "test1:magnet" },
         "facing=down": { "model": "test1:magnet", "x": 180 },
-        "facing=east": { "model": "test1:magnet_side" },
-        "facing=south": { "model": "test1:magnet_side", "y": 90 },
-        "facing=west": { "model": "test1:magnet_side", "y": 180 },
-        "facing=north": { "model": "test1:magnet_side", "y": 270 }
+        "facing=east": { "model": "test1:magnet_side", "y": 90 },
+        "facing=south": { "model": "test1:magnet_side", "y": 180 },
+        "facing=west": { "model": "test1:magnet_side", "y": 270 },
+        "facing=north": { "model": "test1:magnet_side" }
     }
 }

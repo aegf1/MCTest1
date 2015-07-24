@@ -5,9 +5,9 @@ import com.josephb.test1.utility.LogHelper;
 public class EMField 
 {
 	private static Vector3 BDir = new Vector3(0,1,0);
-	private static double BStrength = 1;
-	private static Vector3 EDir = new Vector3(0,1,0);
-	private static double EStrength = 0;
+	private static double BStrength = 5D;
+	private static Vector3 EDir = new Vector3(1,0,0);
+	private static double EStrength = 0D;
 	
 	public static Vector3 getBField(Vector3 position)
 	{

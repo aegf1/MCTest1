@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.josephb.test1.utility.LogHelper;
 import com.josephb.test1.utility.physics.EMField;
+import com.josephb.test1.utility.physics.UpdateMethods;
 import com.josephb.test1.utility.physics.Vector3;
 
 import net.minecraft.entity.Entity;
@@ -17,8 +18,8 @@ import net.minecraft.world.World;
 public class EntityChargedParticle extends EntityThrowable
 {
 	private float explosionRadius = 2F;
-	private float charge = 1F;
-	private float mass = 1F;
+	public float charge = 1F;
+	public float mass = 1F;
 
 	protected double ticksInAir;
 
@@ -57,33 +58,34 @@ public class EntityChargedParticle extends EntityThrowable
 
 	@Override
 	public void onUpdate()
-	{
+	{		
+		// Recording previous positions
 		this.prevPosX = this.posX;
 		this.prevPosY = this.posY;
 		this.prevPosZ = this.posZ;
-				
-		//moves entity using built-in methods
-		//this.moveEntity(this.motionX, this.motionY, this.motionZ);
-
-		//current and next positions
+		
+		//current position and velocity
 		Vector3 currentPos = new Vector3(this.posX, this.posY, this.posZ);
+		Vector3 currentVel = new Vector3(this.motionX, this.motionY, this.motionZ);
 		
 		// ***update velocity***:
-		// v_(n+1) = v_(n) + a * dt
-		Vector3 acc = EMField.lorentzForce(currentPos, new Vector3(this.motionX, this.motionY, this.motionZ), charge);
-		acc.scaleBy(1/mass);
-		this.motionX += acc.getX();
-		this.motionY += acc.getY();
-		this.motionZ += acc.getZ();
+//		Vector3 nextVel = UpdateMethods.updateVelEC(currentVel, getAcc(), 0.05);
 		
-		Vector3 nextPos = new Vector3(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
+		// ***update position***:
+		// r_(n+1) = r_(n) + v(n+1) * dt
+//		Vector3 nextPos = UpdateMethods.updatePosEC(currentPos, nextVel, 0.05);
+		
+		Vector3[] nextPosVel = UpdateMethods.updateManyTimes(this);
+		Vector3 nextVel = new Vector3(nextPosVel[1]);
+		Vector3 nextPos = new Vector3(nextPosVel[0]);
+		
+		// *****ASSIGNING NEXT VELOCITY TO ENTITY*****
+		this.motionX = nextVel.getX();
+		this.motionY = nextVel.getY();
+		this.motionZ = nextVel.getZ();
 		
 		// detects if it hits a block?
 		MovingObjectPosition movingobjectposition = this.worldObj.rayTraceBlocks(currentPos.getVec3(), nextPos.getVec3());
-
-		//again for some reason
-		currentPos = new Vector3(this.posX, this.posY, this.posZ);
-		nextPos = new Vector3(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
 
 		if (movingobjectposition != null)
 		{		// if it hits a block, sets final position as hit coord.
@@ -93,7 +95,7 @@ public class EntityChargedParticle extends EntityThrowable
 		{
 			Entity hitEntity = null;
 
-			// get all entities in/near bounding box (part from this one)
+			// get all entities in/near bounding box (apart from this one)
 			AxisAlignedBB AABB = this.getEntityBoundingBox();
 			AABB.addCoord(this.motionX, this.motionY, this.motionZ); 
 			AABB.expand(1.0D, 1.0D, 1.0D);
@@ -135,12 +137,10 @@ public class EntityChargedParticle extends EntityThrowable
 			}
 		}
 		
-		
-		// r_(n+1) = r_(n) + v(n+1) * dt
-		this.posX += this.motionX;	//this.motion is treated as v*dt
-        this.posY += this.motionY;
-        this.posZ += this.motionZ;
-        this.setPosition(this.posX, this.posY, this.posZ);
+		// *****ASSIGNING NEXT POSITION TO ENTITY*****
+		this.posX = nextPos.getX();
+		this.posY = nextPos.getY();
+		this.posZ = nextPos.getZ();
         
         this.ticksInAir++;
 
@@ -153,6 +153,15 @@ public class EntityChargedParticle extends EntityThrowable
 		{
 			this.setDead();
 		}	// kills entity if outside world or existed for >10s
+	}
+	
+	public Vector3 getAcc()
+	{
+		Vector3 currentPos = new Vector3(this.posX, this.posY, this.posZ);
+		Vector3 currentVel = new Vector3(this.motionX, this.motionY, this.motionZ);
+		Vector3 acc = EMField.lorentzForce(currentPos, new Vector3(this.motionX, this.motionY, this.motionZ), charge);
+		acc.scaleBy(1/mass);
+		return acc;
 	}
 
 	@Override
