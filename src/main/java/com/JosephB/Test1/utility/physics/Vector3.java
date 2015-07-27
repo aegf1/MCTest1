@@ -14,29 +14,29 @@ import net.minecraft.util.Vec3;
  */
 public class Vector3 
 {
-	private double vectorComponents[] = new double[3];	// (x,y,z)
+	private double x,y,z;	// (x,y,z)
 	
 	public Vector3()
 	{
-		vectorComponents[0] = 0;
-		vectorComponents[1] = 0;
-		vectorComponents[2] = 0;
+		x = 0;
+		y = 0;
+		z = 0;
 	}
 	
-	public Vector3(double x, double y, double z)
+	public Vector3(double xIn, double yIn, double zIn)
 	{
-		vectorComponents[0] = x;
-		vectorComponents[1] = y;
-		vectorComponents[2] = z;
+		x = xIn;
+		y = yIn;
+		z = zIn;
 	}
 	
 	public Vector3(double[] components)
 	{
 		if( components.length >= 3)
 		{
-			vectorComponents[0] = components[0];
-			vectorComponents[1] = components[1];
-			vectorComponents[2] = components[2];
+			x = components[0];
+			y = components[1];
+			z = components[2];
 		}
 		else
 		{
@@ -51,56 +51,56 @@ public class Vector3
 
 	public double getX() 
 	{
-		return vectorComponents[0];
+		return x;
 	}
 
 	public double getY() 
 	{
-		return vectorComponents[1];
+		return y;
 	}
 
 	public double getZ() 
 	{
-		return vectorComponents[2];
+		return z;
 	}
 	
-	public void setX(double x)
+	public void setX(double xIn)
 	{
-		vectorComponents[0] = x;
+		x = xIn;
 	}
 	
-	public void setY(double y)
+	public void setY(double yIn)
 	{
-		vectorComponents[1] = y;
+		y = yIn;
 	}
 	
-	public void setZ(double z)
+	public void setZ(double zIn)
 	{
-		vectorComponents[2] = z;
+		z = zIn;
 	}
 
 	public void setVector(Vector3 v) 
 	{
-		vectorComponents[0] = v.getX();
-		vectorComponents[1] = v.getY();
-		vectorComponents[2] = v.getZ();
+		x = v.getX();
+		y = v.getY();
+		z = v.getZ();
 		
 	}
 	
-	public void setVector(double x, double y, double z)
+	public void setVector(double xIn, double yIn, double zIn)
 	{
-		vectorComponents[0] = x;
-		vectorComponents[1] = y;
-		vectorComponents[2] = z;
+		x = xIn;
+		y = yIn;
+		z = zIn;
 	}
 	
 	public void setVector(double[] components)
 	{
 		if( components.length >= 3)
 		{
-			vectorComponents[0] = components[0];
-			vectorComponents[1] = components[1];
-			vectorComponents[2] = components[2];
+			x = components[0];
+			y = components[1];
+			z = components[2];
 		}
 		else
 		{
@@ -110,22 +110,21 @@ public class Vector3
 	
 	public void increaseBy(Vector3 v)
 	{
-		vectorComponents[0] += v.getX();
-		vectorComponents[1] += v.getY();
-		vectorComponents[2] += v.getZ();
+		x += v.getX();
+		y += v.getY();
+		z += v.getZ();
 	}
 	
 	public void decreaseBy(Vector3 v)
 	{
-		vectorComponents[0] -= v.getX();
-		vectorComponents[1] -= v.getY();
-		vectorComponents[2] -= v.getZ();
+		x -= v.getX();
+		y -= v.getY();
+		z -= v.getZ();
 	}
 	
 	public double magnitude()
 	{
-		return Math.sqrt(vectorComponents[0]*vectorComponents[0]
-				+ vectorComponents[1]*vectorComponents[1] + vectorComponents[2]*vectorComponents[2]);
+		return Math.sqrt(x*x + y*y + z*z);
 	}
 	
 	public Vector3 getUnitVector()
@@ -145,9 +144,9 @@ public class Vector3
 
 	public void scaleBy(double d) 
 	{
-		vectorComponents[0] *= d;
-		vectorComponents[1] *= d;
-		vectorComponents[2] *= d;
+		x *= d;
+		y *= d;
+		z *= d;
 	}
 	
 	public static Vector3 scale(Vector3 v, double d)
@@ -195,11 +194,11 @@ public class Vector3
 	
 	public Vec3 getVec3()
 	{
-		return new Vec3(this.vectorComponents[0],this.vectorComponents[1],this.vectorComponents[2]);
+		return new Vec3(x,this.y,this.z);
 	}
 	
 	public String toString()
 	{
-		return vectorComponents[0] + ", " + vectorComponents[1] + ", " + vectorComponents[2];
+		return x + ", " + y + ", " + z;
 	}
 }

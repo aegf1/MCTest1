@@ -9,7 +9,7 @@ public class EntityThrownAntiProton extends EntityChargedParticle
 {
 	private static final float protonCharge = 1F;
 	private static final float protonMass = 1F;
-	private static final float speed = 10F;	// in blocks/second
+	private static final float speed = 5F;	// in blocks/second
 
 	public EntityThrownAntiProton(World world, EntityLivingBase player) 
 	{

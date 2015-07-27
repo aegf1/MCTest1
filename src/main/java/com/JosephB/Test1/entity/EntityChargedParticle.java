@@ -75,9 +75,11 @@ public class EntityChargedParticle extends EntityThrowable
 		// r_(n+1) = r_(n) + v(n+1) * dt
 //		Vector3 nextPos = UpdateMethods.updatePosEC(currentPos, nextVel, 0.05);
 		
-		Vector3[] nextPosVel = UpdateMethods.updateManyTimes(this);
+	//	System.out.println(currentVel);
+		Vector3[] nextPosVel = UpdateMethods.updateManyTimesEC(this);
 		Vector3 nextVel = new Vector3(nextPosVel[1]);
 		Vector3 nextPos = new Vector3(nextPosVel[0]);
+		
 		
 		// *****ASSIGNING NEXT VELOCITY TO ENTITY*****
 		this.motionX = nextVel.getX();
@@ -159,7 +161,14 @@ public class EntityChargedParticle extends EntityThrowable
 	{
 		Vector3 currentPos = new Vector3(this.posX, this.posY, this.posZ);
 		Vector3 currentVel = new Vector3(this.motionX, this.motionY, this.motionZ);
-		Vector3 acc = EMField.lorentzForce(currentPos, new Vector3(this.motionX, this.motionY, this.motionZ), charge);
+		Vector3 acc = EMField.lorentzForce(currentPos, currentVel, charge);
+		acc.scaleBy(1/mass);
+		return acc;
+	}
+	
+	public Vector3 getAcc(Vector3 pos,Vector3 vel)
+	{
+		Vector3 acc = EMField.lorentzForce(pos, vel, charge);
 		acc.scaleBy(1/mass);
 		return acc;
 	}
