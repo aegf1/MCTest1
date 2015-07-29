@@ -1,12 +1,13 @@
 package com.josephb.test1.block;
 
+import com.josephb.test1.Test1;
 import com.josephb.test1.creativetab.CreativeTabTest1;
-import com.josephb.test1.reference.Reference;
+import com.josephb.test1.utility.LogHelper;
+import com.josephb.test1.utility.trackers.TrackerHelper;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyDirection;
-import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
@@ -17,6 +18,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumWorldBlockLayer;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -103,7 +105,31 @@ public class BlockRotatedPillerTest1 extends BlockTest1
 
     public IBlockState onBlockPlaced(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
     {
-    	return this.getDefaultState().withProperty(FACING, getFacingFromEntity(worldIn, pos, placer));
+    	IBlockState state = this.getDefaultState().withProperty(FACING, getFacingFromEntity(worldIn, pos, placer));
+    	
+    	if (FMLCommonHandler.instance().getEffectiveSide().isServer()) 
+    	{
+			if(TrackerHelper.track(this, pos.getX(), pos.getY(), pos.getZ(), state))
+			{
+//	    		LogHelper.info("Adding block to list. "+pos.getX()+", "+pos.getY()+", "+pos.getZ()+", "+state.getValue(PropertyDirection.create("facing")));
+//				LogHelper.info(Test1.magnetTracker.getNumOfMagnets());
+			}
+		}
+		return state;
+    }
+    
+    @Override
+    public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
+    {
+    	if (FMLCommonHandler.instance().getEffectiveSide().isServer()) 
+    	{
+			if(TrackerHelper.remove(this, pos.getX(), pos.getY(), pos.getZ()))
+			{
+//				LogHelper.info("Removing block from list. "+pos.getX()+", "+pos.getY()+", "+pos.getZ()+", "+state.getValue(PropertyDirection.create("facing")));
+//				LogHelper.info(Test1.magnetTracker.getNumOfMagnets());
+			}
+		}
+		super.breakBlock(worldIn, pos, state);
     }
     
     public static EnumFacing getFacingFromEntity(World worldIn, BlockPos clickedBlock, EntityLivingBase entityIn)

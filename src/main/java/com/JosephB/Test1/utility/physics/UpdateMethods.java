@@ -83,12 +83,23 @@ public class UpdateMethods
 		k4[0].scaleBy(dt); k4[1].scaleBy(dt);
 		
 		// X_n+1 =X_n + 1/6*(k1 + 2k2 + 2k3 + k4)
-		Vector3 rChange = new Vector3(k1[0]); 
+/*		Vector3 rChange = new Vector3(k1[0]); 
 		rChange.increaseBy(Vector3.scale(k2[0],2.0D)); rChange.increaseBy(Vector3.scale(k3[0],2.0D)); rChange.increaseBy(k4[0]);
 		rChange.scaleBy(1/6);
 		Vector3 vChange = new Vector3(k1[1]); 
 		vChange.increaseBy(Vector3.scale(k2[1],2.0D)); vChange.increaseBy(Vector3.scale(k3[1],2.0D)); vChange.increaseBy(k4[1]);
 		vChange.scaleBy(1/6);
+*/		
+		
+		Vector3 rChange1 = Vector3.add(k1[0], Vector3.scale(k2[0], 2.0));
+		Vector3 rChange2 = Vector3.add(k4[0], Vector3.scale(k3[0], 2.0));
+		Vector3 rChange = Vector3.add(rChange1, rChange2);
+		rChange.scaleBy(1.0/6.0D);
+		
+		Vector3 vChange1 = Vector3.add(k1[1], Vector3.scale(k2[1], 2.0));
+		Vector3 vChange2 = Vector3.add(k4[1], Vector3.scale(k3[1], 2.0));
+		Vector3 vChange = Vector3.add(vChange1, vChange2);
+		vChange.scaleBy(1.0/6.0D);
 		
 		return new Vector3[]{
 				Vector3.add(startPos, rChange),

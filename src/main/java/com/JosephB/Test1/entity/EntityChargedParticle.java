@@ -75,8 +75,8 @@ public class EntityChargedParticle extends EntityThrowable
 		// r_(n+1) = r_(n) + v(n+1) * dt
 //		Vector3 nextPos = UpdateMethods.updatePosEC(currentPos, nextVel, 0.05);
 		
-	//	System.out.println(currentVel);
-		Vector3[] nextPosVel = UpdateMethods.updateManyTimesEC(this);
+//		System.out.println(currentVel);
+		Vector3[] nextPosVel = UpdateMethods.updateManyTimesRK4(this);
 		Vector3 nextVel = new Vector3(nextPosVel[1]);
 		Vector3 nextPos = new Vector3(nextPosVel[0]);
 		

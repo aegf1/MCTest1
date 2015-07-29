@@ -1,8 +1,10 @@
 package com.josephb.test1.init;
 
+import com.josephb.test1.Test1;
 import com.josephb.test1.block.BlockMagnet;
 import com.josephb.test1.block.BlockTest1;
 import com.josephb.test1.reference.Reference;
+import com.josephb.test1.utility.trackers.MagnetTracker;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderItem;
@@ -21,12 +23,12 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class ModBlocks 
 {
 	public static final BlockTest1 magnet = new BlockMagnet();
-		//Do this for every block
-	
-	public static void init()
+		public static void init()
 	{
 		GameRegistry.registerBlock(magnet, magnet.getName());
 		//Do this for every block
+		
+		Test1.magnetTracker = new MagnetTracker();
 	}
 	
 	public static void initRenders()
