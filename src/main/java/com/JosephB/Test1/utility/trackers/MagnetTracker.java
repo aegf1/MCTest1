@@ -5,10 +5,12 @@ import java.util.Iterator;
 
 import com.josephb.test1.block.BlockMagnet;
 import com.josephb.test1.utility.LogHelper;
+import com.josephb.test1.utility.physics.Vector3;
 
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 import net.minecraftforge.common.DimensionManager;
 
@@ -100,4 +102,30 @@ public class MagnetTracker
 		if(numRemoved==0){return false;}
 		else{return true;}
 	}
+	
+	public int[][] get2DArray()
+	{
+		HashSet<MagnetInstance> magnets1 = new HashSet(magnets);
+		
+		int[][] arr = new int[magnets1.size()][4];
+		int i = 0;
+		for(MagnetInstance current: magnets1)
+		{
+			arr[i] = current.toArray();
+			i++;
+		}
+		return arr;
+	}
+	
+	public Vector3 getTotalFacingVector()
+	{
+		Vector3 vec = new Vector3(0,0,0);
+		HashSet<MagnetInstance> magnets1 = new HashSet(magnets);
+		for(MagnetInstance current: magnets1)
+		{
+			vec.increaseBy(current.getFacingVector());
+		}
+		return vec;
+	}
+	
 }

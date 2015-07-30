@@ -1,17 +1,18 @@
 package com.josephb.test1.utility.physics;
 
+import com.josephb.test1.Test1;
 import com.josephb.test1.utility.LogHelper;
 
 public class EMField 
 {
-	private static Vector3 BDir = new Vector3(0,1,0);
-	private static double BStrength = 5D;
+	private static Vector3 BDir = new Vector3(0,0,0);
+	private static double BStrength = 2D;
 	private static Vector3 EDir = new Vector3(1,0,0);
 	private static double EStrength = 0D;
 	
 	public static Vector3 getBField(Vector3 position)
 	{
-		Vector3 dir = BDir.getUnitVector();
+		Vector3 dir = Test1.magnetTracker.getTotalFacingVector();
 		dir.scaleBy(BStrength);
 		return dir;
 		
