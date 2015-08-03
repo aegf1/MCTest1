@@ -14,6 +14,8 @@ import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class EntityChargedParticle extends EntityThrowable
 {
@@ -57,6 +59,7 @@ public class EntityChargedParticle extends EntityThrowable
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void onUpdate()
 	{		
 		// Recording previous positions

@@ -1,6 +1,7 @@
 package com.josephb.test1.utility.physics;
 
 import net.minecraft.util.Vec3;
+import net.minecraft.util.Vec3i;
 
 /**
  * Represents a 3d vector
@@ -47,6 +48,20 @@ public class Vector3
 	public Vector3(Vector3 v)
 	{
 		this.setVector(v);
+	}
+	
+	public Vector3(Vec3 vec3)
+	{
+		x = vec3.xCoord;
+		y = vec3.yCoord;
+		z = vec3.zCoord;
+	}
+	
+	public Vector3(Vec3i vec3i)
+	{
+		x = vec3i.getX();
+		y = vec3i.getY();
+		z = vec3i.getZ();
 	}
 
 	public double getX() 

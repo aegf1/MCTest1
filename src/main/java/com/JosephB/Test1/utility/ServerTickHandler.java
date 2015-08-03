@@ -21,7 +21,7 @@ public class ServerTickHandler
 			Test1.magnetTracker.verifyAllLocations();
 //			LogHelper.info(Test1.magnetTracker.getNumOfMagnets() + " magnet(s) in stored list");
 //			LogHelper.info(Test1.magnetTracker.get2DArray().length + " magnet(s) in stored list");
-			LogHelper.info(Test1.magnetTracker.getTotalFacingVector().toString());
+//			LogHelper.info(Test1.magnetTracker.getTotalFacingVector().toString());
 			ticks=0;
 		}
 		return true;

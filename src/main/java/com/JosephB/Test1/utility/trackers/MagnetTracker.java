@@ -13,6 +13,8 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 import net.minecraftforge.common.DimensionManager;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class MagnetTracker
 {
@@ -97,15 +99,29 @@ public class MagnetTracker
 				if(remove(pos)){numRemoved++;}
 			}
 		}
-		LogHelper.info("Magnet Tracker checked over. "+numRemoved+" entries removed");
+//		LogHelper.info("Magnet Tracker checked over. "+numRemoved+" entries removed");
 		
 		if(numRemoved==0){return false;}
 		else{return true;}
 	}
 	
+	/**
+	 * gets a 2d array containing the x,y,z,orientation of every magnet
+	 * (x1, y1, z1, facing1)
+	 * (x2, y2, z2, facing2)
+	 * (x3, y3, z3, facing3)
+	 * ....
+	 * @return
+	 */
+	@SideOnly(Side.CLIENT)
 	public int[][] get2DArray()
 	{
-		HashSet<MagnetInstance> magnets1 = new HashSet(magnets);
+		HashSet<MagnetInstance> magnets1 = new HashSet();
+		try {
+			magnets1 = new HashSet(magnets);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 		
 		int[][] arr = new int[magnets1.size()][4];
 		int i = 0;
@@ -120,7 +136,12 @@ public class MagnetTracker
 	public Vector3 getTotalFacingVector()
 	{
 		Vector3 vec = new Vector3(0,0,0);
-		HashSet<MagnetInstance> magnets1 = new HashSet(magnets);
+		HashSet<MagnetInstance> magnets1 = new HashSet();
+		try {
+			magnets1 = new HashSet(magnets);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 		for(MagnetInstance current: magnets1)
 		{
 			vec.increaseBy(current.getFacingVector());

@@ -1,7 +1,13 @@
 package com.josephb.test1.utility.physics;
 
 import com.josephb.test1.Test1;
+import com.josephb.test1.block.BlockMagnet;
+import com.josephb.test1.reference.Reference;
 import com.josephb.test1.utility.LogHelper;
+
+import net.minecraft.block.properties.PropertyDirection;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Vec3i;
 
 public class EMField 
 {
@@ -12,11 +18,55 @@ public class EMField
 	
 	public static Vector3 getBField(Vector3 position)
 	{
-		Vector3 dir = Test1.magnetTracker.getTotalFacingVector();
-		dir.scaleBy(BStrength);
-		return dir;
+		return getTotalMagDipoleField(position);
 		
 		//Just constant for now. ToDo: make this method get the field from all nearby magnet blocks
+	}
+	
+	/**
+	 *  Calculates magnetic field at a point 'pos' due to a dipole with 'dipoleVector' at 'magnetPos'
+	 * @param pos Position to calculate field at
+	 * @param magnetPos position of magnetic dipole
+	 * @param dipoleVector dipole vector of magnet
+	 * @return magnetic field due to dipole at that point
+	 */
+	public static Vector3 magDipoleField(Vector3 pos, Vector3 magnetPos, Vector3 dipoleVector)
+	{
+		// B = const*[1/(|r|^5) (3(d.r)r] - [d/(r^3)]
+//		System.out.println("particle pos: "+pos);
+//		System.out.println("magnet pos: "+magnetPos);
+//		System.out.println("particle direction: "+dipoleVector);
+		
+		Vector3 relPos = Vector3.subtract(pos, magnetPos);
+		
+		double d1 = 1.0/(Math.pow(relPos.magnitude(), 5));
+		d1 *= 3*Vector3.dotProduct(dipoleVector, relPos);	// d1 =  3(d.r)/(|r|^5)
+		Vector3 v1 = Vector3.scale(relPos, d1);				// v1 =  3(d.r)*r/(|r|^5)
+		
+		double d2 = -1.0/(Math.pow(relPos.magnitude(), 5));	// d2 = -1/(|r|^3)
+		Vector3 v2 = Vector3.scale(dipoleVector, d2);		// v2 = -d/(|r|^3)
+		
+		v1.increaseBy(v2);									// v1 = 3(d.r)*r/(|r|^5) - d/(|r|^3)
+		v1.scaleBy(Reference.MAGNETIC_DIPOLE_CONSTANT);
+		return v1;
+	}
+	
+	public static Vector3 getTotalMagDipoleField(Vector3 pos)
+	{
+		Vector3 b = new Vector3(0,0,0);
+		int[][] magnets = Test1.magnetTracker.get2DArray();
+		if (magnets.length>=1) 
+		{
+//			System.out.println(magnets.length);
+//			System.out.println(magnets[0].length);
+			for (int i = 0; i < magnets.length; i++) {
+				Vector3 thisDir = new Vector3(((EnumFacing) BlockMagnet.getFacing(magnets[i][3])).getDirectionVec());
+				Vector3 thisMagPos = new Vector3(magnets[i][0]+0.5, magnets[i][1]+0.5, magnets[i][2]+0.5);
+				Vector3 thisB = magDipoleField(pos, thisMagPos, thisDir);
+				b.increaseBy(thisB);
+			} 
+		}
+		return b;
 	}
 	
 	public static Vector3 getEField(Vector3 position)
@@ -55,7 +105,7 @@ public class EMField
 	{
 		Vector3 force = E;								// F = E
 		force.increaseBy(Vector3.crossProduct(vel, B));	// F = E + v X B
-		LogHelper.info(Vector3.crossProduct(vel, B).toString());
+//		LogHelper.info(Vector3.crossProduct(vel, B).toString());
 		force.scaleBy(charge);							// F = q(E + v X B)
 		return force;
 	}
