@@ -1,22 +1,25 @@
 package com.josephb.test1;
 
 import com.josephb.test1.handler.ConfigurationHandler;
-import com.josephb.test1.init.*;
+import com.josephb.test1.init.ModBlocks;
+import com.josephb.test1.init.ModEntities;
+import com.josephb.test1.init.ModItems;
+import com.josephb.test1.init.ModTileEntities;
+import com.josephb.test1.init.Recipes;
 import com.josephb.test1.proxy.IProxy;
 import com.josephb.test1.reference.Reference;
 import com.josephb.test1.utility.LogHelper;
 import com.josephb.test1.utility.ServerTickHandler;
 import com.josephb.test1.utility.trackers.MagnetTracker;
+import com.josephb.test1.utility.trackers.NegChargeTracker;
+import com.josephb.test1.utility.trackers.PosChargeTracker;
 
-import net.minecraft.client.Minecraft;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.TickEvent.ServerTickEvent;
 import net.minecraftforge.fml.relauncher.Side;
 
 @Mod(modid= Reference.MOD_ID, name= Reference.MOD_NAME , version=Reference.VERSION, guiFactory = Reference.GUI_FACTORY_CLASS)
@@ -31,6 +34,10 @@ public class Test1
 
 	//Do this for every block
 	public static MagnetTracker magnetTracker;
+
+	public static PosChargeTracker posChargeTracker;
+
+	public static NegChargeTracker negChargeTracker;
 	
 	private int ticks = 0;
 	

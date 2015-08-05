@@ -1,7 +1,7 @@
 package com.josephb.test1.init;
 
 import com.josephb.test1.reference.Reference;
-import com.josephb.test1.tileentity.TileEntityMagnet;
+import com.josephb.test1.tileentity.*;
 
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
@@ -17,7 +17,7 @@ public class ModTileEntities
 	public static void init()
 	{
 		GameRegistry.registerTileEntity(TileEntityMagnet.class, "Tile_Entity_Magnet");
-
+		GameRegistry.registerTileEntity(TileEntityPosCharge.class, "Tile_Entity_PosCharge");
 		//Do this for every tile entity
 	}
 }

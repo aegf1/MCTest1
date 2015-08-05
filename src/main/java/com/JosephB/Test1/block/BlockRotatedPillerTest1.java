@@ -69,6 +69,7 @@ public class BlockRotatedPillerTest1 extends BlockTest1
 		return 3;
 	}
 
+	
 	public static EnumFacing getFacing(int meta)
     {
         int j = meta & 7;
@@ -78,6 +79,7 @@ public class BlockRotatedPillerTest1 extends BlockTest1
     /**
      * Convert the given metadata into a BlockState for this Block
      */
+	@Override
     public IBlockState getStateFromMeta(int meta)
     {
     	return this.getDefaultState().withProperty(FACING, getFacing(meta));
@@ -86,6 +88,7 @@ public class BlockRotatedPillerTest1 extends BlockTest1
     /**
      * Convert the BlockState into the correct metadata value
      */
+    @Override
     public int getMetaFromState(IBlockState state)
     {
     	byte b0 = 0;
@@ -93,16 +96,19 @@ public class BlockRotatedPillerTest1 extends BlockTest1
 		return i;
     }
 
+    @Override
     protected BlockState createBlockState()
     {
         return new BlockState(this, new IProperty[] {FACING});
     }
 
+    @Override
     protected ItemStack createStackedBlock(IBlockState state)
     {
         return new ItemStack(Item.getItemFromBlock(this), 1, 0);
     }
 
+    @Override
     public IBlockState onBlockPlaced(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
     {
     	IBlockState state = this.getDefaultState().withProperty(FACING, getFacingFromEntity(worldIn, pos, placer));
@@ -131,6 +137,7 @@ public class BlockRotatedPillerTest1 extends BlockTest1
 		}
 		super.breakBlock(worldIn, pos, state);
     }
+    
     
     public static EnumFacing getFacingFromEntity(World worldIn, BlockPos clickedBlock, EntityLivingBase entityIn)
     {

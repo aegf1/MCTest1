@@ -41,7 +41,7 @@ public class EntityThrownAntiProton extends EntityChargedParticle
 	{
 		super.onUpdate();
 		
-		if (tickCountParticleSpawn >= 5) 
+		if (tickCountParticleSpawn >= 2) 
 		{
 			Test1.proxy.spawnAntiProtonParticle(this.worldObj, posX, posY, posZ, 0, 0, 0);
 			tickCountParticleSpawn = 0;

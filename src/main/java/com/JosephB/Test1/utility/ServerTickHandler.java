@@ -19,6 +19,8 @@ public class ServerTickHandler
 		if (ticks>=200) 
 		{
 			Test1.magnetTracker.verifyAllLocations();
+			Test1.posChargeTracker.verifyAllLocations();
+			Test1.negChargeTracker.verifyAllLocations();
 //			LogHelper.info(Test1.magnetTracker.getNumOfMagnets() + " magnet(s) in stored list");
 //			LogHelper.info(Test1.magnetTracker.get2DArray().length + " magnet(s) in stored list");
 //			LogHelper.info(Test1.magnetTracker.getTotalFacingVector().toString());

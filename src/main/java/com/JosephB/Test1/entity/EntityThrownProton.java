@@ -41,9 +41,10 @@ public class EntityThrownProton extends EntityChargedParticle
 	{
 		super.onUpdate();
 		
-		if (tickCountParticleSpawn >= 5) 
+		if (tickCountParticleSpawn >= 2) 
 		{
 			Test1.proxy.spawnProtonParticle(this.worldObj, posX, posY, posZ, 0, 0, 0);
+//			this.worldObj.spawnParticle(EnumParticleTypes.FLAME, this.posX, this.posY, this.posZ, 0, 0, 0, 0);
 			tickCountParticleSpawn = 0;
 //			LogHelper.info(posX+", "+posY+", "+posZ);
 		}
