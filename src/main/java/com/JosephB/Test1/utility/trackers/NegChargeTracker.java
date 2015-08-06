@@ -12,7 +12,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class NegChargeTracker
 {
-	private HashSet<int[]> negCharges = new HashSet(100);
+	private HashSet<BlockPos> negCharges = new HashSet(100);
 	
 	public NegChargeTracker()
 	{
@@ -30,7 +30,7 @@ public class NegChargeTracker
 	public boolean add(int x, int y, int z)
 	{
 		remove(x,y,z);
-		return negCharges.add(new int[]{x,y,z});
+		return negCharges.add(new BlockPos(x,y,z));
 //		System.out.println(m.getX()+","+m.getY()+","+m.getZ());
 //		System.out.println(m.getState().getValue(PropertyDirection.create("facing")));
 	}
@@ -54,12 +54,14 @@ public class NegChargeTracker
 	 */
 	public boolean remove(int x, int y, int z)
 	{
-		HashSet<int[]> negCharges1 = new HashSet(negCharges);
-		for(int[] current: negCharges1)
+		HashSet<BlockPos> negCharges1 = new HashSet(negCharges);
+		for(BlockPos current: negCharges1)
 		{
-			if(current[0]==x && current[1]==y && current[2]==z)
+			if(current.getX()==x && current.getY()==y && current.getZ()==z)
 			{
-				return negCharges1.remove(current);
+//				LogHelper.info(x+", "+y+", "+z);
+				negCharges.remove(current);
+				return true;
 			}
 		}
 		return false;
@@ -83,17 +85,21 @@ public class NegChargeTracker
 	public boolean verifyAllLocations()
 	{
 		int numRemoved = 0;
-		HashSet<int[]> negCharges1 = new HashSet(negCharges);
-		for(int[] current: negCharges1)
+		HashSet<BlockPos> negCharges1 = new HashSet(negCharges);
+		for(BlockPos current: negCharges1)
 		{
-			BlockPos pos = new BlockPos(current[0], current[1], current[2]);
-			if(!(DimensionManager.getWorld(0).getBlockState(pos).getBlock() instanceof BlockNegCharge))
+			if(!(DimensionManager.getWorld(0).getBlockState(current).getBlock() instanceof BlockNegCharge))
 			{
-				if(remove(pos)){numRemoved++;}
+				if(remove(current))
+				{
+//					LogHelper.info("Removing NegCharge, "+pos.toString());
+					
+					numRemoved++;
+				}
 			}
 		}
-		LogHelper.info("negCharge Tracker checked over. "+numRemoved+" entries removed");
-		
+//		LogHelper.info("negCharge Tracker checked over. "+numRemoved+" entries removed");
+//		LogHelper.info(negCharges1.size());
 		if(numRemoved==0){return false;}
 		else{return true;}
 	}
@@ -109,7 +115,7 @@ public class NegChargeTracker
 	@SideOnly(Side.CLIENT)
 	public int[][] get2DArray()
 	{
-		HashSet<int[]> negCharges1 = new HashSet();
+		HashSet<BlockPos> negCharges1 = new HashSet();
 		try {
 			negCharges1 = new HashSet(negCharges);
 		} catch (Exception e) {
@@ -118,9 +124,9 @@ public class NegChargeTracker
 		
 		int[][] arr = new int[negCharges1.size()][4];
 		int i = 0;
-		for(int[] current: negCharges1)
+		for(BlockPos current: negCharges1)
 		{
-			arr[i] = current;
+			arr[i] = new int[]{current.getX(),current.getY(),current.getZ()};
 			i++;
 		}
 		return arr;

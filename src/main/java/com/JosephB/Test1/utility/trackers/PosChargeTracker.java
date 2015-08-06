@@ -12,7 +12,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class PosChargeTracker
 {
-	private HashSet<int[]> posCharges = new HashSet(100);
+	private HashSet<BlockPos> posCharges = new HashSet(100);
 	
 	public PosChargeTracker()
 	{
@@ -30,7 +30,7 @@ public class PosChargeTracker
 	public boolean add(int x, int y, int z)
 	{
 		remove(x,y,z);
-		return posCharges.add(new int[]{x,y,z});
+		return posCharges.add(new BlockPos(x,y,z));
 //		System.out.println(m.getX()+","+m.getY()+","+m.getZ());
 //		System.out.println(m.getState().getValue(PropertyDirection.create("facing")));
 	}
@@ -54,12 +54,14 @@ public class PosChargeTracker
 	 */
 	public boolean remove(int x, int y, int z)
 	{
-		HashSet<int[]> posCharges1 = new HashSet(posCharges);
-		for(int[] current: posCharges1)
+		HashSet<BlockPos> posCharges1 = new HashSet(posCharges);
+		for(BlockPos current: posCharges1)
 		{
-			if(current[0]==x && current[1]==y && current[2]==z)
+			if(current.getX()==x && current.getY()==y && current.getZ()==z)
 			{
-				return posCharges1.remove(current);
+//				LogHelper.info(x+", "+y+", "+z);
+				posCharges.remove(current);
+				return true;
 			}
 		}
 		return false;
@@ -75,7 +77,7 @@ public class PosChargeTracker
 		return remove(pos.getX(), pos.getY(), pos.getZ());
 	}
 	
-	public int getNumOfPosCharges()
+	public int getNumOfposCharges()
 	{
 		return posCharges.size();
 	}
@@ -83,17 +85,21 @@ public class PosChargeTracker
 	public boolean verifyAllLocations()
 	{
 		int numRemoved = 0;
-		HashSet<int[]> posCharges1 = new HashSet(posCharges);
-		for(int[] current: posCharges1)
+		HashSet<BlockPos> posCharges1 = new HashSet(posCharges);
+		for(BlockPos current: posCharges1)
 		{
-			BlockPos pos = new BlockPos(current[0], current[1], current[2]);
-			if(!(DimensionManager.getWorld(0).getBlockState(pos).getBlock() instanceof BlockPosCharge))
+			if(!(DimensionManager.getWorld(0).getBlockState(current).getBlock() instanceof BlockPosCharge))
 			{
-				if(remove(pos)){numRemoved++;}
+				if(remove(current))
+				{
+//					LogHelper.info("Removing PosCharge, "+pos.toString());
+					
+					numRemoved++;
+				}
 			}
 		}
-		LogHelper.info("posCharge Tracker checked over. "+numRemoved+" entries removed");
-		
+//		LogHelper.info("posCharge Tracker checked over. "+numRemoved+" entries removed");
+//		LogHelper.info(posCharges1.size());
 		if(numRemoved==0){return false;}
 		else{return true;}
 	}
@@ -109,7 +115,7 @@ public class PosChargeTracker
 	@SideOnly(Side.CLIENT)
 	public int[][] get2DArray()
 	{
-		HashSet<int[]> posCharges1 = new HashSet();
+		HashSet<BlockPos> posCharges1 = new HashSet();
 		try {
 			posCharges1 = new HashSet(posCharges);
 		} catch (Exception e) {
@@ -118,9 +124,9 @@ public class PosChargeTracker
 		
 		int[][] arr = new int[posCharges1.size()][4];
 		int i = 0;
-		for(int[] current: posCharges1)
+		for(BlockPos current: posCharges1)
 		{
-			arr[i] = current;
+			arr[i] = new int[]{current.getX(),current.getY(),current.getZ()};
 			i++;
 		}
 		return arr;
