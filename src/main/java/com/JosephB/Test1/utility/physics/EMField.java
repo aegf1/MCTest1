@@ -16,6 +16,49 @@ public class EMField
 	private static Vector3 EDir = new Vector3(1,0,0);
 	private static double EStrength = 0D;
 	
+	public static Vector3 getEField(Vector3 position)
+	{
+		return getTotalEFiedPointCharges(position);
+	}
+	
+	public static Vector3 getTotalEFiedPointCharges(Vector3 pos)
+	{
+		Vector3 e = new Vector3(0,0,0);
+		int[][] posCharges = Test1.posChargeTracker.get2DArray();
+		if (posCharges.length>=1) 
+		{
+//			System.out.println(magnets.length);
+//			System.out.println(magnets[0].length);
+			for (int i = 0; i < posCharges.length; i++) 
+			{
+				Vector3 thisChargePos = new Vector3(posCharges[i][0]+0.5, posCharges[i][1]+0.5, posCharges[i][2]+0.5);
+				e.increaseBy(getEFieldPointCharge(pos, thisChargePos, 1D));
+			} 
+		}
+		
+		int[][] negCharges = Test1.negChargeTracker.get2DArray();
+		if (negCharges.length>=1) 
+		{
+//			System.out.println(magnets.length);
+//			System.out.println(magnets[0].length);
+			for (int i = 0; i < negCharges.length; i++) 
+			{
+				Vector3 thisChargePos = new Vector3(negCharges[i][0]+0.5, negCharges[i][1]+0.5, negCharges[i][2]+0.5);
+				e.increaseBy(getEFieldPointCharge(pos, thisChargePos, -1D));
+			} 
+		}
+		
+		return e;
+	}
+	
+	public static Vector3 getEFieldPointCharge(Vector3 pos, Vector3 chargePos, double charge)
+	{
+		// E = const*q/((r-R)^3) * (r-R)
+		Vector3 relPos = Vector3.subtract(pos, chargePos);			// r-R
+		double number = Reference.ELECTRIC_FIELD_CONSTANT * charge/Math.pow(relPos.magnitude(), 3);	// const * q/((r-R)^3)
+		return Vector3.scale(relPos, number);
+	}
+	
 	public static Vector3 getBField(Vector3 position)
 	{
 		return getTotalMagDipoleField(position);
@@ -59,7 +102,8 @@ public class EMField
 		{
 //			System.out.println(magnets.length);
 //			System.out.println(magnets[0].length);
-			for (int i = 0; i < magnets.length; i++) {
+			for (int i = 0; i < magnets.length; i++) 
+			{
 				Vector3 thisDir = new Vector3(((EnumFacing) BlockMagnet.getFacing(magnets[i][3])).getDirectionVec());
 				Vector3 thisMagPos = new Vector3(magnets[i][0]+0.5, magnets[i][1]+0.5, magnets[i][2]+0.5);
 				Vector3 thisB = magDipoleField(pos, thisMagPos, thisDir);
@@ -67,15 +111,6 @@ public class EMField
 			} 
 		}
 		return b;
-	}
-	
-	public static Vector3 getEField(Vector3 position)
-	{
-		Vector3 dir = EDir.getUnitVector();
-		dir.scaleBy(EStrength);
-		return dir;
-		
-		//Just constant for now. ToDo: make this method get the field from all nearby charged blocks
 	}
 	
 	

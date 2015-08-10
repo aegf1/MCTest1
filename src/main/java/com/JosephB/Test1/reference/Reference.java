@@ -13,4 +13,6 @@ public class Reference {
 	public static final String GUI_FACTORY_CLASS = "com.josephb.test1.client.gui.GuiFactory";
 	public static final int ITERATIONS_PER_TICK = 50;
 	public static final double MAGNETIC_DIPOLE_CONSTANT = 2D;
+	public static final double ELECTRIC_FIELD_CONSTANT = 20D;
+	public static final double SPEED_OF_LIGHT = 20D; 	// in blocks/second
 }

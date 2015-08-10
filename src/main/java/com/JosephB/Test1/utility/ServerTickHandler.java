@@ -1,6 +1,7 @@
 package com.josephb.test1.utility;
 
 import com.josephb.test1.Test1;
+import com.josephb.test1.utility.trackers.TrackerHelper;
 
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -18,9 +19,7 @@ public class ServerTickHandler
 //		System.out.println("Hello World");
 		if (ticks>=200) 
 		{
-			Test1.magnetTracker.verifyAllLocations();
-			Test1.posChargeTracker.verifyAllLocations();
-			Test1.negChargeTracker.verifyAllLocations();
+			TrackerHelper.verifyAll();
 //			LogHelper.info(Test1.magnetTracker.getNumOfMagnets() + " magnet(s) in stored list");
 //			LogHelper.info(Test1.magnetTracker.get2DArray().length + " magnet(s) in stored list");
 //			LogHelper.info(Test1.magnetTracker.getTotalFacingVector().toString());

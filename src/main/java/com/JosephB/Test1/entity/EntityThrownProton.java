@@ -8,7 +8,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.World;
 
-public class EntityThrownProton extends EntityChargedParticle
+public class EntityThrownProton extends EntityRelChargedParticle
 {
 	private static final float protonCharge = 1F;
 	private static final float protonMass = 1F;

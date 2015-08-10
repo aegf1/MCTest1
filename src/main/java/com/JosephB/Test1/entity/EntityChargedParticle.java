@@ -3,7 +3,6 @@ package com.josephb.test1.entity;
 import java.util.Iterator;
 import java.util.List;
 
-import com.josephb.test1.utility.LogHelper;
 import com.josephb.test1.utility.physics.EMField;
 import com.josephb.test1.utility.physics.UpdateMethods;
 import com.josephb.test1.utility.physics.Vector3;
@@ -19,10 +18,11 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class EntityChargedParticle extends EntityThrowable
 {
-	private float explosionRadius = 2F;
+	protected float explosionRadius = 2F;
 	public float charge = 1F;
 	public float mass = 1F;
-
+	protected int lifetime = 1000; 		// lifetime in ticks
+	
 	protected double ticksInAir;
 
 	public EntityChargedParticle(World world, float mIn, float qIn, float speedIn)
@@ -154,7 +154,7 @@ public class EntityChargedParticle extends EntityThrowable
 			this.onImpact(movingobjectposition);
 		}	//does onImpact on hitEntity
 
-		if (this.posY <= -20 || this.posY >= 400 || this.ticksInAir > 200)
+		if (this.posY <= -20 || this.posY >= 400 || this.ticksInAir >= lifetime)
 		{
 			this.setDead();
 		}	// kills entity if outside world or existed for >10s

@@ -10,7 +10,7 @@ import net.minecraft.block.state.IBlockState;
 
 public class TrackerHelper 
 {
-	
+
 	public static boolean track(Block block, int x, int y, int z, IBlockState state)
 	{
 		if(block instanceof BlockMagnet)
@@ -22,8 +22,8 @@ public class TrackerHelper
 			return false;
 		}
 	}
-	
-	
+
+
 	public static boolean remove(Block block, int x, int y, int z)
 	{
 		if(block instanceof BlockMagnet)
@@ -46,18 +46,25 @@ public class TrackerHelper
 
 
 	public static boolean track(Block block, int x, int y, int z) 
+	{
+		if(block instanceof BlockPosCharge)
 		{
-			if(block instanceof BlockPosCharge)
-			{
-				return Test1.posChargeTracker.add(x, y, z);
-			}
-			else if(block instanceof BlockNegCharge)
-			{
-				return Test1.negChargeTracker.add(x, y, z);
-			}
-			else
-			{
-				return false;
-			}
+			return Test1.posChargeTracker.add(x, y, z);
 		}
+		else if(block instanceof BlockNegCharge)
+		{
+			return Test1.negChargeTracker.add(x, y, z);
+		}
+		else
+		{
+			return false;
+		}
+	}
+	
+	public static void verifyAll()
+	{
+		Test1.magnetTracker.verifyAllLocations();
+		Test1.posChargeTracker.verifyAllLocations();
+		Test1.negChargeTracker.verifyAllLocations();
+	}
 }

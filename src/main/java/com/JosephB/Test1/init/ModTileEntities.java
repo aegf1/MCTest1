@@ -18,6 +18,7 @@ public class ModTileEntities
 	{
 		GameRegistry.registerTileEntity(TileEntityMagnet.class, "Tile_Entity_Magnet");
 		GameRegistry.registerTileEntity(TileEntityPosCharge.class, "Tile_Entity_PosCharge");
+		GameRegistry.registerTileEntity(TileEntityNegCharge.class, "Tile_Entity_NegCharge");
 		//Do this for every tile entity
 	}
 }
