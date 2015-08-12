@@ -3,6 +3,7 @@ package com.josephb.test1.entity;
 import java.util.Iterator;
 import java.util.List;
 
+import com.josephb.test1.utility.LogHelper;
 import com.josephb.test1.utility.physics.EMField;
 import com.josephb.test1.utility.physics.UpdateMethods;
 import com.josephb.test1.utility.physics.Vector3;
@@ -28,6 +29,7 @@ public class EntityChargedParticle extends EntityThrowable
 	public EntityChargedParticle(World world, float mIn, float qIn, float speedIn)
 	{
 		super(world);
+		normaliseMotion();
 		this.motionX*=speedIn;
 		this.motionY*=speedIn;
 		this.motionZ*=speedIn;
@@ -39,6 +41,7 @@ public class EntityChargedParticle extends EntityThrowable
 	public EntityChargedParticle(World world, EntityLivingBase player, float mIn, float qIn, float speedIn)
 	{
 		super(world, player);
+		normaliseMotion();
 		this.motionX*=speedIn;
 		this.motionY*=speedIn;
 		this.motionZ*=speedIn;
@@ -50,6 +53,7 @@ public class EntityChargedParticle extends EntityThrowable
 	public EntityChargedParticle(World world, Vector3 pos, Vector3 vel, float mIn, float qIn)
 	{
 		super(world, pos.getX(), pos.getY(), pos.getZ());
+		normaliseMotion();
 		this.motionX*=vel.getX();
 		this.motionY*=vel.getY();
 		this.motionZ*=vel.getZ();
@@ -59,9 +63,9 @@ public class EntityChargedParticle extends EntityThrowable
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
 	public void onUpdate()
 	{		
+		
 		// Recording previous positions
 		this.prevPosX = this.posX;
 		this.prevPosY = this.posY;
@@ -213,4 +217,14 @@ public class EntityChargedParticle extends EntityThrowable
 	public void setCharge(float charge) {
 		this.charge = charge;
 	}
+	
+	public void normaliseMotion()
+	{
+		Vector3 motion = new Vector3(this.motionX, this.motionY, this.motionZ);
+		Vector3 motionNorm = motion.getUnitVector();
+		this.motionX = motionNorm.getX();
+		this.motionY = motionNorm.getY();
+		this.motionZ = motionNorm.getZ();
+	}
+			
 }

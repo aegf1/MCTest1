@@ -12,12 +12,16 @@ public class EntityThrownAntiProton extends EntityRelChargedParticle
 {
 	private static final float protonCharge = 1F;
 	private static final float protonMass = 1F;
-	private static final float speed = 2F;	// in blocks/second
+	private static final float speed = 5F;	// in blocks/second
 	private int tickCountParticleSpawn = 0;
 
 	public EntityThrownAntiProton(World world, EntityLivingBase player) 
 	{
 		super(world, player, protonMass, -1*protonCharge, speed);
+		/* DEBUG
+        System.out.println("Constructing on client side ="+worldObj.isRemote);
+        System.out.println("Constructor: entity position ="+posX+", "+posY+", "+posZ);
+        System.out.println("Constructor: entity motion ="+motionX+", "+motionY+", "+motionZ); */
 	}
 	
 	public EntityThrownAntiProton(World world) 

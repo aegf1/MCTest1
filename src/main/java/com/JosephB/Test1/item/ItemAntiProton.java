@@ -7,6 +7,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatList;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
 
 public class ItemAntiProton extends ItemTest1
 {
@@ -39,7 +40,12 @@ public class ItemAntiProton extends ItemTest1
 
         if (!worldIn.isRemote)
         {
-            worldIn.spawnEntityInWorld(new EntityThrownAntiProton(worldIn, playerIn));
+            EntityThrownAntiProton ap = new EntityThrownAntiProton(worldIn, playerIn);
+        	worldIn.spawnEntityInWorld(ap);
+        	/* DEBUG
+            System.out.println("Spawning on client side ="+worldIn.isRemote);
+            System.out.println("On spawn: entity position ="+ap.posX+", "+ap.posY+", "+ap.posZ);
+            System.out.println("On spawn: entity motion ="+ap.motionX+", "+ap.motionY+", "+ap.motionZ); */
         }
 
         playerIn.triggerAchievement(StatList.objectUseStats[Item.getIdFromItem(this)]);

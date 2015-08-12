@@ -7,6 +7,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatList;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
 
 public class ItemProton extends ItemTest1
 {
@@ -37,7 +38,7 @@ public class ItemProton extends ItemTest1
 
         worldIn.playSoundAtEntity(playerIn, "item.fireCharge.use", 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 1.2F));
 
-        if (!worldIn.isRemote)
+        if (!worldIn.isRemote && worldIn instanceof WorldServer)
         {
             worldIn.spawnEntityInWorld(new EntityThrownProton(worldIn, playerIn));
         }

@@ -12,7 +12,7 @@ public class EntityThrownProton extends EntityRelChargedParticle
 {
 	private static final float protonCharge = 1F;
 	private static final float protonMass = 1F;
-	private static final float speed = 2F;	// in blocks/second
+	private static final float speed = 5F;	// in blocks/second
 	private static double tickCountParticleSpawn = 0;
 	
 	public EntityThrownProton(World world, EntityLivingBase player) 
