@@ -20,8 +20,8 @@ import net.minecraftforge.fml.common.Mod;
 public class EntityRelChargedParticle extends EntityChargedParticle
 {
 	protected double gamma;
-	protected Vector3 position;
-	protected Vector3 momentum;
+	protected Vector3 position = new Vector3();
+	protected Vector3 momentum = new Vector3();
 	protected boolean dataWatcherInitialised= false;
 
 	public EntityRelChargedParticle(World world, float mIn, float qIn, float speedIn)
@@ -29,16 +29,7 @@ public class EntityRelChargedParticle extends EntityChargedParticle
 		super(world, mIn, qIn, speedIn);
 		Vector3 vel = new Vector3(this.motionX,this.motionY,this.motionZ);
 		double gam = 1.0 / Math.sqrt(1 - Math.pow((vel.magnitude()/Reference.SPEED_OF_LIGHT) , 2));	//gamma = 1/sqrt(1-(v/c)^2)
-		momentum = Vector3.scale(vel, gam*mass);				// p = gamma*m*v
-		
-
-/*		DataWatcher dw = this.getDataWatcher();
-		dw.addObject(26, 0f);	// x pos
-		dw.addObject(27, 0f);	// y pos
-		dw.addObject(28, 0f);	// z pos
-		dw.addObject(29, 0f);	// x mom
-		dw.addObject(30, 0f);	// y mom
-		dw.addObject(31, 0f);	// z mom	*/
+		setMomentum(Vector3.scale(vel, gam*mass));				// p = gamma*m*v
 	}
 
 	public EntityRelChargedParticle(World world, EntityLivingBase player, float mIn, float qIn, float speedIn)
@@ -46,15 +37,8 @@ public class EntityRelChargedParticle extends EntityChargedParticle
 		super(world, player, mIn, qIn, speedIn);
 		Vector3 vel = new Vector3(this.motionX,this.motionY,this.motionZ);
 		double gam = 1.0 / Math.sqrt(1 - Math.pow((vel.magnitude()/Reference.SPEED_OF_LIGHT) , 2));	//gamma = 1/sqrt(1-(v/c)^2)
-		momentum = Vector3.scale(vel, gam*mass);				// p = gamma*m*v
-
-/*		DataWatcher dw = this.getDataWatcher();
-		dw.addObject(26, 0f);	// x pos
-		dw.addObject(27, 0f);	// y pos
-		dw.addObject(28, 0f);	// z pos
-		dw.addObject(29, 0f);	// x mom
-		dw.addObject(30, 0f);	// y mom
-		dw.addObject(31, 0f);	// z mom	*/
+		setMomentum(Vector3.scale(vel, gam*mass));				// p = gamma*m*v
+		this.setPosition(new Vector3(player.posX, player.posY + (double)player.getEyeHeight(), player.posZ));
 	}
 
 	public EntityRelChargedParticle(World world, Vector3 posIn, Vector3 velIn, float mIn, float qIn)
@@ -62,69 +46,43 @@ public class EntityRelChargedParticle extends EntityChargedParticle
 		super(world, posIn, velIn, mIn, qIn);
 		Vector3 vel = new Vector3(this.motionX,this.motionY,this.motionZ);
 		double gam = 1.0 / Math.sqrt(1 - Math.pow((vel.magnitude()/Reference.SPEED_OF_LIGHT) , 2));	//gamma = 1/sqrt(1-(v/c)^2)
-		momentum = Vector3.scale(vel, gam*mass);				// p = gamma*m*v
-		
-/*		DataWatcher dw = this.getDataWatcher();
-		dw.addObject(26, 0f);	// x pos
-		dw.addObject(27, 0f);	// y pos
-		dw.addObject(28, 0f);	// z pos
-		dw.addObject(29, 0f);	// x mom
-		dw.addObject(30, 0f);	// y mom
-		dw.addObject(31, 0f);	// z mom	*/
+		setMomentum(Vector3.scale(vel, gam*mass));				// p = gamma*m*v
+		this.setPosition(posIn);
 	}
 
-	@Override
-	public void onUpdate()
-	{		
+	protected void entityInit()
+	{
+		super.entityInit();
 		if(!dataWatcherInitialised)
 		{
 			DataWatcher dw = this.getDataWatcher();
-			dw.addObject(26, 0f);	// x pos
-			dw.addObject(27, 0f);	// y pos
-			dw.addObject(28, 0f);	// z pos
-			dw.addObject(29, 0f);	// x mom
-			dw.addObject(30, 0f);	// y mom
-			dw.addObject(31, 0f);	// z mom
-			
+			dw.addObject(10, 0f);	// x pos
+			dw.addObject(11, 0f);	// y pos
+			dw.addObject(12, 0f);	// z pos
+			dw.addObject(13, 0f);	// x mom
+			dw.addObject(14, 0f);	// y mom
+			dw.addObject(15, 0f);	// z mom	
 			dataWatcherInitialised = true;
 		}
-		
-		if (this.worldObj.isRemote) 		// only on client: update pos, mom from datawatcher
-		{
-			DataWatcher dw = this.getDataWatcher();
-			this.posX = (double) dw.getWatchableObjectFloat(26); 		// x pos
-			this.posY = (double) dw.getWatchableObjectFloat(27); 		// x pos
-			this.posZ = (double) dw.getWatchableObjectFloat(28); 		// x pos
-			momentum.setVector(
-					(double) dw.getWatchableObjectFloat(29), 			// x mom
-					(double) dw.getWatchableObjectFloat(30), 			// x mom
-					(double) dw.getWatchableObjectFloat(31) ); 			// x mom
-			LogHelper.info("reading from datawatcher");
-		}
-		
-		
+	}
+	
+	@Override
+	public void onUpdate()
+	{		
+//		System.out.println("updating");
 		
 //		LogHelper.warn(entityUniqueID.toString());
 //		System.out.println("entity position ="+this.posX+", "+this.posY+", "+this.posZ);
 //      System.out.println("entity motion ="+this.motionX+", "+this.motionY+", "+this.motionZ);
 		
+		position = new Vector3(getPositionVec3());	//current position
+		momentum = new Vector3(getMomentumVec3());	//current momentum
 		
-		// Recording previous positions
-		this.prevPosX = this.posX;
-		this.prevPosY = this.posY;
-		this.prevPosZ = this.posZ;
+		// Recording previous position
+		this.prevPosX = position.getX();
+		this.prevPosY = position.getY();
+		this.prevPosZ = position.getZ();
 		
-		//current position and velocity
-		position = new Vector3(this.posX, this.posY, this.posZ);
-		
-		// ***update velocity***:
-//		Vector3 nextVel = UpdateMethods.updateVelEC(currentVel, getAcc(), 0.05);
-		
-		// ***update position***:
-		// r_(n+1) = r_(n) + v(n+1) * dt
-//		Vector3 nextPos = UpdateMethods.updatePosEC(currentPos, nextVel, 0.05);
-		
-//		System.out.println(currentVel);
 		Vector3[] nextPosMom = updateManyTimesRK4(position, momentum);
 		
 		Vector3 nextPos = new Vector3(nextPosMom[0]);
@@ -150,9 +108,7 @@ public class EntityRelChargedParticle extends EntityChargedParticle
 			Entity hitEntity = null;
 
 			// get all entities in/near bounding box (apart from this one)
-			AxisAlignedBB AABB = this.getEntityBoundingBox();
-			AABB.addCoord(this.motionX, this.motionY, this.motionZ); 
-			AABB.expand(1.0D, 1.0D, 1.0D);
+			AxisAlignedBB AABB = this.getEntityBoundingBox().addCoord(this.motionX, this.motionY, this.motionZ).expand(1.0D, 1.0D, 1.0D);
 			List entitiesInAABBList = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, AABB);
 			
 			double d0 = 0.0D;
@@ -191,13 +147,9 @@ public class EntityRelChargedParticle extends EntityChargedParticle
 			}
 		}
 		
-		// *****ASSIGNING NEXT POSITION TO ENTITY*****
-		this.posX = nextPos.getX();
-		this.posY = nextPos.getY();
-		this.posZ = nextPos.getZ();
-		
-		position = new Vector3(nextPos);
-		momentum = new Vector3(nextMom);
+		// *****ASSIGNING NEXT POSITION + MOMENTUM TO ENTITY*****
+		setPosition(nextPos);
+		setMomentum(nextMom);
         
         this.ticksInAir++;
 
@@ -210,18 +162,6 @@ public class EntityRelChargedParticle extends EntityChargedParticle
 		{
 			this.setDead();
 		}	// kills entity if outside world or existed for >10s
-		
-		if (!this.worldObj.isRemote) 	// only on server: write pos, mom to datawatcher
-		{
-			DataWatcher dw = this.getDataWatcher();
-			dw.updateObject(26, (float) this.posX); 		// x pos
-			dw.updateObject(27, (float) this.posY); 		// y pos
-			dw.updateObject(28, (float) this.posZ); 		// z pos
-			dw.updateObject(29, (float) momentum.getX()); 	// x mom
-			dw.updateObject(30, (float) momentum.getY()); 	// y mom
-			dw.updateObject(31, (float) momentum.getZ()); 	// z mom
-			LogHelper.info("writing to datawatcher");
-		}
 	}
 	
 	/**
@@ -326,6 +266,61 @@ public class EntityRelChargedParticle extends EntityChargedParticle
 			
 		}
 		return new Vector3[]{thisPos,thisMom};
+	}
+	
+	public void setPosition(Vector3 pos)
+	{
+		setPosition(pos.getX(), pos.getY(), pos.getZ());
+		if(!this.worldObj.isRemote)
+		{
+			this.dataWatcher.updateObject(10, (float) pos.getX()); 		// x pos
+			this.dataWatcher.updateObject(11, (float) pos.getY()); 		// y pos
+			this.dataWatcher.updateObject(12, (float) pos.getZ()); 		// z pos
+
+//			LogHelper.info("writing position to datawatcher");
+//			LogHelper.info("entity position = "+pos.toString());
+		}
+		position = new Vector3(pos.getX(), pos.getY(), pos.getZ());
+
+	}
+	
+	public Vector3 getPositionVec3()
+	{
+		return new Vector3(
+				(double) this.dataWatcher.getWatchableObjectFloat(10),
+				(double) this.dataWatcher.getWatchableObjectFloat(11),
+				(double) this.dataWatcher.getWatchableObjectFloat(12)
+		);
+	}
+	
+	public void setMomentum(double x, double y, double z)
+	{
+		this.momentum.setX(x); 
+		this.momentum.setY(y); 
+		this.momentum.setZ(z);
+		if(!this.worldObj.isRemote)
+		{
+			this.dataWatcher.updateObject(13, (float) x); 		// x mom
+			this.dataWatcher.updateObject(14, (float) y); 		// y mom
+			this.dataWatcher.updateObject(15, (float) z); 		// z mom
+			
+//			LogHelper.info("writing momentum to datawatcher");
+//			LogHelper.info("entity momentum = "+momentum.toString());
+		}
+	}
+	
+	public void setMomentum(Vector3 mom)
+	{
+		setMomentum(mom.getX(), mom.getY(), mom.getZ());
+	}
+	
+	public Vector3 getMomentumVec3()
+	{
+		return new Vector3(
+				(double) this.dataWatcher.getWatchableObjectFloat(13),
+				(double) this.dataWatcher.getWatchableObjectFloat(14),
+				(double) this.dataWatcher.getWatchableObjectFloat(15)
+			);
 	}
 	
 /*	@Mod.EventHandler
