@@ -1,5 +1,7 @@
 package com.josephb.test1.proxy;
 
+import com.josephb.test1.utility.physics.Vector3;
+
 import net.minecraft.world.World;
 
 public class CommonProxy implements IProxy
@@ -11,5 +13,12 @@ public class CommonProxy implements IProxy
 	public void spawnAntiProtonParticle(World world, double x, double y, double z, double vx, double vy, double vz)
 	{
 		return;
+	}
+
+	@Override
+	public boolean recordParticleDataPoint(Vector3 point) 
+	{
+		return false;
+		
 	}
 }

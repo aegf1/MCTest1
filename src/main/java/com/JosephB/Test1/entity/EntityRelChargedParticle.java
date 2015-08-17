@@ -3,8 +3,10 @@ package com.josephb.test1.entity;
 import java.util.Iterator;
 import java.util.List;
 
+import com.josephb.test1.Test1;
 import com.josephb.test1.reference.Reference;
 import com.josephb.test1.utility.LogHelper;
+import com.josephb.test1.utility.dataoutput.OutputHelper;
 import com.josephb.test1.utility.physics.EMField;
 import com.josephb.test1.utility.physics.Vector3;
 
@@ -150,7 +152,12 @@ public class EntityRelChargedParticle extends EntityChargedParticle
 		// *****ASSIGNING NEXT POSITION + MOMENTUM TO ENTITY*****
 		setPosition(nextPos);
 		setMomentum(nextMom);
-        
+		
+		if (!this.worldObj.isRemote)
+		{
+			OutputHelper.record(nextPos);
+		}
+			
         this.ticksInAir++;
 
 		if (movingobjectposition != null)
