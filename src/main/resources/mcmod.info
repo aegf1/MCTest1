@@ -1,9 +1,9 @@
 [
 {
-    "modid": "Test1",
-    "name": "First Test Mod",
-    "description": "Test mod, using Pahimar's mod tutorial",
-    "version": "0.1",
+    "modid": "MaxwellCraft",
+    "name": "MaxwellCraft",
+    "description": "A mod to simulate the motion of charged particles in electromagnetic fields.",
+    "version": "1.7",
     "credits": "Created by Joseph Brownless, thanks to Pahimar for his tutorial",
     "logoFile": "",
     "mcversion": "1.8",

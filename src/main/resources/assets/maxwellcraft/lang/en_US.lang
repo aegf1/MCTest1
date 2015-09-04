@@ -1,0 +1,7 @@
+# Item localizations
+item.maxwellcraft:Proton.name=Proton
+item.maxwellcraft:AntiProton.name=AntiProton
+tile.maxwellcraft:Magnet.name=Magnet
+itemGroup.maxwellcraft=MaxwellCraft
+tile.maxwellcraft:PosCharge.name=Positive Charge
+tile.maxwellcraft:NegCharge.name=Negative Charge

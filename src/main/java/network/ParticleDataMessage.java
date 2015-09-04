@@ -3,7 +3,7 @@ package network;
 import java.text.DecimalFormat;
 import java.util.UUID;
 
-import com.josephb.test1.utility.physics.Vector3;
+import com.josephb.maxwellcraft.utility.physics.Vector3;
 
 import io.netty.buffer.ByteBuf;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
