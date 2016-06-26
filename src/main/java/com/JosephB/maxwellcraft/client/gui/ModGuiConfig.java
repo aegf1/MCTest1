@@ -1,7 +1,7 @@
-package com.josephb.maxwellcraft.client.gui;
+package com.JosephB.maxwellcraft.client.gui;
 
-import com.josephb.maxwellcraft.handler.ConfigurationHandler;
-import com.josephb.maxwellcraft.reference.Reference;
+import com.JosephB.maxwellcraft.handler.ConfigurationHandler;
+import com.JosephB.maxwellcraft.reference.Reference;
 
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraftforge.common.config.ConfigElement;

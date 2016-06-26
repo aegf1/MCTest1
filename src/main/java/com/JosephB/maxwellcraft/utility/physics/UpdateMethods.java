@@ -1,7 +1,7 @@
-package com.josephb.maxwellcraft.utility.physics;
+package com.JosephB.maxwellcraft.utility.physics;
 
-import com.josephb.maxwellcraft.entity.EntityChargedParticle;
-import com.josephb.maxwellcraft.reference.Reference;
+import com.JosephB.maxwellcraft.entity.EntityChargedParticle;
+import com.JosephB.maxwellcraft.reference.Reference;
 
 public class UpdateMethods 
 {

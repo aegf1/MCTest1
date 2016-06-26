@@ -1,15 +1,15 @@
-package com.josephb.maxwellcraft.block;
+package com.JosephB.maxwellcraft.block;
 
-import com.josephb.maxwellcraft.creativetab.CreativeTabMaxwellCraft;
-import com.josephb.maxwellcraft.reference.Reference;
-import com.josephb.maxwellcraft.utility.trackers.TrackerHelper;
+import com.JosephB.maxwellcraft.creativetab.CreativeTabMaxwellCraft;
+import com.JosephB.maxwellcraft.reference.Reference;
+import com.JosephB.maxwellcraft.utility.trackers.TrackerHelper;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 
@@ -30,7 +30,7 @@ public class BlockMaxwellCraft extends Block
 	 */
 	public BlockMaxwellCraft()
 	{
-		this(Material.iron);
+		this(Material.IRON);
 	}
 	
 	@Override

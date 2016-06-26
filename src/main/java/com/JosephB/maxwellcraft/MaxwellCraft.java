@@ -1,19 +1,19 @@
-package com.josephb.maxwellcraft;
+package com.JosephB.maxwellcraft;
 
-import com.josephb.maxwellcraft.commands.*;
-import com.josephb.maxwellcraft.handler.ConfigurationHandler;
-import com.josephb.maxwellcraft.handler.MaxwellCraftEventHandler;
-import com.josephb.maxwellcraft.init.ModBlocks;
-import com.josephb.maxwellcraft.init.ModEntities;
-import com.josephb.maxwellcraft.init.ModItems;
-import com.josephb.maxwellcraft.init.ModTileEntities;
-import com.josephb.maxwellcraft.init.Recipes;
-import com.josephb.maxwellcraft.proxy.IProxy;
-import com.josephb.maxwellcraft.reference.Reference;
-import com.josephb.maxwellcraft.utility.LogHelper;
-import com.josephb.maxwellcraft.utility.trackers.MagnetTracker;
-import com.josephb.maxwellcraft.utility.trackers.NegChargeTracker;
-import com.josephb.maxwellcraft.utility.trackers.PosChargeTracker;
+import com.JosephB.maxwellcraft.commands.*;
+import com.JosephB.maxwellcraft.handler.ConfigurationHandler;
+import com.JosephB.maxwellcraft.handler.MaxwellCraftEventHandler;
+import com.JosephB.maxwellcraft.init.ModBlocks;
+import com.JosephB.maxwellcraft.init.ModEntities;
+import com.JosephB.maxwellcraft.init.ModItems;
+import com.JosephB.maxwellcraft.init.ModTileEntities;
+import com.JosephB.maxwellcraft.init.Recipes;
+import com.JosephB.maxwellcraft.proxy.IProxy;
+import com.JosephB.maxwellcraft.reference.Reference;
+import com.JosephB.maxwellcraft.utility.LogHelper;
+import com.JosephB.maxwellcraft.utility.trackers.MagnetTracker;
+import com.JosephB.maxwellcraft.utility.trackers.NegChargeTracker;
+import com.JosephB.maxwellcraft.utility.trackers.PosChargeTracker;
 
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;

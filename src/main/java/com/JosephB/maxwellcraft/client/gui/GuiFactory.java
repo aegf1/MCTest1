@@ -1,4 +1,4 @@
-package com.josephb.maxwellcraft.client.gui;
+package com.JosephB.maxwellcraft.client.gui;
 
 import java.util.Set;
 

@@ -1,22 +1,15 @@
-package com.josephb.maxwellcraft.block;
+package com.JosephB.maxwellcraft.block;
 
-import com.josephb.maxwellcraft.tileentity.TileEntityMagnet;
+import com.JosephB.maxwellcraft.tileentity.TileEntityMagnet;
+import com.JosephB.maxwellcraft.block.BlockRotatedPillerMaxwellCraft;
 
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
-import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumWorldBlockLayer;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockMagnet extends BlockRotatedPillerMaxwellCraft implements ITileEntityProvider
 {
@@ -24,7 +17,7 @@ public class BlockMagnet extends BlockRotatedPillerMaxwellCraft implements ITile
 	
 	public BlockMagnet()
 	{
-		super(Material.iron);
+		super(Material.IRON);
 		this.setUnlocalizedName(name);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
 		this.isBlockContainer = true;
@@ -51,11 +44,11 @@ public class BlockMagnet extends BlockRotatedPillerMaxwellCraft implements ITile
 		worldIn.removeTileEntity(pos);
 	}
 	
-	@Override
+/*	@Override
 	public boolean onBlockEventReceived(World worldIn, BlockPos pos, IBlockState state, int eventID, int eventParam)
 	{
 		super.onBlockEventReceived(worldIn, pos, state, eventID, eventParam);
 		TileEntity tileEntity = worldIn.getTileEntity(pos);
 		return tileEntity == null? false : tileEntity.receiveClientEvent(eventID, eventParam);
-	}
+	}	*/
 }

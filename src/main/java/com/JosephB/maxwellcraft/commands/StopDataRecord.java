@@ -1,16 +1,16 @@
-package com.josephb.maxwellcraft.commands;
+package com.JosephB.maxwellcraft.commands;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.josephb.maxwellcraft.utility.dataoutput.OutputHelper;
+import com.JosephB.maxwellcraft.utility.dataoutput.OutputHelper;
 
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.IChatComponent;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentString;
 
 public class StopDataRecord implements ICommand
 {
@@ -22,13 +22,13 @@ public class StopDataRecord implements ICommand
 	}
 	
 	@Override
-	public int compareTo(Object arg0) 
+	public int compareTo(ICommand arg0) 
 	{
 		return 0;
 	}
 
 	@Override
-	public String getName() 
+	public String getCommandName() 
 	{
 		return "stopdatarecord";
 	}
@@ -41,34 +41,35 @@ public class StopDataRecord implements ICommand
 	}
 
 	@Override
-	public List getAliases() 
+	public List getCommandAliases() 
 	{
 		return aliases;
 	}
 
 	@Override
-	public void execute(ICommandSender sender, String[] args) throws CommandException 
+	public void execute(MinecraftServer server, ICommandSender sender, String[] args) throws CommandException 
 	{
 		if(OutputHelper.finishOutput())
 		{
-			sender.addChatMessage(new ChatComponentText("Stopping recording particle positions"));
+			sender.addChatMessage(new TextComponentString("Stopping recording particle positions"));
 		}
 		else
 		{
-			sender.addChatMessage(new ChatComponentText("Not running!"));
+			sender.addChatMessage(new TextComponentString("Not running!"));
 		}
 		
 	}
 
 	@Override
-	public boolean canCommandSenderUse(ICommandSender sender) 
+	public boolean checkPermission(MinecraftServer server, ICommandSender sender) 
 	{
 		return true;
 	}
 
 	@Override
-	public List addTabCompletionOptions(ICommandSender sender, String[] args, BlockPos pos) {
-		// TODO Auto-generated method stub
+	public List<String> getTabCompletionOptions(MinecraftServer server, ICommandSender sender, String[] args,
+			net.minecraft.util.math.BlockPos pos) 
+	{
 		return null;
 	}
 

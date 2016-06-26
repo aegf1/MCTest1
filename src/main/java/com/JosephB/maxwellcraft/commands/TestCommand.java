@@ -1,4 +1,4 @@
-package com.josephb.maxwellcraft.commands;
+package com.JosephB.maxwellcraft.commands;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,9 +6,9 @@ import java.util.List;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.IChatComponent;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentString;
 
 public class TestCommand implements ICommand
 {
@@ -19,13 +19,13 @@ public class TestCommand implements ICommand
 	}
 	
 	@Override
-	public int compareTo(Object arg0) 
+	public int compareTo(ICommand arg0) 
 	{
 		return 0;
 	}
 
 	@Override
-	public String getName() 
+	public String getCommandName() 
 	{
 		return "test";
 	}
@@ -38,35 +38,36 @@ public class TestCommand implements ICommand
 	}
 
 	@Override
-	public List getAliases() 
+	public List getCommandAliases() 
 	{
 		return aliases;
 	}
 
 	@Override
-	public void execute(ICommandSender sender, String[] args) throws CommandException 
+	public void execute(MinecraftServer server, ICommandSender sender, String[] args) throws CommandException 
 	{
 		if(args.length == 0)
 		{
-			sender.addChatMessage(new ChatComponentText("Invalid arguments"));
+			sender.addChatMessage(new TextComponentString("Invalid arguments"));
 		}
 		else
 		{
-			sender.addChatMessage(new ChatComponentText(
+			sender.addChatMessage(new TextComponentString(
 					"You said: [" + args[0] + "]"));
 		}
 		
 	}
 
 	@Override
-	public boolean canCommandSenderUse(ICommandSender sender) 
+	public boolean checkPermission(MinecraftServer server, ICommandSender sender) 
 	{
 		return true;
 	}
 
 	@Override
-	public List addTabCompletionOptions(ICommandSender sender, String[] args, BlockPos pos) {
-		// TODO Auto-generated method stub
+	public List<String> getTabCompletionOptions(MinecraftServer server, ICommandSender sender, String[] args,
+			net.minecraft.util.math.BlockPos pos) 
+	{
 		return null;
 	}
 

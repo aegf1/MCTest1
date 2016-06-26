@@ -1,18 +1,19 @@
-package com.josephb.maxwellcraft.entity;
+package com.JosephB.maxwellcraft.entity;
 
 import java.util.Iterator;
 import java.util.List;
 
-import com.josephb.maxwellcraft.utility.LogHelper;
-import com.josephb.maxwellcraft.utility.physics.EMField;
-import com.josephb.maxwellcraft.utility.physics.UpdateMethods;
-import com.josephb.maxwellcraft.utility.physics.Vector3;
+import com.JosephB.maxwellcraft.utility.LogHelper;
+import com.JosephB.maxwellcraft.utility.physics.EMField;
+import com.JosephB.maxwellcraft.utility.physics.UpdateMethods;
+import com.JosephB.maxwellcraft.utility.physics.Vector3;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.projectile.EntityThrowable;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.entity.projectile.ProjectileHelper;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -93,7 +94,7 @@ public class EntityChargedParticle extends EntityThrowable
 		this.motionY = nextVel.getY();
 		this.motionZ = nextVel.getZ();
 		
-		// detects if it hits a block?
+/*		// detects if it hits a block?
 		MovingObjectPosition movingobjectposition = this.worldObj.rayTraceBlocks(currentPos.getVec3(), nextPos.getVec3());
 
 		if (movingobjectposition != null)
@@ -144,7 +145,22 @@ public class EntityChargedParticle extends EntityThrowable
 			{
 				movingobjectposition = new MovingObjectPosition(hitEntity);
 			}
-		}
+		}	
+		
+		if (movingobjectposition != null)
+		{
+			this.onImpact(movingobjectposition);
+		}	//does onImpact on hitEntity
+		
+		*/
+		
+		// New RayTrace system
+		RayTraceResult raytraceresult = ProjectileHelper.forwardsRaycast(this, true, this.ticksInAir >= 25, this.getThrower());
+
+        if (raytraceresult != null)
+        {
+            this.onImpact(raytraceresult);
+        }
 		
 		// *****ASSIGNING NEXT POSITION TO ENTITY*****
 		this.posX = nextPos.getX();
@@ -152,11 +168,6 @@ public class EntityChargedParticle extends EntityThrowable
 		this.posZ = nextPos.getZ();
         
         this.ticksInAir++;
-
-		if (movingobjectposition != null)
-		{
-			this.onImpact(movingobjectposition);
-		}	//does onImpact on hitEntity
 
 		if (this.posY <= -20 || this.posY >= 400 || this.ticksInAir >= lifetime)
 		{
@@ -181,7 +192,7 @@ public class EntityChargedParticle extends EntityThrowable
 	}
 
 	@Override
-	protected void onImpact(MovingObjectPosition pos) 
+	protected void onImpact(RayTraceResult pos) 
 	{
 		this.worldObj.createExplosion(this, this.posX, this.posY, this.posZ,
 				(float)this.explosionRadius, false);

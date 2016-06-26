@@ -1,8 +1,8 @@
-package com.josephb.maxwellcraft.entity;
+package com.JosephB.maxwellcraft.entity;
 
-import com.josephb.maxwellcraft.MaxwellCraft;
-import com.josephb.maxwellcraft.utility.LogHelper;
-import com.josephb.maxwellcraft.utility.physics.Vector3;
+import com.JosephB.maxwellcraft.MaxwellCraft;
+import com.JosephB.maxwellcraft.utility.LogHelper;
+import com.JosephB.maxwellcraft.utility.physics.Vector3;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.EnumParticleTypes;

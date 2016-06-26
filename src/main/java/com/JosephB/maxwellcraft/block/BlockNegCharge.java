@@ -1,12 +1,12 @@
-package com.josephb.maxwellcraft.block;
+package com.JosephB.maxwellcraft.block;
 
-import com.josephb.maxwellcraft.tileentity.TileEntityNegCharge;
+import com.JosephB.maxwellcraft.tileentity.TileEntityNegCharge;
 
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class BlockNegCharge extends BlockMaxwellCraft implements ITileEntityProvider
@@ -15,7 +15,7 @@ public class BlockNegCharge extends BlockMaxwellCraft implements ITileEntityProv
 	
 	public BlockNegCharge()
 	{
-		super(Material.iron);
+		super(Material.IRON);
 		this.setUnlocalizedName(name);
 		this.isBlockContainer = true;
 	}

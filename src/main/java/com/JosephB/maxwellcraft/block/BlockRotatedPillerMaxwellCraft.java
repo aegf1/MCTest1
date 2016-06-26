@@ -1,22 +1,22 @@
-package com.josephb.maxwellcraft.block;
+package com.JosephB.maxwellcraft.block;
 
-import com.josephb.maxwellcraft.MaxwellCraft;
-import com.josephb.maxwellcraft.creativetab.CreativeTabMaxwellCraft;
-import com.josephb.maxwellcraft.utility.LogHelper;
-import com.josephb.maxwellcraft.utility.trackers.TrackerHelper;
+import com.JosephB.maxwellcraft.MaxwellCraft;
+import com.JosephB.maxwellcraft.creativetab.CreativeTabMaxwellCraft;
+import com.JosephB.maxwellcraft.utility.LogHelper;
+import com.JosephB.maxwellcraft.utility.trackers.TrackerHelper;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyDirection;
-import net.minecraft.block.state.BlockState;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumWorldBlockLayer;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
@@ -42,33 +42,22 @@ public class BlockRotatedPillerMaxwellCraft extends BlockMaxwellCraft
 	 */
 	public BlockRotatedPillerMaxwellCraft()
 	{
-		this(Material.iron);
+		this(Material.IRON);
 	}
 	
 	@SideOnly(Side.CLIENT)
-	public EnumWorldBlockLayer getBlockLayer()
-	{
-		return EnumWorldBlockLayer.SOLID;
-	}
+    public BlockRenderLayer getBlockLayer()
+    {
+        return BlockRenderLayer.SOLID;
+    }
 	
-	@Override
-	public boolean isOpaqueCube()
-	{
-		return true;
-	}
 	
-	@Override
-	public boolean isFullCube()
-	{
-		return true;
-	}
-	
-	@Override
+/*	@Override
 	public int getRenderType()
 	{
 		return 3;
 	}
-
+*/
 	
 	public static EnumFacing getFacing(int meta)
     {
@@ -97,9 +86,9 @@ public class BlockRotatedPillerMaxwellCraft extends BlockMaxwellCraft
     }
 
     @Override
-    protected BlockState createBlockState()
+    protected BlockStateContainer createBlockState()
     {
-        return new BlockState(this, new IProperty[] {FACING});
+        return new BlockStateContainer(this, new IProperty[] {FACING});
     }
 
     @Override

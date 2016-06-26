@@ -1,7 +1,7 @@
-package com.josephb.maxwellcraft.creativetab;
+package com.JosephB.maxwellcraft.creativetab;
 
-import com.josephb.maxwellcraft.init.ModItems;
-import com.josephb.maxwellcraft.reference.Reference;
+import com.JosephB.maxwellcraft.init.ModItems;
+import com.JosephB.maxwellcraft.reference.Reference;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
