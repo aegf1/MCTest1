@@ -1,26 +1,25 @@
-package com.josephb.maxwellcraft.entity.particle;
+package com.JosephB.maxwellcraft.entity.particle;
 
-import net.minecraft.client.particle.EntityFX;
+import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.IParticleFactory;
-import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class ParticleProton extends EntityFX
+public class ParticleProton extends Particle
 {
     private static final String __OBFID = "CL_00000907";
 
-    public ParticleProton(World worldIn, double p_i1209_2_, double p_i1209_4_, double p_i1209_6_, double p_i1209_8_, double p_i1209_10_, double p_i1209_12_)
+    public ParticleProton(World worldIn, double x, double y, double z, double XMov, double YMov, double ZMov)
     {
-        super(worldIn, p_i1209_2_, p_i1209_4_, p_i1209_6_, p_i1209_8_, p_i1209_10_, p_i1209_12_);
+        super(worldIn, x, y, z, XMov, YMov, ZMov);
         this.motionX = this.motionY = this.motionZ = 0;
         this.particleRed = this.particleGreen = this.particleBlue = 1.0F;
         this.particleMaxAge = 200;
-        this.noClip = true;
+        this.field_190017_n = true;
         this.setParticleTextureIndex(48);
         this.particleTextureJitterX = 0;
         this.particleTextureJitterY = 0;
@@ -51,17 +50,6 @@ public class ParticleProton extends EntityFX
     }
 
     /**
-     * Gets how bright this entity is.
-     */
-    public float getBrightness(float p_70013_1_)
-    {
-        float f1 = ((float)this.particleAge + p_70013_1_) / (float)this.particleMaxAge;
-        f1 = MathHelper.clamp_float(f1, 0.0F, 1.0F);
-        float f2 = super.getBrightness(p_70013_1_);
-        return f2 * f1 + (1.0F - f1);
-    }
-
-    /**
      * Called to update the entity's position/logic.
      */
     public void onUpdate()
@@ -72,7 +60,7 @@ public class ParticleProton extends EntityFX
 
         if (this.particleAge++ >= this.particleMaxAge)
         {
-            this.setDead();
+            this.setExpired();
         }
 
     }
@@ -82,7 +70,7 @@ public class ParticleProton extends EntityFX
         {
             private static final String __OBFID = "CL_00002602";
 
-            public EntityFX getEntityFX(int p_178902_1_, World worldIn, double p_178902_3_, double p_178902_5_, double p_178902_7_, double p_178902_9_, double p_178902_11_, double p_178902_13_, int ... p_178902_15_)
+            public Particle getEntityFX(int p_178902_1_, World worldIn, double p_178902_3_, double p_178902_5_, double p_178902_7_, double p_178902_9_, double p_178902_11_, double p_178902_13_, int ... p_178902_15_)
             {
                 return new ParticleProton(worldIn, p_178902_3_, p_178902_5_, p_178902_7_, p_178902_9_, p_178902_11_, p_178902_13_);
             }

@@ -1,11 +1,11 @@
-package com.josephb.maxwellcraft.utility.trackers;
+package com.JosephB.maxwellcraft.utility.trackers;
 
 import java.util.HashSet;
 
-import com.josephb.maxwellcraft.block.BlockNegCharge;
-import com.josephb.maxwellcraft.utility.LogHelper;
+import com.JosephB.maxwellcraft.block.BlockNegCharge;
+import com.JosephB.maxwellcraft.utility.LogHelper;
 
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;

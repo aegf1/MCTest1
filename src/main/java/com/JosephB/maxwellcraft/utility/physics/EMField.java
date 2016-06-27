@@ -1,13 +1,13 @@
-package com.josephb.maxwellcraft.utility.physics;
+package com.JosephB.maxwellcraft.utility.physics;
 
-import com.josephb.maxwellcraft.MaxwellCraft;
-import com.josephb.maxwellcraft.block.BlockMagnet;
-import com.josephb.maxwellcraft.reference.Reference;
-import com.josephb.maxwellcraft.utility.LogHelper;
+import com.JosephB.maxwellcraft.MaxwellCraft;
+import com.JosephB.maxwellcraft.block.BlockMagnet;
+import com.JosephB.maxwellcraft.reference.Reference;
+import com.JosephB.maxwellcraft.utility.LogHelper;
 
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.Vec3i;
+import net.minecraft.util.math.Vec3i;
 
 public class EMField 
 {

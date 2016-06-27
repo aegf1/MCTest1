@@ -1,13 +1,13 @@
-package com.josephb.maxwellcraft.init;
+package com.JosephB.maxwellcraft.init;
 
-import com.josephb.maxwellcraft.item.ItemAntiProton;
-import com.josephb.maxwellcraft.item.ItemProton;
-import com.josephb.maxwellcraft.item.ItemMaxwellCraft;
-import com.josephb.maxwellcraft.reference.Reference;
+import com.JosephB.maxwellcraft.item.ItemAntiProton;
+import com.JosephB.maxwellcraft.item.ItemProton;
+import com.JosephB.maxwellcraft.item.ItemMaxwellCraft;
+import com.JosephB.maxwellcraft.reference.Reference;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.entity.RenderItem;
-import net.minecraft.client.resources.model.ModelResourceLocation;
+import net.minecraft.client.renderer.RenderItem;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;

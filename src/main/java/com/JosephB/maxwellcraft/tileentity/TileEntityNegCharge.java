@@ -1,13 +1,12 @@
-package com.josephb.maxwellcraft.tileentity;
+package com.JosephB.maxwellcraft.tileentity;
 
-import com.josephb.maxwellcraft.MaxwellCraft;
-import com.josephb.maxwellcraft.utility.LogHelper;
+import com.JosephB.maxwellcraft.MaxwellCraft;
+import com.JosephB.maxwellcraft.utility.LogHelper;
 
 import net.minecraft.block.properties.PropertyDirection;
-import net.minecraft.server.gui.IUpdatePlayerListBox;
 import net.minecraft.tileentity.TileEntity;
 
-public class TileEntityNegCharge extends TileEntity implements IUpdatePlayerListBox
+public class TileEntityNegCharge extends TileEntity 
 {
 	public static final String publicName = "TileEntityNegCharge";
 	private String name = "TileEntityNegCharge";
@@ -18,7 +17,6 @@ public class TileEntityNegCharge extends TileEntity implements IUpdatePlayerList
 		return name;
 	}
 	
-	@Override
 	public void update()
 	{
 		if(!worldObj.isRemote)

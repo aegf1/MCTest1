@@ -42,6 +42,7 @@ public class EntityChargedParticle extends EntityThrowable
 	public EntityChargedParticle(World world, EntityLivingBase player, float mIn, float qIn, float speedIn)
 	{
 		super(world, player);
+		this.setHeadingFromThrower(player, player.rotationPitch, player.rotationYaw, 0.0F, 1.0F, 0.0F);
 		normaliseMotion();
 		this.motionX*=speedIn;
 		this.motionY*=speedIn;

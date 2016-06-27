@@ -12,6 +12,7 @@ import com.JosephB.maxwellcraft.utility.physics.Vector3;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.item.EntityArmorStand;
 import net.minecraft.entity.projectile.ProjectileHelper;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -27,12 +28,12 @@ public class EntityRelChargedParticle extends EntityChargedParticle
 	protected Vector3 position = new Vector3();
 	protected Vector3 momentum = new Vector3();
 	protected boolean dataManagerInitialised= false;
-	protected DataParameter<Float> XPOS = EntityDataManager.<Float>createKey(Entity.class, DataSerializers.FLOAT);
-	protected DataParameter<Float> YPOS = EntityDataManager.<Float>createKey(Entity.class, DataSerializers.FLOAT);
-	protected DataParameter<Float> ZPOS = EntityDataManager.<Float>createKey(Entity.class, DataSerializers.FLOAT);
-	protected DataParameter<Float> XMOM = EntityDataManager.<Float>createKey(Entity.class, DataSerializers.FLOAT);
-	protected DataParameter<Float> YMOM = EntityDataManager.<Float>createKey(Entity.class, DataSerializers.FLOAT);
-	protected DataParameter<Float> ZMOM = EntityDataManager.<Float>createKey(Entity.class, DataSerializers.FLOAT);
+	public static final DataParameter<Float> XPOS = EntityDataManager.<Float>createKey(EntityRelChargedParticle.class, DataSerializers.FLOAT);
+	public static final DataParameter<Float> YPOS = EntityDataManager.<Float>createKey(EntityRelChargedParticle.class, DataSerializers.FLOAT);
+	public static final DataParameter<Float> ZPOS = EntityDataManager.<Float>createKey(EntityRelChargedParticle.class, DataSerializers.FLOAT);
+	public static final DataParameter<Float> XMOM = EntityDataManager.<Float>createKey(EntityRelChargedParticle.class, DataSerializers.FLOAT);
+	public static final DataParameter<Float> YMOM = EntityDataManager.<Float>createKey(EntityRelChargedParticle.class, DataSerializers.FLOAT);
+	public static final DataParameter<Float> ZMOM = EntityDataManager.<Float>createKey(EntityRelChargedParticle.class, DataSerializers.FLOAT);
 
 	public EntityRelChargedParticle(World world, float mIn, float qIn, float speedIn)
 	{
@@ -65,15 +66,15 @@ public class EntityRelChargedParticle extends EntityChargedParticle
 		super.entityInit();
 		if(!dataManagerInitialised)
 		{
-			this.dataManager = new EntityDataManager(this);
+//			this.dataManager = new EntityDataManager(this);
 			
-	        this.dataManager.register(XPOS, (float) this.posX);
-	        this.dataManager.register(YPOS, (float) this.posY);
-	        this.dataManager.register(ZPOS, (float) this.posZ);
+	        this.dataManager.register(XPOS, Float.valueOf((float) this.posX));
+	        this.dataManager.register(YPOS, Float.valueOf((float) this.posY));
+	        this.dataManager.register(ZPOS, Float.valueOf((float) this.posZ));
 	        
-	        this.dataManager.register(XMOM, 0f);
-	        this.dataManager.register(YMOM, 0f);
-	        this.dataManager.register(ZMOM, 0f);
+	        this.dataManager.register(XMOM, Float.valueOf(0f));
+	        this.dataManager.register(YMOM, Float.valueOf(0f));
+	        this.dataManager.register(ZMOM, Float.valueOf(0f));
 	        
 			dataManagerInitialised = true;
 		}
@@ -300,9 +301,9 @@ public class EntityRelChargedParticle extends EntityChargedParticle
 		setPosition(pos.getX(), pos.getY(), pos.getZ());
 		if(!this.worldObj.isRemote)
 		{
-			this.dataManager.set(XPOS, (float) pos.getX());
-			this.dataManager.set(YPOS, (float) pos.getY());
-			this.dataManager.set(ZPOS, (float) pos.getZ());
+			this.dataManager.set(XPOS, Float.valueOf((float) pos.getX()));
+			this.dataManager.set(YPOS, Float.valueOf((float) pos.getY()));
+			this.dataManager.set(ZPOS, Float.valueOf((float) pos.getZ()));
 
 //			LogHelper.info("writing position to datawatcher");
 //			LogHelper.info("entity position = "+pos.toString());
@@ -314,9 +315,9 @@ public class EntityRelChargedParticle extends EntityChargedParticle
 	public Vector3 getPositionVec3()
 	{
 		return new Vector3(
-				(double) this.dataManager.get(XPOS),
-				(double) this.dataManager.get(YPOS),
-				(double) this.dataManager.get(ZPOS)
+				((Float) this.dataManager.get(XPOS)).doubleValue(),
+				((Float) this.dataManager.get(YPOS)).doubleValue(),
+				((Float) this.dataManager.get(ZPOS)).doubleValue()
 		);
 	}
 	
@@ -327,9 +328,9 @@ public class EntityRelChargedParticle extends EntityChargedParticle
 		this.momentum.setZ(z);
 		if(!this.worldObj.isRemote)
 		{
-			this.dataManager.set(XMOM, (float) x);
-			this.dataManager.set(YMOM, (float) y);
-			this.dataManager.set(ZMOM, (float) z);
+			this.dataManager.set(XMOM, Float.valueOf((float) x));
+			this.dataManager.set(YMOM, Float.valueOf((float) y));
+			this.dataManager.set(ZMOM, Float.valueOf((float) z));
 			
 //			LogHelper.info("writing momentum to datawatcher");
 //			LogHelper.info("entity momentum = "+momentum.toString());
@@ -344,9 +345,9 @@ public class EntityRelChargedParticle extends EntityChargedParticle
 	public Vector3 getMomentumVec3()
 	{
 		return new Vector3(
-				(double) this.dataManager.get(XMOM),
-				(double) this.dataManager.get(YMOM),
-				(double) this.dataManager.get(ZMOM)
+				((Float) this.dataManager.get(XMOM)).doubleValue(),
+				((Float) this.dataManager.get(YMOM)).doubleValue(),
+				((Float) this.dataManager.get(ZMOM)).doubleValue()
 			);
 	}
 	

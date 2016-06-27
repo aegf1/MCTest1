@@ -1,9 +1,9 @@
-package com.josephb.maxwellcraft.utility.trackers;
+package com.JosephB.maxwellcraft.utility.trackers;
 
-import com.josephb.maxwellcraft.MaxwellCraft;
-import com.josephb.maxwellcraft.block.BlockMagnet;
-import com.josephb.maxwellcraft.block.BlockNegCharge;
-import com.josephb.maxwellcraft.block.BlockPosCharge;
+import com.JosephB.maxwellcraft.MaxwellCraft;
+import com.JosephB.maxwellcraft.block.BlockMagnet;
+import com.JosephB.maxwellcraft.block.BlockNegCharge;
+import com.JosephB.maxwellcraft.block.BlockPosCharge;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;

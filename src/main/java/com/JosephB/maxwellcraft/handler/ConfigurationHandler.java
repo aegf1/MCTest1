@@ -1,8 +1,8 @@
-package com.josephb.maxwellcraft.handler;
+package com.JosephB.maxwellcraft.handler;
 
 import java.io.File;
 
-import com.josephb.maxwellcraft.reference.Reference;
+import com.JosephB.maxwellcraft.reference.Reference;
 
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
@@ -28,7 +28,7 @@ public class ConfigurationHandler {
 	@Mod.EventHandler
 	public void onConfigurationChangedEvent(ConfigChangedEvent.OnConfigChangedEvent event)
 	{
-		if (event.modID.equalsIgnoreCase(Reference.MOD_ID))
+		if (event.getModID().equalsIgnoreCase(Reference.MOD_ID))
 		{
 			loadConfiguration();
 		}

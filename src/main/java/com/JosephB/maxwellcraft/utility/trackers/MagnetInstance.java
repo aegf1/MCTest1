@@ -1,12 +1,12 @@
-package com.josephb.maxwellcraft.utility.trackers;
+package com.JosephB.maxwellcraft.utility.trackers;
 
-import com.josephb.maxwellcraft.utility.physics.Vector3;
+import com.JosephB.maxwellcraft.utility.physics.Vector3;
 
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.Vec3i;
+import net.minecraft.util.math.Vec3i;
 
 public class MagnetInstance 
 {

@@ -1,15 +1,15 @@
-package com.josephb.maxwellcraft.utility.trackers;
+package com.JosephB.maxwellcraft.utility.trackers;
 
 import java.util.HashSet;
 import java.util.Iterator;
 
-import com.josephb.maxwellcraft.block.BlockMagnet;
-import com.josephb.maxwellcraft.utility.LogHelper;
-import com.josephb.maxwellcraft.utility.physics.Vector3;
+import com.JosephB.maxwellcraft.block.BlockMagnet;
+import com.JosephB.maxwellcraft.utility.LogHelper;
+import com.JosephB.maxwellcraft.utility.physics.Vector3;
 
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 import net.minecraftforge.common.DimensionManager;

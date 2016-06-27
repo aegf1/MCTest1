@@ -1,8 +1,8 @@
-package com.josephb.maxwellcraft.handler;
+package com.JosephB.maxwellcraft.handler;
 
-import com.josephb.maxwellcraft.MaxwellCraft;
-import com.josephb.maxwellcraft.utility.dataoutput.OutputHelper;
-import com.josephb.maxwellcraft.utility.trackers.TrackerHelper;
+import com.JosephB.maxwellcraft.MaxwellCraft;
+import com.JosephB.maxwellcraft.utility.dataoutput.OutputHelper;
+import com.JosephB.maxwellcraft.utility.trackers.TrackerHelper;
 
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;

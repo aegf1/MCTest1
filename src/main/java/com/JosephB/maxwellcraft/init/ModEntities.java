@@ -1,10 +1,10 @@
-package com.josephb.maxwellcraft.init;
+package com.JosephB.maxwellcraft.init;
 
-import com.josephb.maxwellcraft.entity.EntityThrownAntiProton;
-import com.josephb.maxwellcraft.entity.EntityThrownProton;
-import com.josephb.maxwellcraft.reference.Reference;
-import com.josephb.maxwellcraft.renderers.RenderEntityAntiProton;
-import com.josephb.maxwellcraft.renderers.RenderEntityProton;
+import com.JosephB.maxwellcraft.entity.EntityThrownAntiProton;
+import com.JosephB.maxwellcraft.entity.EntityThrownProton;
+import com.JosephB.maxwellcraft.reference.Reference;
+import com.JosephB.maxwellcraft.renderers.RenderEntityAntiProton;
+import com.JosephB.maxwellcraft.renderers.RenderEntityProton;
 
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.registry.EntityRegistry;

@@ -1,7 +1,7 @@
-package com.josephb.maxwellcraft.init;
+package com.JosephB.maxwellcraft.init;
 
-import com.josephb.maxwellcraft.reference.Reference;
-import com.josephb.maxwellcraft.tileentity.*;
+import com.JosephB.maxwellcraft.reference.Reference;
+import com.JosephB.maxwellcraft.tileentity.*;
 
 import net.minecraftforge.fml.common.registry.GameRegistry;
 

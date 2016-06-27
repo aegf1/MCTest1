@@ -1,8 +1,8 @@
-package com.josephb.maxwellcraft.utility;
+package com.JosephB.maxwellcraft.utility;
 
 import org.apache.logging.log4j.Level;
 
-import com.josephb.maxwellcraft.reference.Reference;
+import com.JosephB.maxwellcraft.reference.Reference;
 
 import net.minecraftforge.fml.common.FMLLog;
 

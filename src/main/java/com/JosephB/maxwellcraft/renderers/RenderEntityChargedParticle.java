@@ -1,14 +1,15 @@
-package com.josephb.maxwellcraft.renderers;
+package com.JosephB.maxwellcraft.renderers;
 
-import com.josephb.maxwellcraft.entity.EntityChargedParticle;
+import com.JosephB.maxwellcraft.entity.EntityChargedParticle;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.WorldRenderer;
+import net.minecraft.client.renderer.VertexBuffer;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 
@@ -46,7 +47,7 @@ public class RenderEntityChargedParticle extends Render
         TextureAtlasSprite textureatlassprite = this.getTextureAtlasSprite();
         		//=Minecraft.getMinecraft().getRenderItem().getItemModelMesher().getParticleIcon(ModItems.proton);
         Tessellator tessellator = Tessellator.getInstance();
-        WorldRenderer worldrenderer = tessellator.getWorldRenderer();
+        VertexBuffer vbuffer = tessellator.getBuffer();
         float f3 = textureatlassprite.getMinU();
         float f4 = textureatlassprite.getMaxU();
         float f5 = textureatlassprite.getMinV();
@@ -56,12 +57,12 @@ public class RenderEntityChargedParticle extends Render
         float f9 = 0.25F;
         GlStateManager.rotate(180.0F - this.renderManager.playerViewY, 0.0F, 1.0F, 0.0F);
         GlStateManager.rotate(-this.renderManager.playerViewX, 1.0F, 0.0F, 0.0F);
-        worldrenderer.startDrawingQuads();
-        worldrenderer.setNormal(0.0F, 1.0F, 0.0F);
-        worldrenderer.addVertexWithUV((double)(0.0F - f8), (double)(0.0F - f9), 0.0D, (double)f3, (double)f6);
-        worldrenderer.addVertexWithUV((double)(f7 - f8), (double)(0.0F - f9), 0.0D, (double)f4, (double)f6);
-        worldrenderer.addVertexWithUV((double)(f7 - f8), (double)(1.0F - f9), 0.0D, (double)f4, (double)f5);
-        worldrenderer.addVertexWithUV((double)(0.0F - f8), (double)(1.0F - f9), 0.0D, (double)f3, (double)f5);
+        
+        vbuffer.begin(7, DefaultVertexFormats.POSITION_TEX_NORMAL);
+        vbuffer.pos(-0.5D, -0.25D, 0.0D).tex((double)f3, (double)f6).normal(0.0F, 1.0F, 0.0F).endVertex();
+        vbuffer.pos(0.5D, -0.25D, 0.0D).tex((double)f4, (double)f6).normal(0.0F, 1.0F, 0.0F).endVertex();
+        vbuffer.pos(0.5D, 0.75D, 0.0D).tex((double)f4, (double)f5).normal(0.0F, 1.0F, 0.0F).endVertex();
+        vbuffer.pos(-0.5D, 0.75D, 0.0D).tex((double)f3, (double)f5).normal(0.0F, 1.0F, 0.0F).endVertex();
         tessellator.draw();
         GlStateManager.disableRescaleNormal();
         GlStateManager.popMatrix();

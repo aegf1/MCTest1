@@ -1,18 +1,18 @@
-package com.josephb.maxwellcraft.init;
+package com.JosephB.maxwellcraft.init;
 
-import com.josephb.maxwellcraft.MaxwellCraft;
-import com.josephb.maxwellcraft.block.BlockMagnet;
-import com.josephb.maxwellcraft.block.BlockNegCharge;
-import com.josephb.maxwellcraft.block.BlockPosCharge;
-import com.josephb.maxwellcraft.block.BlockMaxwellCraft;
-import com.josephb.maxwellcraft.reference.Reference;
-import com.josephb.maxwellcraft.utility.trackers.MagnetTracker;
-import com.josephb.maxwellcraft.utility.trackers.NegChargeTracker;
-import com.josephb.maxwellcraft.utility.trackers.PosChargeTracker;
+import com.JosephB.maxwellcraft.MaxwellCraft;
+import com.JosephB.maxwellcraft.block.BlockMagnet;
+import com.JosephB.maxwellcraft.block.BlockNegCharge;
+import com.JosephB.maxwellcraft.block.BlockPosCharge;
+import com.JosephB.maxwellcraft.block.BlockMaxwellCraft;
+import com.JosephB.maxwellcraft.reference.Reference;
+import com.JosephB.maxwellcraft.utility.trackers.MagnetTracker;
+import com.JosephB.maxwellcraft.utility.trackers.NegChargeTracker;
+import com.JosephB.maxwellcraft.utility.trackers.PosChargeTracker;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.entity.RenderItem;
-import net.minecraft.client.resources.model.ModelResourceLocation;
+import net.minecraft.client.renderer.RenderItem;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;

@@ -1,4 +1,4 @@
-package com.josephb.maxwellcraft.utility.dataoutput;
+package com.JosephB.maxwellcraft.utility.dataoutput;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -6,10 +6,10 @@ import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-import com.josephb.maxwellcraft.MaxwellCraft;
-import com.josephb.maxwellcraft.block.BlockMagnet;
-import com.josephb.maxwellcraft.utility.physics.Vector3;
-import com.josephb.maxwellcraft.utility.trackers.PosChargeTracker;
+import com.JosephB.maxwellcraft.MaxwellCraft;
+import com.JosephB.maxwellcraft.block.BlockMagnet;
+import com.JosephB.maxwellcraft.utility.physics.Vector3;
+import com.JosephB.maxwellcraft.utility.trackers.PosChargeTracker;
 
 import net.minecraft.util.EnumFacing;
 

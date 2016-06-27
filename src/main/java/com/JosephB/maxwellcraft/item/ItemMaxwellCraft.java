@@ -1,7 +1,7 @@
-package com.josephb.maxwellcraft.item;
+package com.JosephB.maxwellcraft.item;
 
-import com.josephb.maxwellcraft.creativetab.CreativeTabMaxwellCraft;
-import com.josephb.maxwellcraft.reference.Reference;
+import com.JosephB.maxwellcraft.creativetab.CreativeTabMaxwellCraft;
+import com.JosephB.maxwellcraft.reference.Reference;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

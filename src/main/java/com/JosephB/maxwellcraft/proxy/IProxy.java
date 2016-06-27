@@ -1,6 +1,6 @@
-package com.josephb.maxwellcraft.proxy;
+package com.JosephB.maxwellcraft.proxy;
 
-import com.josephb.maxwellcraft.utility.physics.Vector3;
+import com.JosephB.maxwellcraft.utility.physics.Vector3;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;

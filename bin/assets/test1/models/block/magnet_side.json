@@ -1,0 +1,8 @@
+{
+    "parent": "Test1:block/column_side_topbottom",
+    "textures": {
+        "top": "Test1:blocks/MagnetNorth",
+        "bottom": "Test1:blocks/MagnetSouth",
+        "side": "Test1:blocks/MagnetSide"
+    }
+}

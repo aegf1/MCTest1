@@ -1,7 +1,7 @@
-package com.josephb.maxwellcraft.renderers;
+package com.JosephB.maxwellcraft.renderers;
 
-import com.josephb.maxwellcraft.entity.EntityThrownAntiProton;
-import com.josephb.maxwellcraft.init.ModItems;
+import com.JosephB.maxwellcraft.entity.EntityThrownAntiProton;
+import com.JosephB.maxwellcraft.init.ModItems;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderManager;

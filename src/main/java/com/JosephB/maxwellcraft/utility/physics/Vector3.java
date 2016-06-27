@@ -1,7 +1,7 @@
-package com.josephb.maxwellcraft.utility.physics;
+package com.JosephB.maxwellcraft.utility.physics;
 
-import net.minecraft.util.Vec3;
-import net.minecraft.util.Vec3i;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.Vec3i;
 
 /**
  * Represents a 3d vector
@@ -50,11 +50,11 @@ public class Vector3
 		this.setVector(v);
 	}
 	
-	public Vector3(Vec3 vec3)
+	public Vector3(Vec3d vec3d)
 	{
-		x = vec3.xCoord;
-		y = vec3.yCoord;
-		z = vec3.zCoord;
+		x = vec3d.xCoord;
+		y = vec3d.yCoord;
+		z = vec3d.zCoord;
 	}
 	
 	public Vector3(Vec3i vec3i)
@@ -207,9 +207,9 @@ public class Vector3
 		else { return false; }
 	}
 	
-	public Vec3 getVec3()
+	public Vec3d getVec3()
 	{
-		return new Vec3(x,this.y,this.z);
+		return new Vec3d(x,this.y,this.z);
 	}
 	
 	public String toString()
