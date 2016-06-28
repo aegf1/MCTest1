@@ -1,6 +1,7 @@
 package com.JosephB.maxwellcraft.entity;
 
 import com.JosephB.maxwellcraft.MaxwellCraft;
+import com.JosephB.maxwellcraft.reference.Reference;
 import com.JosephB.maxwellcraft.utility.LogHelper;
 import com.JosephB.maxwellcraft.utility.physics.Vector3;
 
@@ -10,30 +11,21 @@ import net.minecraft.world.World;
 
 public class EntityThrownProton extends EntityRelChargedParticle
 {
-	private static final float protonCharge = 1F;
-	private static final float protonMass = 1F;
-	private static final float speed = 5F;	// in blocks/second
 	private static double tickCountParticleSpawn = 0;
 	
 	public EntityThrownProton(World world, EntityLivingBase player) 
 	{
-		super(world, player, protonMass, protonCharge, speed);
+		super(world, player, Reference.protonMass, Reference.protonCharge, Reference.protonSpeed/20F);	
 	}
 	
 	public EntityThrownProton(World world) 
 	{
-		super(world, protonMass, protonCharge, speed);
+		super(world, Reference.protonMass, Reference.protonCharge, Reference.protonSpeed/20F);
 	}
 	
 	public EntityThrownProton(World world, Vector3 pos, Vector3 vel)
 	{
-		super(world, pos, vel, protonMass, protonCharge);
-		this.motionX*=vel.getX();
-		this.motionY*=vel.getY();
-		this.motionZ*=vel.getZ();
-		setTicksInAir(0);
-		setMass(protonMass);
-		setCharge(protonCharge);
+		super(world, pos, vel, Reference.protonMass, Reference.protonCharge);
 	}
 	
 	@Override

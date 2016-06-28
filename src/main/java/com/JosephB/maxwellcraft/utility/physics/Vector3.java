@@ -6,9 +6,8 @@ import net.minecraft.util.math.Vec3i;
 /**
  * Represents a 3d vector
  * 
- * Created before i knew that the existing 'Vec3' class (which is terrible) is required for all the
- * bounding box and ray tracing stuff
- * Not used atm, but may be modified to instead perform functions Vec3 doesn't.
+ * Created before I knew that the existing 'Vec3' class (which is terrible) is required for all the
+ * bounding box and ray tracing stuff.
  * 
  * @author Joseph Brownless
  *

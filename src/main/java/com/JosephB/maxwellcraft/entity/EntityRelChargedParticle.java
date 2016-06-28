@@ -24,60 +24,50 @@ import net.minecraftforge.fml.common.Mod;
 
 public class EntityRelChargedParticle extends EntityChargedParticle
 {
-	protected double gamma;
-	protected Vector3 position = new Vector3();
-	protected Vector3 momentum = new Vector3();
-	protected boolean dataManagerInitialised= false;
-	public static final DataParameter<Float> XPOS = EntityDataManager.<Float>createKey(EntityRelChargedParticle.class, DataSerializers.FLOAT);
-	public static final DataParameter<Float> YPOS = EntityDataManager.<Float>createKey(EntityRelChargedParticle.class, DataSerializers.FLOAT);
-	public static final DataParameter<Float> ZPOS = EntityDataManager.<Float>createKey(EntityRelChargedParticle.class, DataSerializers.FLOAT);
+	// NOTE that motionX etc are per TICK (1/20 sec). So, velocity is 20*(motionX,motionY,motionZ)
+	
+	protected Vector3 momentum;
 	public static final DataParameter<Float> XMOM = EntityDataManager.<Float>createKey(EntityRelChargedParticle.class, DataSerializers.FLOAT);
 	public static final DataParameter<Float> YMOM = EntityDataManager.<Float>createKey(EntityRelChargedParticle.class, DataSerializers.FLOAT);
 	public static final DataParameter<Float> ZMOM = EntityDataManager.<Float>createKey(EntityRelChargedParticle.class, DataSerializers.FLOAT);
 
 	public EntityRelChargedParticle(World world, float mIn, float qIn, float speedIn)
 	{
-		super(world, mIn, qIn, speedIn);
-		Vector3 vel = new Vector3(this.motionX,this.motionY,this.motionZ);
-		double gam = 1.0 / Math.sqrt(1 - Math.pow((vel.magnitude()/Reference.SPEED_OF_LIGHT) , 2));	//gamma = 1/sqrt(1-(v/c)^2)
-		setMomentum(Vector3.scale(vel, gam*mass));				// p = gamma*m*v
+		super(world, mIn, qIn, speedIn);	// Speed is per TICK
+		initMom();
 	}
 
 	public EntityRelChargedParticle(World world, EntityLivingBase player, float mIn, float qIn, float speedIn)
 	{
-		super(world, player, mIn, qIn, speedIn);
-		Vector3 vel = new Vector3(this.motionX,this.motionY,this.motionZ);
-		double gam = 1.0 / Math.sqrt(1 - Math.pow((vel.magnitude()/Reference.SPEED_OF_LIGHT) , 2));	//gamma = 1/sqrt(1-(v/c)^2)
-		setMomentum(Vector3.scale(vel, gam*mass));				// p = gamma*m*v
-		this.setPosition(new Vector3(player.posX, player.posY + (double)player.getEyeHeight(), player.posZ));
+		super(world, player, mIn, qIn, speedIn);	// Speed is per TICK
+		initMom();
 	}
 
 	public EntityRelChargedParticle(World world, Vector3 posIn, Vector3 velIn, float mIn, float qIn)
 	{
-		super(world, posIn, velIn, mIn, qIn);
-		Vector3 vel = new Vector3(this.motionX,this.motionY,this.motionZ);
-		double gam = 1.0 / Math.sqrt(1 - Math.pow((vel.magnitude()/Reference.SPEED_OF_LIGHT) , 2));	//gamma = 1/sqrt(1-(v/c)^2)
-		setMomentum(Vector3.scale(vel, gam*mass));				// p = gamma*m*v
-		this.setPosition(posIn);
+		super(world, posIn, velIn, mIn, qIn);	// Speed is per TICK
+		initMom();
 	}
 
 	protected void entityInit()
 	{
 		super.entityInit();
-		if(!dataManagerInitialised)
-		{
-//			this.dataManager = new EntityDataManager(this);
-			
-	        this.dataManager.register(XPOS, Float.valueOf((float) this.posX));
-	        this.dataManager.register(YPOS, Float.valueOf((float) this.posY));
-	        this.dataManager.register(ZPOS, Float.valueOf((float) this.posZ));
-	        
-	        this.dataManager.register(XMOM, Float.valueOf(0f));
-	        this.dataManager.register(YMOM, Float.valueOf(0f));
-	        this.dataManager.register(ZMOM, Float.valueOf(0f));
-	        
-			dataManagerInitialised = true;
-		}
+ 
+	    this.dataManager.register(XMOM, Float.valueOf(0f));
+	    this.dataManager.register(YMOM, Float.valueOf(0f));
+	    this.dataManager.register(ZMOM, Float.valueOf(0f));
+	    
+	}
+	
+	private void initMom()
+	{
+		momentum = new Vector3();
+		Vector3 vel = Vector3.scale(new Vector3(this.motionX,this.motionY,this.motionZ), 20D);
+//		LogHelper.info("Velocity ="+vel.getX()+", "+vel.getY()+", "+vel.getZ());
+		double gam = 1.0 / Math.sqrt(1 - Math.pow((vel.magnitude()/Reference.SPEED_OF_LIGHT) , 2));	//gamma = 1/sqrt(1-(v/c)^2)
+//		LogHelper.info(gam);
+		setMomentum(Vector3.scale(vel, gam*mass));				// p = gamma*m*v
+//		LogHelper.info("Momentum ="+momentum.getX()+", "+momentum.getY()+", "+momentum.getZ());
 	}
 	
 	@Override
@@ -86,11 +76,13 @@ public class EntityRelChargedParticle extends EntityChargedParticle
 //		System.out.println("updating");
 		
 //		LogHelper.warn(entityUniqueID.toString());
-//		System.out.println("entity position ="+this.posX+", "+this.posY+", "+this.posZ);
-//      System.out.println("entity motion ="+this.motionX+", "+this.motionY+", "+this.motionZ);
+		
+//		LogHelper.info("Before update: ");
+//		LogHelper.info("entity motion ="+this.motionX+", "+this.motionY+", "+this.motionZ);
 		
 		position = new Vector3(getPositionVec3());	//current position
 		momentum = new Vector3(getMomentumVec3());	//current momentum
+//		LogHelper.info("Momentum ="+momentum.getX()+", "+momentum.getY()+", "+momentum.getZ());
 		
 		// Recording previous position
 		this.prevPosX = position.getX();
@@ -99,16 +91,20 @@ public class EntityRelChargedParticle extends EntityChargedParticle
 		
 		Vector3[] nextPosMom = updateManyTimesRK4(position, momentum);
 		
+//		LogHelper.info("After update: ");
 		Vector3 nextPos = new Vector3(nextPosMom[0]);
 		Vector3 nextMom = new Vector3(nextPosMom[1]);
+//		LogHelper.info("Momentum ="+nextMom.getX()+", "+nextMom.getY()+", "+nextMom.getZ());
 		
 		Vector3 nextVel = calcVelocity(nextMom);
-		
+//		LogHelper.info("Velocity ="+nextVel.getX()+", "+nextVel.getY()+", "+nextVel.getZ());
 		
 		// *****ASSIGNING NEXT VELOCITY TO ENTITY*****
-		this.motionX = nextVel.getX();
-		this.motionY = nextVel.getY();
-		this.motionZ = nextVel.getZ();
+		this.motionX = nextVel.getX()/20D;
+		this.motionY = nextVel.getY()/20D;
+		this.motionZ = nextVel.getZ()/20D;
+		
+//		LogHelper.info("entity motion ="+this.motionX+", "+this.motionY+", "+this.motionZ);
 		
 /*		// detects if it hits a block?
 		MovingObjectPosition movingobjectposition = this.worldObj.rayTraceBlocks(position.getVec3(), nextPos.getVec3());
@@ -162,8 +158,6 @@ public class EntityRelChargedParticle extends EntityChargedParticle
 		}
 		
 		// *****ASSIGNING NEXT POSITION + MOMENTUM TO ENTITY*****
-		setPosition(nextPos);
-		setMomentum(nextMom);
 		
 		if (!this.worldObj.isRemote)
 		{
@@ -179,10 +173,14 @@ public class EntityRelChargedParticle extends EntityChargedParticle
 		
 		// New RayTrace system
 		RayTraceResult raytraceresult = ProjectileHelper.forwardsRaycast(this, true, this.ticksInAir >= 25, this.getThrower());
-		if (raytraceresult != null)
+		if (raytraceresult != null && !this.worldObj.isRemote)
 		{
+			LogHelper.info("Hit something!");
 			this.onImpact(raytraceresult);
 		}
+		
+		setPosition(nextPos);
+		setMomentum(nextMom);
 			
         this.ticksInAir++;
 
@@ -216,9 +214,9 @@ public class EntityRelChargedParticle extends EntityChargedParticle
 		return Vector3.scale( m , 1.0 / (this.mass * calcGamma(m)) );
 	}
 	
-	public Vector3 calcForce(Vector3 pos, Vector3 mom)
+	public Vector3 calcForceMom(Vector3 pos, Vector3 mom)
 	{
-		return EMField.lorentzForce(pos, calcVelocity(mom), this.charge);
+		return calcForce(pos, calcVelocity(mom));
 	}
 	
 	private Vector3[] updateRK4(Vector3 pos, Vector3 mom, double dt)
@@ -231,28 +229,28 @@ public class EntityRelChargedParticle extends EntityChargedParticle
 		Vector3[] k1 = new Vector3[]
 			{
 				calcVelocity(startMom),
-				calcForce(startPos, startMom)
+				calcForceMom(startPos, startMom)
 			};
 		k1[0].scaleBy(dt); k1[1].scaleBy(dt);
 		
 		Vector3[] k2 = new Vector3[]
 			{
 				calcVelocity(Vector3.add(startMom, Vector3.scale(k1[1], 0.5))),
-				calcForce(Vector3.add(startPos, Vector3.scale(k1[0], 0.5)), Vector3.add(startMom, Vector3.scale(k1[1], 0.5)))
+				calcForceMom(Vector3.add(startPos, Vector3.scale(k1[0], 0.5)), Vector3.add(startMom, Vector3.scale(k1[1], 0.5)))
 			};
 		k2[0].scaleBy(dt); k2[1].scaleBy(dt);
 		
 		Vector3[] k3 = new Vector3[]
 			{
 				calcVelocity(Vector3.add(startMom, Vector3.scale(k2[1], 0.5))),
-				calcForce(Vector3.add(startPos, Vector3.scale(k2[0], 0.5)), Vector3.add(startMom, Vector3.scale(k2[1], 0.5)))
+				calcForceMom(Vector3.add(startPos, Vector3.scale(k2[0], 0.5)), Vector3.add(startMom, Vector3.scale(k2[1], 0.5)))
 			};
 		k3[0].scaleBy(dt); k3[1].scaleBy(dt);
 			
 		Vector3[] k4 = new Vector3[]
 			{
 				calcVelocity(Vector3.add(startMom, k3[1])),
-				calcForce(Vector3.add(startPos, k3[0]), Vector3.add(startMom, k3[1]))
+				calcForceMom(Vector3.add(startPos, k3[0]), Vector3.add(startMom, k3[1]))
 			};
 		k4[0].scaleBy(dt); k4[1].scaleBy(dt);
 		
@@ -296,33 +294,9 @@ public class EntityRelChargedParticle extends EntityChargedParticle
 		return new Vector3[]{thisPos,thisMom};
 	}
 	
-	public void setPosition(Vector3 pos)
-	{
-		setPosition(pos.getX(), pos.getY(), pos.getZ());
-		if(!this.worldObj.isRemote)
-		{
-			this.dataManager.set(XPOS, Float.valueOf((float) pos.getX()));
-			this.dataManager.set(YPOS, Float.valueOf((float) pos.getY()));
-			this.dataManager.set(ZPOS, Float.valueOf((float) pos.getZ()));
-
-//			LogHelper.info("writing position to datawatcher");
-//			LogHelper.info("entity position = "+pos.toString());
-		}
-		position = new Vector3(pos.getX(), pos.getY(), pos.getZ());
-
-	}
-	
-	public Vector3 getPositionVec3()
-	{
-		return new Vector3(
-				((Float) this.dataManager.get(XPOS)).doubleValue(),
-				((Float) this.dataManager.get(YPOS)).doubleValue(),
-				((Float) this.dataManager.get(ZPOS)).doubleValue()
-		);
-	}
-	
 	public void setMomentum(double x, double y, double z)
 	{
+		
 		this.momentum.setX(x); 
 		this.momentum.setY(y); 
 		this.momentum.setZ(z);

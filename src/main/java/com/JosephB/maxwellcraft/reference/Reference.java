@@ -15,4 +15,10 @@ public class Reference {
 	public static final double MAGNETIC_DIPOLE_CONSTANT = 2D;
 	public static final double ELECTRIC_FIELD_CONSTANT = 20D;
 	public static final double SPEED_OF_LIGHT = 100D; 	// in blocks/second
+	public static final float protonSpeed = 5F;			// in blocks/second
+	public static final float aProtonSpeed = 5F;		// in blocks/second
+	public static final float protonCharge = 1F;
+	public static final float aProtonCharge = -1F;
+	public static final float protonMass = 1F;
+	public static final float aProtonMass = 1F;
 }

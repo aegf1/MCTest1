@@ -1,6 +1,7 @@
 package com.JosephB.maxwellcraft.entity;
 
 import com.JosephB.maxwellcraft.MaxwellCraft;
+import com.JosephB.maxwellcraft.reference.Reference;
 import com.JosephB.maxwellcraft.utility.LogHelper;
 import com.JosephB.maxwellcraft.utility.physics.Vector3;
 
@@ -10,14 +11,11 @@ import net.minecraft.world.World;
 
 public class EntityThrownAntiProton extends EntityRelChargedParticle
 {
-	private static final float protonCharge = 1F;
-	private static final float protonMass = 1F;
-	private static final float speed = 5F;	// in blocks/second
 	private int tickCountParticleSpawn = 0;
 
 	public EntityThrownAntiProton(World world, EntityLivingBase player) 
 	{
-		super(world, player, protonMass, -1*protonCharge, speed);
+		super(world, player, Reference.aProtonMass, Reference.aProtonCharge, Reference.aProtonSpeed/20F);
 		/* DEBUG
         System.out.println("Constructing on client side ="+worldObj.isRemote);
         System.out.println("Constructor: entity position ="+posX+", "+posY+", "+posZ);
@@ -26,18 +24,16 @@ public class EntityThrownAntiProton extends EntityRelChargedParticle
 	
 	public EntityThrownAntiProton(World world) 
 	{
-		super(world, protonMass, -1*protonCharge, speed);
+		super(world, Reference.aProtonMass, Reference.aProtonCharge, Reference.aProtonSpeed/20F);
 	}
 	
 	public EntityThrownAntiProton(World world, Vector3 pos, Vector3 vel)
 	{
-		super(world, pos, vel, protonMass, -1*protonCharge);
+		super(world, pos, vel, Reference.aProtonMass, Reference.aProtonCharge);
 		this.motionX*=vel.getX();
 		this.motionY*=vel.getY();
 		this.motionZ*=vel.getZ();
 		setTicksInAir(0);
-		setMass(protonMass);
-		setCharge(-1*protonCharge);
 	}
 	
 	@Override

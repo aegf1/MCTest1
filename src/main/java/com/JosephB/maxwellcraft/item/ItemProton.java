@@ -49,9 +49,9 @@ public class ItemProton extends ItemMaxwellCraft
         	EntityThrownProton p = new EntityThrownProton(worldIn, playerIn);
             worldIn.spawnEntityInWorld(p);
             
-            System.out.println("Spawning on client side ="+worldIn.isRemote);
-            System.out.println("On spawn: entity position ="+p.posX+", "+p.posY+", "+p.posZ);
-            System.out.println("On spawn: entity motion ="+p.motionX+", "+p.motionY+", "+p.motionZ); 
+//            System.out.println("Spawning on client side ="+worldIn.isRemote);
+//            System.out.println("On spawn: entity position ="+p.posX+", "+p.posY+", "+p.posZ);
+//            System.out.println("On spawn: entity motion ="+p.motionX+", "+p.motionY+", "+p.motionZ); 
         }
 
         return new ActionResult(EnumActionResult.SUCCESS, itemStackIn);

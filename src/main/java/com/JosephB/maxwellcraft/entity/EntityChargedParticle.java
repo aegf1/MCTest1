@@ -12,6 +12,9 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.entity.projectile.ProjectileHelper;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
@@ -24,6 +27,12 @@ public class EntityChargedParticle extends EntityThrowable
 	public float charge = 1F;
 	public float mass = 1F;
 	protected int lifetime = 1000; 		// lifetime in ticks
+
+	protected Vector3 position = new Vector3();
+	public static final DataParameter<Float> XPOS = EntityDataManager.<Float>createKey(EntityRelChargedParticle.class, DataSerializers.FLOAT);
+	public static final DataParameter<Float> YPOS = EntityDataManager.<Float>createKey(EntityRelChargedParticle.class, DataSerializers.FLOAT);
+	public static final DataParameter<Float> ZPOS = EntityDataManager.<Float>createKey(EntityRelChargedParticle.class, DataSerializers.FLOAT);
+	
 	
 	protected double ticksInAir;
 
@@ -42,11 +51,10 @@ public class EntityChargedParticle extends EntityThrowable
 	public EntityChargedParticle(World world, EntityLivingBase player, float mIn, float qIn, float speedIn)
 	{
 		super(world, player);
-		this.setHeadingFromThrower(player, player.rotationPitch, player.rotationYaw, 0.0F, 1.0F, 0.0F);
-		normaliseMotion();
-		this.motionX*=speedIn;
-		this.motionY*=speedIn;
-		this.motionZ*=speedIn;
+//		LogHelper.info(speedIn);
+		this.setPosition(new Vector3(player.posX, player.posY + (double)player.getEyeHeight() - 0.1D, player.posZ));
+		this.setHeadingFromThrower(player, player.rotationPitch, player.rotationYaw, 0.0F, (float) speedIn, 0.0F);
+//		LogHelper.info(this.motionX+", "+this.motionY+", "+this.motionZ+", ");
 		ticksInAir = 0;
 		setMass(mIn);
 		setCharge(qIn);
@@ -55,13 +63,21 @@ public class EntityChargedParticle extends EntityThrowable
 	public EntityChargedParticle(World world, Vector3 pos, Vector3 vel, float mIn, float qIn)
 	{
 		super(world, pos.getX(), pos.getY(), pos.getZ());
+		this.setPosition(pos);
 		normaliseMotion();
-		this.motionX*=vel.getX();
-		this.motionY*=vel.getY();
-		this.motionZ*=vel.getZ();
+		this.motionX =vel.getX()/20D;
+		this.motionY =vel.getY()/20D;
+		this.motionZ =vel.getZ()/20D;
 		ticksInAir = 0;
 		setMass(mIn);
 		setCharge(qIn);
+	}
+	
+	protected void entityInit()
+	{
+        this.dataManager.register(XPOS, Float.valueOf((float) this.posX));
+        this.dataManager.register(YPOS, Float.valueOf((float) this.posY));
+        this.dataManager.register(ZPOS, Float.valueOf((float) this.posZ));
 	}
 
 	@Override
@@ -176,18 +192,23 @@ public class EntityChargedParticle extends EntityThrowable
 		}	// kills entity if outside world or existed for >10s
 	}
 	
+	public Vector3 calcForce(Vector3 pos, Vector3 vel)
+	{
+		return EMField.lorentzForce(pos, vel, this.charge);
+	}
+	
 	public Vector3 getAcc()
 	{
 		Vector3 currentPos = new Vector3(this.posX, this.posY, this.posZ);
-		Vector3 currentVel = new Vector3(this.motionX, this.motionY, this.motionZ);
-		Vector3 acc = EMField.lorentzForce(currentPos, currentVel, charge);
+		Vector3 currentVel = Vector3.scale(new Vector3(this.motionX, this.motionY, this.motionZ), 20D);
+		Vector3 acc = calcForce(currentPos, currentVel);
 		acc.scaleBy(1/mass);
 		return acc;
 	}
 	
 	public Vector3 getAcc(Vector3 pos,Vector3 vel)
 	{
-		Vector3 acc = EMField.lorentzForce(pos, vel, charge);
+		Vector3 acc = calcForce(pos, vel);
 		acc.scaleBy(1/mass);
 		return acc;
 	}
@@ -228,6 +249,31 @@ public class EntityChargedParticle extends EntityThrowable
 
 	public void setCharge(float charge) {
 		this.charge = charge;
+	}
+	
+	public void setPosition(Vector3 pos)
+	{
+		setPosition(pos.getX(), pos.getY(), pos.getZ());
+		if(!this.worldObj.isRemote)
+		{
+			this.dataManager.set(XPOS, Float.valueOf((float) pos.getX()));
+			this.dataManager.set(YPOS, Float.valueOf((float) pos.getY()));
+			this.dataManager.set(ZPOS, Float.valueOf((float) pos.getZ()));
+
+//			LogHelper.info("writing position to datawatcher");
+//			LogHelper.info("entity position = "+pos.toString());
+		}
+		position = new Vector3(pos.getX(), pos.getY(), pos.getZ());
+
+	}
+	
+	public Vector3 getPositionVec3()
+	{
+		return new Vector3(
+				((Float) this.dataManager.get(XPOS)).doubleValue(),
+				((Float) this.dataManager.get(YPOS)).doubleValue(),
+				((Float) this.dataManager.get(ZPOS)).doubleValue()
+		);
 	}
 	
 	public void normaliseMotion()

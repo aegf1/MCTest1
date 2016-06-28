@@ -5,8 +5,9 @@ import com.JosephB.maxwellcraft.utility.LogHelper;
 
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ITickable;
 
-public class TileEntityNegCharge extends TileEntity 
+public class TileEntityNegCharge extends TileEntity implements ITickable
 {
 	public static final String publicName = "TileEntityNegCharge";
 	private String name = "TileEntityNegCharge";

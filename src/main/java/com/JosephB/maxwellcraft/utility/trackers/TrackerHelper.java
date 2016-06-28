@@ -4,8 +4,10 @@ import com.JosephB.maxwellcraft.MaxwellCraft;
 import com.JosephB.maxwellcraft.block.BlockMagnet;
 import com.JosephB.maxwellcraft.block.BlockNegCharge;
 import com.JosephB.maxwellcraft.block.BlockPosCharge;
+import com.JosephB.maxwellcraft.utility.LogHelper;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.IBlockState;
 
 public class TrackerHelper 
@@ -15,7 +17,10 @@ public class TrackerHelper
 	{
 		if(block instanceof BlockMagnet)
 		{
-			return MaxwellCraft.magnetTracker.add(x, y, z, (IBlockState) state);
+			LogHelper.info("Tracking magnet: "+x+", "+y+", "+z+", "+state.getValue(PropertyDirection.create("facing")));
+			Boolean added = MaxwellCraft.magnetTracker.add(x, y, z, (IBlockState) state);
+			LogHelper.info(MaxwellCraft.magnetTracker.getNumOfMagnets());
+			return added;
 		}
 		else
 		{

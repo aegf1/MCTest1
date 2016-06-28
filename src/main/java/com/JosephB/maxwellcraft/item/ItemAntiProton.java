@@ -49,9 +49,9 @@ public class ItemAntiProton extends ItemMaxwellCraft
             EntityThrownAntiProton ap = new EntityThrownAntiProton(worldIn, playerIn);
         	worldIn.spawnEntityInWorld(ap);
         	
-            System.out.println("Spawning on client side ="+worldIn.isRemote);
-            System.out.println("On spawn: entity position ="+ap.posX+", "+ap.posY+", "+ap.posZ);
-            System.out.println("On spawn: entity motion ="+ap.motionX+", "+ap.motionY+", "+ap.motionZ); 
+//            System.out.println("Spawning on client side ="+worldIn.isRemote);
+//            System.out.println("On spawn: entity position ="+ap.posX+", "+ap.posY+", "+ap.posZ);
+//            System.out.println("On spawn: entity motion ="+ap.motionX+", "+ap.motionY+", "+ap.motionZ); 
         }
 
         return new ActionResult(EnumActionResult.SUCCESS, itemStackIn);
