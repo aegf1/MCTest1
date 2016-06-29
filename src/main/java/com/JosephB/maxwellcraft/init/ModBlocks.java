@@ -14,6 +14,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -33,9 +34,13 @@ public class ModBlocks
 
 	public static void init()
 	{
-		GameRegistry.registerBlock(magnet, magnet.getName());
-		GameRegistry.registerBlock(posCharge, posCharge.getName());
-		GameRegistry.registerBlock(negCharge, negCharge.getName());
+		GameRegistry.register(magnet.setRegistryName(magnet.getName()));				// Register name of each block, then register block
+		GameRegistry.register(new ItemBlock(magnet).setRegistryName(magnet.getRegistryName()));	//Same for each itemblock
+		GameRegistry.register(posCharge.setRegistryName(posCharge.getName()));
+		GameRegistry.register(new ItemBlock(posCharge).setRegistryName(posCharge.getRegistryName()));
+		GameRegistry.register(negCharge.setRegistryName(negCharge.getName()));
+		GameRegistry.register(new ItemBlock(negCharge).setRegistryName(negCharge.getRegistryName()));
+		
 		//Do this for every block
 
 		MaxwellCraft.magnetTracker = new MagnetTracker();

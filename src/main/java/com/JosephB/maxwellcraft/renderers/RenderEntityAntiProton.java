@@ -23,9 +23,9 @@ public class RenderEntityAntiProton extends RenderEntityChargedParticle
 	}
 	
 	@Override
-	public void doRender(Entity entity, double x, double y, double z, float p_76986_8_, float partialTicks)
+	public void doRender(Entity entity, double x, double y, double z, float entityYaw, float partialTicks)
     {
-        this.doRender((EntityThrownAntiProton)entity, x, y, z, p_76986_8_, partialTicks);
+        this.doRender((EntityThrownAntiProton)entity, x, y, z, entityYaw, partialTicks);
      /* DEBUG
         System.out.println("Rendering on client side ="+entity.worldObj.isRemote);
         System.out.println("entity position ="+entity.posX+", "+entity.posY+", "+entity.posZ);

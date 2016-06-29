@@ -15,7 +15,7 @@ import net.minecraft.util.ResourceLocation;
 
 public class RenderEntityChargedParticle extends Render
 {
-	private float scale = 1F;
+	private float scale = 0.5F;
 	
 	
 	public RenderEntityChargedParticle()
@@ -36,7 +36,7 @@ public class RenderEntityChargedParticle extends Render
 		return null;
 	}
 	
-	public void doRender(EntityChargedParticle entity, double x, double y, double z, float p_76986_8_, float partialTicks)
+	public void doRender(EntityChargedParticle entity, double x, double y, double z, float entityYaw, float partialTicks)
 	{
 		GlStateManager.pushMatrix();
         this.bindEntityTexture(entity);
@@ -66,7 +66,7 @@ public class RenderEntityChargedParticle extends Render
         tessellator.draw();
         GlStateManager.disableRescaleNormal();
         GlStateManager.popMatrix();
-        super.doRender(entity, x, y, z, p_76986_8_, partialTicks);
+        super.doRender(entity, x, y, z, entityYaw, partialTicks);
 	}
 
 	public TextureAtlasSprite getTextureAtlasSprite() 

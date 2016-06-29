@@ -3,6 +3,8 @@ package com.JosephB.maxwellcraft.init;
 import com.JosephB.maxwellcraft.entity.EntityThrownAntiProton;
 import com.JosephB.maxwellcraft.entity.EntityThrownProton;
 import com.JosephB.maxwellcraft.reference.Reference;
+import com.JosephB.maxwellcraft.renderers.AntiProtonRenderFactory;
+import com.JosephB.maxwellcraft.renderers.ProtonRenderFactory;
 import com.JosephB.maxwellcraft.renderers.RenderEntityAntiProton;
 import com.JosephB.maxwellcraft.renderers.RenderEntityProton;
 
@@ -32,8 +34,8 @@ public class ModEntities
 	@SideOnly(Side.CLIENT)
 	public static void initRenders()
 	{
-		RenderingRegistry.registerEntityRenderingHandler(EntityThrownProton.class,new RenderEntityProton());
-		RenderingRegistry.registerEntityRenderingHandler(EntityThrownAntiProton.class,new RenderEntityAntiProton());
+		RenderingRegistry.registerEntityRenderingHandler(EntityThrownProton.class,new ProtonRenderFactory());
+		RenderingRegistry.registerEntityRenderingHandler(EntityThrownAntiProton.class,new AntiProtonRenderFactory());
 		//Do this for every entity
 	}
 	

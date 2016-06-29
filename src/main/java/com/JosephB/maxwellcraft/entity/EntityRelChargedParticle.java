@@ -175,7 +175,7 @@ public class EntityRelChargedParticle extends EntityChargedParticle
 		RayTraceResult raytraceresult = ProjectileHelper.forwardsRaycast(this, true, this.ticksInAir >= 25, this.getThrower());
 		if (raytraceresult != null && !this.worldObj.isRemote)
 		{
-			LogHelper.info("Hit something!");
+//			LogHelper.info("Hit something!");
 			this.onImpact(raytraceresult);
 		}
 		

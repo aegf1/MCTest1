@@ -27,8 +27,10 @@ public class ModItems
 	
 	public static void init()
 	{
-		GameRegistry.registerItem(proton, proton.getName());
-		GameRegistry.registerItem(antiProton, antiProton.getName());
+		proton.setRegistryName(proton.getName());
+		GameRegistry.register(proton);
+		antiProton.setRegistryName(antiProton.getName());
+		GameRegistry.register(antiProton);
 		//Do this for every item
 	}
 	

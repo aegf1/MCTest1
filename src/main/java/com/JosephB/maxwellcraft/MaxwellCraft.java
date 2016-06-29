@@ -67,6 +67,12 @@ public class MaxwellCraft
 
 		//Register Server tick handler (For magnet tracker refresher)
 		FMLCommonHandler.instance().bus().register(new MaxwellCraftEventHandler());
+		
+		if(event.getSide() == Side.CLIENT)
+		{
+			//Initialise all entity renders
+			ModEntities.initRenders();
+		}
 	}
 
 	@Mod.EventHandler
@@ -83,9 +89,6 @@ public class MaxwellCraft
 
 			//Initialise all block item renders
 			ModBlocks.initRenders();
-
-			//Initialise all entity renders
-			ModEntities.initRenders();
 		}
 
 		//Initialise recipes

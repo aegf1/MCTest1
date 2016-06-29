@@ -23,9 +23,9 @@ public class RenderEntityProton extends RenderEntityChargedParticle
 	}
 	
 	@Override
-	public void doRender(Entity entity, double x, double y, double z, float p_76986_8_, float partialTicks)
+	public void doRender(Entity entity, double x, double y, double z, float entityYaw, float partialTicks)
     {
-        this.doRender((EntityThrownProton)entity, x, y, z, p_76986_8_, partialTicks);
+        this.doRender((EntityThrownProton)entity, x, y, z, entityYaw, partialTicks);
     }
 
 
