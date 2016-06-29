@@ -10,6 +10,10 @@ import net.minecraft.block.Block;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.IBlockState;
 
+/**
+ * 
+ * @author Joseph Brownless
+ */
 public class TrackerHelper 
 {
 
@@ -17,9 +21,7 @@ public class TrackerHelper
 	{
 		if(block instanceof BlockMagnet)
 		{
-			LogHelper.info("Tracking magnet: "+x+", "+y+", "+z+", "+state.getValue(PropertyDirection.create("facing")));
 			Boolean added = MaxwellCraft.magnetTracker.add(x, y, z, (IBlockState) state);
-			LogHelper.info(MaxwellCraft.magnetTracker.getNumOfMagnets());
 			return added;
 		}
 		else

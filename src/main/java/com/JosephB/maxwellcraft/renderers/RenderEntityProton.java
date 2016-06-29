@@ -8,6 +8,10 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.entity.Entity;
 
+/**
+ * 
+ * @author Joseph Brownless
+ */
 public class RenderEntityProton extends RenderEntityChargedParticle
 {
 	private float scale = 1F;

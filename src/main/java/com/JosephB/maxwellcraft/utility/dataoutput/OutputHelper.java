@@ -13,6 +13,10 @@ import com.JosephB.maxwellcraft.utility.trackers.PosChargeTracker;
 
 import net.minecraft.util.EnumFacing;
 
+/**
+ * 
+ * @author Joseph Brownless
+ */
 public class OutputHelper 
 {
 	public static boolean running = false;

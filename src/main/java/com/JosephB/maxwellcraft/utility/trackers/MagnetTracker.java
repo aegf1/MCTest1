@@ -16,6 +16,10 @@ import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+/**
+ * 
+ * @author Joseph Brownless
+ */
 public class MagnetTracker
 {
 	private HashSet<MagnetInstance> magnets = new HashSet(100);

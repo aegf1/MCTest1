@@ -22,33 +22,63 @@ import net.minecraft.world.World;
 import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
 import net.minecraftforge.fml.common.Mod;
 
+/**
+ * 
+ * @author Joseph Brownless
+ */
 public class EntityRelChargedParticle extends EntityChargedParticle
 {
 	// NOTE that motionX etc are per TICK (1/20 sec). So, velocity is 20*(motionX,motionY,motionZ)
 	
 	protected Vector3 momentum;
-	public static final DataParameter<Float> XMOM = EntityDataManager.<Float>createKey(EntityRelChargedParticle.class, DataSerializers.FLOAT);
-	public static final DataParameter<Float> YMOM = EntityDataManager.<Float>createKey(EntityRelChargedParticle.class, DataSerializers.FLOAT);
-	public static final DataParameter<Float> ZMOM = EntityDataManager.<Float>createKey(EntityRelChargedParticle.class, DataSerializers.FLOAT);
+	protected static final DataParameter<Float> XMOM = EntityDataManager.<Float>createKey(EntityRelChargedParticle.class, DataSerializers.FLOAT);
+	protected static final DataParameter<Float> YMOM = EntityDataManager.<Float>createKey(EntityRelChargedParticle.class, DataSerializers.FLOAT);
+	protected static final DataParameter<Float> ZMOM = EntityDataManager.<Float>createKey(EntityRelChargedParticle.class, DataSerializers.FLOAT);
 
+	/**
+	 * Creates particle with undefined position and motion
+	 * @param world
+	 * @param mIn mass
+	 * @param qIn charge
+	 * @param speedIn speed (per tick)
+	 */
 	public EntityRelChargedParticle(World world, float mIn, float qIn, float speedIn)
 	{
 		super(world, mIn, qIn, speedIn);	// Speed is per TICK
 		initMom();
 	}
 
+	/**
+	 * Creates particle, as thrown by a player (or similar)
+	 * @param world 
+	 * @param player thrower
+	 * @param mIn mass
+	 * @param qIn charge
+	 * @param speedIn speed (per tick)
+	 */
 	public EntityRelChargedParticle(World world, EntityLivingBase player, float mIn, float qIn, float speedIn)
 	{
 		super(world, player, mIn, qIn, speedIn);	// Speed is per TICK
 		initMom();
 	}
 
+	/**
+	 * Creates particle with defined position and velocity
+	 * @param world
+	 * @param pos position
+	 * @param vel velocity (per second)
+	 * @param mIn mass
+	 * @param qIn charge
+	 */
 	public EntityRelChargedParticle(World world, Vector3 posIn, Vector3 velIn, float mIn, float qIn)
 	{
-		super(world, posIn, velIn, mIn, qIn);	// Speed is per TICK
+		super(world, posIn, velIn, mIn, qIn);	// velocity is per second
 		initMom();
 	}
 
+	/**
+	 * Called at start of all constructors. Sets up datamanager entries
+	 */
 	protected void entityInit()
 	{
 		super.entityInit();
@@ -59,54 +89,43 @@ public class EntityRelChargedParticle extends EntityChargedParticle
 	    
 	}
 	
+	/**
+	 * Called at end of all constructors. Sets up relativistic properties of entity.
+	 */
 	private void initMom()
 	{
 		momentum = new Vector3();
 		Vector3 vel = Vector3.scale(new Vector3(this.motionX,this.motionY,this.motionZ), 20D);
-//		LogHelper.info("Velocity ="+vel.getX()+", "+vel.getY()+", "+vel.getZ());
-		double gam = 1.0 / Math.sqrt(1 - Math.pow((vel.magnitude()/Reference.SPEED_OF_LIGHT) , 2));	//gamma = 1/sqrt(1-(v/c)^2)
-//		LogHelper.info(gam);
-		setMomentum(Vector3.scale(vel, gam*mass));				// p = gamma*m*v
-//		LogHelper.info("Momentum ="+momentum.getX()+", "+momentum.getY()+", "+momentum.getZ());
+		double gam = 1.0 / Math.sqrt(1 - Math.pow((vel.magnitude()/Reference.SPEED_OF_LIGHT) , 2));	
+		setMomentum(Vector3.scale(vel, gam*mass));
 	}
 	
+	/**
+	 * Updates entity position
+	 */
 	@Override
 	public void onUpdate()
 	{		
-//		System.out.println("updating");
-		
-//		LogHelper.warn(entityUniqueID.toString());
-		
-//		LogHelper.info("Before update: ");
-//		LogHelper.info("entity motion ="+this.motionX+", "+this.motionY+", "+this.motionZ);
-		
 		position = new Vector3(getPositionVec3());	//current position
 		momentum = new Vector3(getMomentumVec3());	//current momentum
-//		LogHelper.info("Momentum ="+momentum.getX()+", "+momentum.getY()+", "+momentum.getZ());
 		
 		// Recording previous position
 		this.prevPosX = position.getX();
 		this.prevPosY = position.getY();
 		this.prevPosZ = position.getZ();
 		
+		// Calculate next position + velocity
 		Vector3[] nextPosMom = updateManyTimesRK4(position, momentum);
-		
-//		LogHelper.info("After update: ");
 		Vector3 nextPos = new Vector3(nextPosMom[0]);
 		Vector3 nextMom = new Vector3(nextPosMom[1]);
-//		LogHelper.info("Momentum ="+nextMom.getX()+", "+nextMom.getY()+", "+nextMom.getZ());
-		
-		Vector3 nextVel = calcVelocity(nextMom);
-//		LogHelper.info("Velocity ="+nextVel.getX()+", "+nextVel.getY()+", "+nextVel.getZ());
 		
 		// *****ASSIGNING NEXT VELOCITY TO ENTITY*****
+		Vector3 nextVel = calcVelocity(nextMom);
 		this.motionX = nextVel.getX()/20D;
 		this.motionY = nextVel.getY()/20D;
 		this.motionZ = nextVel.getZ()/20D;
 		
-//		LogHelper.info("entity motion ="+this.motionX+", "+this.motionY+", "+this.motionZ);
-		
-/*		// detects if it hits a block?
+/*		***Old Hit Detection***
 		MovingObjectPosition movingobjectposition = this.worldObj.rayTraceBlocks(position.getVec3(), nextPos.getVec3());
 
 		if (movingobjectposition != null)
@@ -157,13 +176,6 @@ public class EntityRelChargedParticle extends EntityChargedParticle
 			}
 		}
 		
-		// *****ASSIGNING NEXT POSITION + MOMENTUM TO ENTITY*****
-		
-		if (!this.worldObj.isRemote)
-		{
-			OutputHelper.record4(nextPos, nextMom, EMField.getEField(nextPos), EMField.getBField(nextPos));
-		}
-		
 		if (movingobjectposition != null)
 		{
 			this.onImpact(movingobjectposition);
@@ -179,15 +191,23 @@ public class EntityRelChargedParticle extends EntityChargedParticle
 			this.onImpact(raytraceresult);
 		}
 		
+		// *****ASSIGNING NEXT POSITION + MOMENTUM TO ENTITY*****
 		setPosition(nextPos);
 		setMomentum(nextMom);
 			
+		// Check if entity should be dead
         this.ticksInAir++;
 
 		if (this.posY <= -20 || this.posY >= 400 || this.ticksInAir >= lifetime)
 		{
 			this.setDead();
-		}	// kills entity if outside world or existed for >10s
+		}	
+		
+		// Output data
+		if (!this.worldObj.isRemote)
+		{
+			OutputHelper.record4(nextPos, nextMom, EMField.getEField(nextPos), EMField.getBField(nextPos));
+		}
 	}
 	
 	/**
@@ -207,18 +227,33 @@ public class EntityRelChargedParticle extends EntityChargedParticle
 	 * @param mom the momentum to be used
 	 * @return the velocity
 	 */
-	public Vector3 calcVelocity(Vector3 mom)
+	public Vector3 calcVelocity(Vector3 mIn)
 	{
-		Vector3 m = new Vector3(mom);
+		Vector3 mom = new Vector3(mIn);
 		//	v = p / (m*gamma)
-		return Vector3.scale( m , 1.0 / (this.mass * calcGamma(m)) );
+		return Vector3.scale( mom , 1.0 / (this.mass * calcGamma(mom)) );
 	}
 	
+	/**
+	 * Calculates the force in this particle at a given position with a given momentum
+	 * Converts momentum to velocity, then uses @link {@link EntityChargedParticle#calcForce(Vector3, Vector3)}
+	 * (Note: Does not use the entity's locally stored pos/mom, so that complex numerical methods can be used)
+	 * @param pos Entity position
+	 * @param mom Entity momentum
+	 * @return the force
+	 */
 	public Vector3 calcForceMom(Vector3 pos, Vector3 mom)
 	{
 		return calcForce(pos, calcVelocity(mom));
 	}
 	
+	/**
+	 * Uses the RK4 method to calculate position and momentum of this particle after given timestep dt, with given initial pos + mom
+	 * @param pos initial position
+	 * @param mom initial momentum
+	 * @param dt timestep
+	 * @return array of vector3, with 1st entry giving final pos and 2nd giving final mom
+	 */
 	private Vector3[] updateRK4(Vector3 pos, Vector3 mom, double dt)
 	{
 		Vector3 startPos = new Vector3(pos);
@@ -271,6 +306,13 @@ public class EntityRelChargedParticle extends EntityChargedParticle
 		};
 	}
 	
+	/**
+	 * Calculates final pos and mom after applying RK4 many times to a particle.
+	 * Total timestep = 1 tick (0.05sec), with {@link Reference#ITERATIONS_PER_TICK} giving num of RK4 iterations performed
+	 * @param pos initial position
+	 * @param mom initial momentum
+	 * @return array of 2 vector3s, with 1st entry giving final pos and 2nd giving final mom
+	 */
 	public Vector3[] updateManyTimesRK4(Vector3 pos, Vector3 mom)
 	{
 		Vector3 thisPos = new Vector3(pos);
@@ -294,6 +336,12 @@ public class EntityRelChargedParticle extends EntityChargedParticle
 		return new Vector3[]{thisPos,thisMom};
 	}
 	
+	/**
+	 * Sets momentum of the entity, locally and using the datamanager
+	 * @param x x component of mom
+	 * @param y y component of mom
+	 * @param z z component of mom
+	 */
 	public void setMomentum(double x, double y, double z)
 	{
 		
@@ -311,11 +359,19 @@ public class EntityRelChargedParticle extends EntityChargedParticle
 		}
 	}
 	
+	/**
+	 * Sets momentum of the entity, locally and using the datamanager
+	 * @param mom new momentum
+	 */
 	public void setMomentum(Vector3 mom)
 	{
 		setMomentum(mom.getX(), mom.getY(), mom.getZ());
 	}
 	
+	/**
+	 * gets entity momentum, from datamanager
+	 * @return the momentum
+	 */
 	public Vector3 getMomentumVec3()
 	{
 		return new Vector3(

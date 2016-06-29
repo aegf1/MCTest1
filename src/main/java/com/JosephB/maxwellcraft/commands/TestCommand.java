@@ -10,6 +10,10 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
 
+/**
+ * Test command. Has no real function
+ * @author Joseph Brownless
+ */
 public class TestCommand implements ICommand
 {
 	private List aliases;

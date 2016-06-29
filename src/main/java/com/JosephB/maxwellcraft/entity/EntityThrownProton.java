@@ -9,25 +9,47 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.World;
 
+/**
+ * 
+ * @author Joseph Brownless
+ */
 public class EntityThrownProton extends EntityRelChargedParticle
 {
 	private static double tickCountParticleSpawn = 0;
 	
-	public EntityThrownProton(World world, EntityLivingBase player) 
-	{
-		super(world, player, Reference.protonMass, Reference.protonCharge, Reference.protonSpeed/20F);	
-	}
-	
+	/**
+	 * Creates entity with no defined position or motion
+	 * @param world
+	 */
 	public EntityThrownProton(World world) 
 	{
 		super(world, Reference.protonMass, Reference.protonCharge, Reference.protonSpeed/20F);
 	}
 	
+	/**
+	 * Creates entity as thrown by player (or similar)
+	 * @param world
+	 * @param player thrower
+	 */
+	public EntityThrownProton(World world, EntityLivingBase player) 
+	{
+		super(world, player, Reference.protonMass, Reference.protonCharge, Reference.protonSpeed/20F);	
+	}
+	
+	/**
+	 * Creates entity with defined position and velocity
+	 * @param world
+	 * @param pos position
+	 * @param vel velocity
+	 */
 	public EntityThrownProton(World world, Vector3 pos, Vector3 vel)
 	{
 		super(world, pos, vel, Reference.protonMass, Reference.protonCharge);
 	}
 	
+	/**
+	 * Called every tick. Does motion defined in super, and spawns particles every 2 ticks
+	 */
 	@Override
 	public void onUpdate()
 	{

@@ -12,6 +12,10 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
 
+/**
+ * 
+ * @author Joseph Brownless
+ */
 public class StopDataRecord implements ICommand
 {
 	private List aliases;

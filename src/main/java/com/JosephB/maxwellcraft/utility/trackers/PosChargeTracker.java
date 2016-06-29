@@ -10,6 +10,10 @@ import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+/**
+ * 
+ * @author Joseph Brownless
+ */
 public class PosChargeTracker
 {
 	private HashSet<BlockPos> posCharges = new HashSet(100);

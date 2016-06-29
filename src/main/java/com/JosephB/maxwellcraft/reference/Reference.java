@@ -1,5 +1,9 @@
 package com.JosephB.maxwellcraft.reference;
 
+/**
+ * 
+ * @author Joseph Brownless
+ */
 public class Reference {
 
 	// Constants for mod
@@ -7,7 +11,7 @@ public class Reference {
 	public static final String MOD_ID = "MaxwellCraft";	
 	public static final String MOD_ID_LC = "maxwellcraft";
 	public static final String MOD_NAME = "maxwellcraft";
-	public static final String VERSION = "1.9";
+	public static final String VERSION = "2.1";
 	public static final String CLIENT_PROXY_CLASS = "com.JosephB.maxwellcraft.proxy.ClientProxy";
 	public static final String SERVER_PROXY_CLASS = "com.JosephB.maxwellcraft.proxy.ServerProxy";	
 	public static final String GUI_FACTORY_CLASS = "com.JosephB.maxwellcraft.client.gui.GuiFactory";
@@ -21,4 +25,6 @@ public class Reference {
 	public static final float aProtonCharge = -1F;
 	public static final float protonMass = 1F;
 	public static final float aProtonMass = 1F;
+	public static final int thrownParticleLifetime = 1000; // in ticks
+	public static final float particleExplosionRad = 1F;
 }

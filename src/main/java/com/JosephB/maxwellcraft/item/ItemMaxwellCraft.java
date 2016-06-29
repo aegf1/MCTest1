@@ -6,6 +6,10 @@ import com.JosephB.maxwellcraft.reference.Reference;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
+/**
+ * 
+ * @author Joseph Brownless
+ */
 public class ItemMaxwellCraft extends Item
 {
 	public ItemMaxwellCraft()

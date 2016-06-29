@@ -14,6 +14,10 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 
+/**
+ * 
+ * @author Joseph Brownless
+ */
 public class ItemProton extends ItemMaxwellCraft
 {
 	

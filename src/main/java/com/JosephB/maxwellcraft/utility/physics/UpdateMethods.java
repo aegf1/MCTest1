@@ -1,8 +1,15 @@
 package com.JosephB.maxwellcraft.utility.physics;
 
 import com.JosephB.maxwellcraft.entity.EntityChargedParticle;
+import com.JosephB.maxwellcraft.entity.EntityRelChargedParticle;
 import com.JosephB.maxwellcraft.reference.Reference;
-
+/**
+ * Contains numerical update methods.
+ * EC methods are no longer used, and RK4 methods are implemented better in {@link EntityRelChargedParticle}
+ * @author Joseph Brownless
+ *
+ */
+@Deprecated
 public class UpdateMethods 
 {
 	public static Vector3 updatePosEC(Vector3 pos, Vector3 vel, double dt)

@@ -9,6 +9,10 @@ import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.Vec3i;
 
+/**
+ * 
+ * @author Joseph Brownless
+ */
 public class EMField 
 {
 	private static Vector3 BDir = new Vector3(0,0,0);

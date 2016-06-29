@@ -14,6 +14,10 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 
+/**
+ * 
+ * @author Joseph Brownless
+ */
 public class GetBField implements ICommand
 {
 	private List aliases;

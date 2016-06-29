@@ -15,6 +15,7 @@ import com.JosephB.maxwellcraft.utility.trackers.MagnetTracker;
 import com.JosephB.maxwellcraft.utility.trackers.NegChargeTracker;
 import com.JosephB.maxwellcraft.utility.trackers.PosChargeTracker;
 
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -24,6 +25,10 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.relauncher.Side;
 
+/**
+ * Main mod file
+ * @author Joseph Brownless
+ */
 @Mod(modid= Reference.MOD_ID, name= Reference.MOD_NAME , version=Reference.VERSION, guiFactory = Reference.GUI_FACTORY_CLASS)
 public class MaxwellCraft 
 {
@@ -51,7 +56,7 @@ public class MaxwellCraft
 		LogHelper.info("PreInit Stage");
 
 		ConfigurationHandler.init(event.getSuggestedConfigurationFile());		//init. config handler
-		FMLCommonHandler.instance().bus().register(new ConfigurationHandler());	//register config handler on event bus
+		MinecraftForge.EVENT_BUS.register(new ConfigurationHandler());	//register config handler on event bus
 
 		//Initialise all items
 		ModItems.init();

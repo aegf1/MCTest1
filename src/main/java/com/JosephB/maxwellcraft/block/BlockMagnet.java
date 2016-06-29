@@ -11,6 +11,10 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+/**
+ * 
+ * @author Joseph Brownless
+ */
 public class BlockMagnet extends BlockRotatedPillerMaxwellCraft implements ITileEntityProvider
 {
 	private final String name = "Magnet";

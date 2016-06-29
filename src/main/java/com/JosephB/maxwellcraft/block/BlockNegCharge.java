@@ -9,6 +9,10 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+/**
+ * 
+ * @author Joseph Brownless
+ */
 public class BlockNegCharge extends BlockMaxwellCraft implements ITileEntityProvider
 {
 	private final String name = "NegCharge";

@@ -17,6 +17,10 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+/**
+ * 
+ * @author Joseph Brownless
+ */
 public class BlockPosCharge extends BlockMaxwellCraft implements ITileEntityProvider
 {
 	private final String name = "PosCharge";

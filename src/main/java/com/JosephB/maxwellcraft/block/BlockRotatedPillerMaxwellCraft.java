@@ -22,6 +22,10 @@ import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+/**
+ * 
+ * @author Joseph Brownless
+ */
 public class BlockRotatedPillerMaxwellCraft extends BlockMaxwellCraft
 {
 	public static final PropertyDirection FACING = PropertyDirection.create("facing");

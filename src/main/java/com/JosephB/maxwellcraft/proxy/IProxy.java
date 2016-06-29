@@ -6,6 +6,10 @@ import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.world.World;
 
+/**
+ * 
+ * @author Joseph Brownless
+ */
 public interface IProxy 
 {
 	public void spawnProtonParticle(World world, double x, double y, double z, double vx, double vy, double vz);

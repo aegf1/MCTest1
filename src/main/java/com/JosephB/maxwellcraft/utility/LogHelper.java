@@ -6,6 +6,10 @@ import com.JosephB.maxwellcraft.reference.Reference;
 
 import net.minecraftforge.fml.common.FMLLog;
 
+/**
+ * 
+ * @author Joseph Brownless
+ */
 public class LogHelper {
 
 	public static void log(Level logLevel, Object object)

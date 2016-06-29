@@ -6,6 +6,10 @@ import com.JosephB.maxwellcraft.reference.Reference;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 
+/**
+ * 
+ * @author Joseph Brownless
+ */
 public class CreativeTabMaxwellCraft 
 {
 	public static final CreativeTabs MaxwellCraft_Tab = new CreativeTabs(Reference.MOD_ID.toLowerCase())

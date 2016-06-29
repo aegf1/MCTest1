@@ -8,6 +8,10 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.Vec3i;
 
+/**
+ * 
+ * @author Joseph Brownless
+ */
 public class MagnetInstance 
 {
 	private IBlockState state;

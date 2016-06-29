@@ -10,6 +10,10 @@ import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
 import net.minecraftforge.fml.common.gameevent.TickEvent.ServerTickEvent;
 import net.minecraftforge.fml.relauncher.Side;
 
+/**
+ * 
+ * @author Joseph Brownless
+ */
 public class MaxwellCraftEventHandler
 {
 	private Minecraft mc;
@@ -18,9 +22,9 @@ public class MaxwellCraftEventHandler
 	@SubscribeEvent
 	public boolean onServerTick(ServerTickEvent event)
 	{
-		if (event.phase == Phase.START) {
+		if (event.phase == Phase.START) 
+		{
 			ticks++;
-//			System.out.println("Hello World");
 			if (ticks >= 20) {
 				TrackerHelper.verifyAll();
 //				LogHelper.info(Test1.magnetTracker.getNumOfMagnets() + " magnet(s) in stored list");
@@ -28,7 +32,8 @@ public class MaxwellCraftEventHandler
 //				LogHelper.info(Test1.magnetTracker.getTotalFacingVector().toString());
 				ticks = 0;
 			}
-			if (event.side == Side.SERVER) {
+			if (event.side == Side.SERVER) 
+			{
 				OutputHelper.tick();
 //				System.out.println(event.side.toString());
 			} 

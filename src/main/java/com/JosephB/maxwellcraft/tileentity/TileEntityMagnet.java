@@ -8,6 +8,10 @@ import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
 
+/**
+ * 
+ * @author Joseph Brownless
+ */
 public class TileEntityMagnet extends TileEntity implements ITickable
 {
 	public static final String publicName = "TileEntityMagnet";

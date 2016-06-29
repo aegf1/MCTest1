@@ -13,6 +13,10 @@ import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 
+/**
+ * 
+ * @author Joseph Brownless
+ */
 public class RenderEntityChargedParticle extends Render
 {
 	private float scale = 0.5F;

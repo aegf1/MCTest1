@@ -8,14 +8,26 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+/**
+ * 
+ * @author Joseph Brownless
+ */
 @SideOnly(Side.CLIENT)
 public class ParticleProton extends Particle
 {
-    private static final String __OBFID = "CL_00000907";
-
-    public ParticleProton(World worldIn, double x, double y, double z, double XMov, double YMov, double ZMov)
+	/**
+	 * Creates particle with defined position and motion
+	 * @param worldIn
+	 * @param x
+	 * @param y
+	 * @param z
+	 * @param xSpeed
+	 * @param ySpeed
+	 * @param zSpeed
+	 */
+    public ParticleProton(World worldIn, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed)
     {
-        super(worldIn, x, y, z, XMov, YMov, ZMov);
+        super(worldIn, x, y, z, xSpeed, ySpeed, zSpeed);
         this.motionX = this.motionY = this.motionZ = 0;
         this.particleRed = this.particleGreen = this.particleBlue = 1.0F;
         this.particleMaxAge = 200;
@@ -32,11 +44,14 @@ public class ParticleProton extends Particle
 //		super.func_180434_a(p_180434_1_, p_180434_2_, p_180434_3_, p_180434_4_, p_180434_5_, p_180434_6_, p_180434_7_, p_180434_8_);
 //	}
 
-    public int getBrightnessForRender(float p_70070_1_)
+    /**
+     * Get particle brightness. Depends on particle age, and some randomness
+     */
+    public int getBrightnessForRender(float partialTicks)
     {
-        float f1 = ((float)this.particleAge + p_70070_1_) / (float)this.particleMaxAge;
+        float f1 = ((float)this.particleAge + partialTicks) / (float)this.particleMaxAge;
         f1 = MathHelper.clamp_float(f1, 0.0F, 1.0F);
-        int i = super.getBrightnessForRender(p_70070_1_);
+        int i = super.getBrightnessForRender(partialTicks);
         int j = i & 255;
         int k = i >> 16 & 255;
         j += (int)(f1 * 15.0F * 16.0F);
@@ -65,14 +80,19 @@ public class ParticleProton extends Particle
 
     }
 
+    /**
+     * Generates particles
+     * @author Joseph Brownless
+     */
     @SideOnly(Side.CLIENT)
     public static class Factory implements IParticleFactory
         {
-            private static final String __OBFID = "CL_00002602";
-
-            public Particle getEntityFX(int p_178902_1_, World worldIn, double p_178902_3_, double p_178902_5_, double p_178902_7_, double p_178902_9_, double p_178902_11_, double p_178902_13_, int ... p_178902_15_)
+    		/**
+    		 * Gives out particles 
+    		 */
+            public Particle getEntityFX(int id, World worldIn, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, int ... parameters)
             {
-                return new ParticleProton(worldIn, p_178902_3_, p_178902_5_, p_178902_7_, p_178902_9_, p_178902_11_, p_178902_13_);
+                return new ParticleProton(worldIn, x, y, z, xSpeed, ySpeed, zSpeed);
             }
         }
 }

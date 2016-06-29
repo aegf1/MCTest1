@@ -9,6 +9,10 @@ import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
+/**
+ * 
+ * @author Joseph Brownless
+ */
 public class ConfigurationHandler {
 
 	public static Configuration configuration;

@@ -7,6 +7,10 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.world.World;
 
+/**
+ * 
+ * @author Joseph Brownless
+ */
 public class ClientProxy extends CommonProxy 
 {
 

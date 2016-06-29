@@ -5,6 +5,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 
+/**
+ * 
+ * @author Joseph Brownless
+ */
 public class Recipes 
 {
 	public static void init()
