@@ -53,6 +53,11 @@ public class EntityChargedParticle extends EntityThrowable
 	{
 		super(world);
 		normaliseMotion();
+		if(speedIn >= Reference.lightSpeed)
+		{
+			LogHelper.warn("Trying to throw particle faster than light! Reducing speed");
+			speedIn = (float) (Reference.lightSpeed*0.99);
+		}
 		this.motionX*=speedIn;
 		this.motionY*=speedIn;
 		this.motionZ*=speedIn;
@@ -74,6 +79,11 @@ public class EntityChargedParticle extends EntityThrowable
 		super(world, player);
 
 		this.setPosition(new Vector3(player.posX, player.posY + (double)player.getEyeHeight() - 0.1D, player.posZ));
+		if(speedIn >= Reference.lightSpeed)
+		{
+			LogHelper.warn("Trying to throw particle faster than light! Reducing speed");
+			speedIn = (float) (Reference.lightSpeed*0.99);
+		}
 		this.setHeadingFromThrower(player, player.rotationPitch, player.rotationYaw, 0.0F, (float) speedIn, 0.0F);
 		
 		ticksInAir = 0;
@@ -94,6 +104,11 @@ public class EntityChargedParticle extends EntityThrowable
 		super(world, pos.getX(), pos.getY(), pos.getZ());
 		this.setPosition(pos);
 		normaliseMotion();
+		if(vel.magnitude() >= Reference.lightSpeed*0.9999)
+		{
+			LogHelper.warn("Trying to throw particle faster than light! Reducing speed");
+			vel = Vector3.scale(vel.getUnitVector(), Reference.lightSpeed*0.99);
+		}
 		this.motionX =vel.getX()/20D;
 		this.motionY =vel.getY()/20D;
 		this.motionZ =vel.getZ()/20D;

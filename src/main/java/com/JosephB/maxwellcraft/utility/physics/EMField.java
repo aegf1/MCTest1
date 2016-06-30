@@ -59,7 +59,7 @@ public class EMField
 	{
 		// E = const*q/((r-R)^3) * (r-R)
 		Vector3 relPos = Vector3.subtract(pos, chargePos);			// r-R
-		double number = Reference.ELECTRIC_FIELD_CONSTANT * charge/Math.pow(relPos.magnitude(), 3);	// const * q/((r-R)^3)
+		double number = Reference.eFieldConst * charge/Math.pow(relPos.magnitude(), 3);	// const * q/((r-R)^3)
 		return Vector3.scale(relPos, number);
 	}
 	
@@ -94,7 +94,7 @@ public class EMField
 		Vector3 v2 = Vector3.scale(dipoleVector, d2);		// v2 = -d/(|r|^3)
 		
 		v1.increaseBy(v2);									// v1 = 3(d.r)*r/(|r|^5) - d/(|r|^3)
-		v1.scaleBy(Reference.MAGNETIC_DIPOLE_CONSTANT);
+		v1.scaleBy(Reference.magDipFieldConst);
 		return v1;
 	}
 	

@@ -60,6 +60,7 @@ public class EntityRelChargedParticle extends EntityChargedParticle
 	{
 		super(world, player, mIn, qIn, speedIn);	// Speed is per TICK
 		initMom();
+		LogHelper.info("Throwing particle with charge of "+qIn);
 	}
 
 	/**
@@ -96,7 +97,7 @@ public class EntityRelChargedParticle extends EntityChargedParticle
 	{
 		momentum = new Vector3();
 		Vector3 vel = Vector3.scale(new Vector3(this.motionX,this.motionY,this.motionZ), 20D);
-		double gam = 1.0 / Math.sqrt(1 - Math.pow((vel.magnitude()/Reference.SPEED_OF_LIGHT) , 2));	
+		double gam = 1.0 / Math.sqrt(1 - Math.pow((vel.magnitude()/Reference.lightSpeed) , 2));	
 		setMomentum(Vector3.scale(vel, gam*mass));
 	}
 	
@@ -219,7 +220,7 @@ public class EntityRelChargedParticle extends EntityChargedParticle
 	{
 		double momMag = mom.magnitude();
 		// sqrt(1+(p/mc)^2)
-		return Math.sqrt(1.0 + Math.pow(momMag/(this.mass * Reference.SPEED_OF_LIGHT), 2));
+		return Math.sqrt(1.0 + Math.pow(momMag/(this.mass * Reference.lightSpeed), 2));
 	}
 	
 	/**
