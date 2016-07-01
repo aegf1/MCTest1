@@ -13,12 +13,19 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
 
 /**
- * 
+ * Defines command to start outputting entity data to a file
  * @author Joseph Brownless
  */
 public class StartDataRecord implements ICommand
 {
+	/**
+	 * List of alternative names for command
+	 */
 	private List aliases;
+	
+	/**
+	 * Create command and define aliases
+	 */
 	public StartDataRecord()
 	{
 		this.aliases = new ArrayList();
@@ -31,12 +38,18 @@ public class StartDataRecord implements ICommand
 		return 0;
 	}
 
+	/**
+	 * @return command name
+	 */
 	@Override
 	public String getCommandName() 
 	{
 		return "startdatarecord";
 	}
 
+	/**
+	 * @return What is given to the user to describe how to use the command
+	 */
 	@Override
 	public String getCommandUsage(ICommandSender sender) 
 	{
@@ -44,12 +57,19 @@ public class StartDataRecord implements ICommand
 		return "startdatarecord";
 	}
 
+	/**
+	 * Get alternative names for command
+	 */
 	@Override
 	public List getCommandAliases() 
 	{
 		return aliases;
 	}
 
+	/**
+	 * Called when command is input by user.
+	 * Starts outputting entity data to external file
+	 */
 	@Override
 	public void execute(MinecraftServer server, ICommandSender sender, String[] args) throws CommandException 
 	{
@@ -64,6 +84,9 @@ public class StartDataRecord implements ICommand
 		
 	}
 
+	/**
+	 * Checks if particular user can use command
+	 */
 	@Override
 	public boolean checkPermission(MinecraftServer server, ICommandSender sender) 
 	{
@@ -77,6 +100,9 @@ public class StartDataRecord implements ICommand
 		return null;
 	}
 
+	/**
+	 * Returns if particular argument is a username
+	 */
 	@Override
 	public boolean isUsernameIndex(String[] args, int index) 
 	{

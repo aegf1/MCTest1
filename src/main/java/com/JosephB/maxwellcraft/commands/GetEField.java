@@ -14,12 +14,19 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
 
 /**
- * 
+ * Defines command to get electric field at a point.
  * @author Joseph Brownless
  */
 public class GetEField implements ICommand
 {
+	/**
+	 * List of alternative names for command
+	 */
 	private List aliases;
+	
+	/**
+	 * Create command and define aliases
+	 */
 	public GetEField()
 	{
 		this.aliases = new ArrayList();
@@ -32,12 +39,18 @@ public class GetEField implements ICommand
 		return 0;
 	}
 
+	/**
+	 * @return command name
+	 */
 	@Override
 	public String getCommandName() 
 	{
 		return "getefield";
 	}
-
+	
+	/**
+	 * @return What is given to the user to describe how to use the command
+	 */
 	@Override
 	public String getCommandUsage(ICommandSender sender) 
 	{
@@ -45,12 +58,19 @@ public class GetEField implements ICommand
 		return "getefield <x> <y> <z>";
 	}
 
+	/**
+	 * Get alternative names for command
+	 */
 	@Override
 	public List getCommandAliases() 
 	{
 		return aliases;
 	}
-
+	
+	/**
+	 * Called when command is input by user.
+	 * Sends user message containing x,y,z components of electric field at provided coordinates
+	 */
 	@Override
 	public void execute(MinecraftServer server, ICommandSender sender, String[] args) throws CommandException 
 	{
@@ -68,6 +88,9 @@ public class GetEField implements ICommand
 		
 	}
 
+	/**
+	 * Checks if particular user can use command
+	 */
 	@Override
 	public boolean checkPermission(MinecraftServer server, ICommandSender sender) 
 	{
@@ -81,6 +104,9 @@ public class GetEField implements ICommand
 		return null;
 	}
 
+	/**
+	 * Returns if particular argument is a username
+	 */
 	@Override
 	public boolean isUsernameIndex(String[] args, int index) 
 	{

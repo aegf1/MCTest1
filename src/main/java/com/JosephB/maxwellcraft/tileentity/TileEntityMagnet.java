@@ -1,6 +1,7 @@
 package com.JosephB.maxwellcraft.tileentity;
 
 import com.JosephB.maxwellcraft.MaxwellCraft;
+import com.JosephB.maxwellcraft.block.BlockMagnet;
 import com.JosephB.maxwellcraft.utility.LogHelper;
 import com.JosephB.maxwellcraft.utility.trackers.TrackerHelper;
 
@@ -9,7 +10,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
 
 /**
- * 
+ * Tile entity contained in magnet blocks. Keeps block location and facing updated with tracker. 
+ * (Mainly useful when loading world with pre-existing blocks.
  * @author Joseph Brownless
  */
 public class TileEntityMagnet extends TileEntity implements ITickable
@@ -19,16 +21,27 @@ public class TileEntityMagnet extends TileEntity implements ITickable
 	
 	int ticks = 0;
 	
+	/**
+	 * Creates tile entity
+	 */
 	public TileEntityMagnet()
 	{
 		super();
 //		LogHelper.info("Creating magnet TileEntity");
 	}
 	
+	/**
+	 * 
+	 * @return Tile entity name
+	 */
 	public String getName() {
 		return name;
 	}
 	
+	/**
+	 * Called every tick. Adds block location and state to tracker.
+	 * (Tracker adds it to list if it's not already there)
+	 */
 	public void update()
 	{
 		if(!worldObj.isRemote)
@@ -36,7 +49,7 @@ public class TileEntityMagnet extends TileEntity implements ITickable
 			
 			if(ticks==20 || ticks==0)
 			{
-				if(MaxwellCraft.magnetTracker.add(this.pos, this.getBlockType().getStateFromMeta(this.getBlockMetadata())))
+				if(MaxwellCraft.magnetTracker.add(this.pos, ((BlockMagnet) this.getBlockType()).getStateFromMeta(this.getBlockMetadata())))
 				{	// Change above to:
 					//	if(TrackerHelper.track(blockType, pos.getX(), pos.getY(), pos.getZ(), this.getBlockType().getStateFromMeta(getBlockMetadata())))
 

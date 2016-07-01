@@ -11,7 +11,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 /**
- * 
+ * Tracks the position of every positive charge block in-world
  * @author Joseph Brownless
  */
 public class PosChargeTracker
@@ -24,7 +24,7 @@ public class PosChargeTracker
 	}
 	
 	/**
-	 * 
+	 * Adds charge to list
 	 * @param x
 	 * @param y
 	 * @param z
@@ -40,6 +40,7 @@ public class PosChargeTracker
 	}
 	
 	/**
+	 * Adds charge to list
 	 * @param pos
 	 * @param state
 	 * @return true if was added successfully
@@ -50,7 +51,7 @@ public class PosChargeTracker
 	}
 	
 	/**
-	 * 
+	 * Removes charge (position) from list
 	 * @param x
 	 * @param y
 	 * @param z
@@ -72,7 +73,7 @@ public class PosChargeTracker
 	}
 	
 	/**
-	 * 
+	 * Removes charge (position) from list
 	 * @param pos
 	 * @return true if an entry with these coords is removed
 	 */
@@ -81,11 +82,19 @@ public class PosChargeTracker
 		return remove(pos.getX(), pos.getY(), pos.getZ());
 	}
 	
+	/**
+	 * Get number of tracked charges
+	 * @return
+	 */
 	public int getNumOfposCharges()
 	{
 		return posCharges.size();
 	}
 	
+	/**
+	 * Check that every tracked location contains a charge
+	 * @return
+	 */
 	public boolean verifyAllLocations()
 	{
 		int numRemoved = 0;

@@ -9,7 +9,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.Vec3i;
 
 /**
- * 
+ * An instance of a tracked magnet block, containing its position and facing
  * @author Joseph Brownless
  */
 public class MagnetInstance 
@@ -19,18 +19,30 @@ public class MagnetInstance
 	
 	PropertyDirection FACING = PropertyDirection.create("facing");
 	
+	/**
+	 * Creates an instance at a position with a facing
+	 * @param xIn x Pos
+	 * @param yIn y Pos
+	 * @param zIn z Pos
+	 * @param stateIn Block state, with a facing
+	 */
 	public MagnetInstance(int xIn, int yIn, int zIn, IBlockState stateIn)
 	{
 		x=xIn;y=yIn;z=zIn;
 		state = (IBlockState)stateIn;
 	}
 	
+	/**
+	 * Creates an instance at a position with a facing
+	 * @param pos Block Position
+	 * @param stateIn Block state, with a facing
+	 */
 	public MagnetInstance(BlockPos pos, IBlockState stateIn)
 	{
 		x=pos.getX(); y=pos.getY(); z=pos.getZ();
 		state = (IBlockState)stateIn;
 	}
-	
+
 	public IBlockState getState() {
 		return state;
 	}
@@ -57,12 +69,21 @@ public class MagnetInstance
 		return new Vector3(x,y,z);
 	}
 	
+	/**
+	 * 
+	 * @return A vector3 with magnitude 1 pointing in the direction the block is facing
+	 */
 	public Vector3 getFacingVector()
 	{
 		Vec3i vec3i = ((EnumFacing) state.getValue(FACING)).getDirectionVec();
 		return new Vector3(new Double(vec3i.getX()),new Double(vec3i.getY()),new Double(vec3i.getZ()));
 	}
 	
+	/**
+	 * 
+	 * @return A size 4 array containing the x,y,z,facing.
+	 * (Facing: 0-5; Down,Up,North,South,West,East)
+	 */
 	public int[] toArray()
 	{
 		int[] arr = new int[4];

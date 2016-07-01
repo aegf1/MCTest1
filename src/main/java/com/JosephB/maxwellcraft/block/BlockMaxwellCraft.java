@@ -14,7 +14,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 
 /**
- * 
+ * Generic base block class for mod
  * @author Joseph Brownless
  */
 public class BlockMaxwellCraft extends Block
@@ -30,30 +30,42 @@ public class BlockMaxwellCraft extends Block
 	}
 
 	/**
-	 * Constructor that sets block material to iron
+	 * Default constructor that sets block material to iron
 	 */
 	public BlockMaxwellCraft()
 	{
 		this(Material.IRON);
 	}
 	
+	/**
+	 * @return unlocalised name of block
+	 */
 	@Override
 	public String getUnlocalizedName()
 	{
 		return String.format("tile.%s%s", Reference.MOD_ID.toLowerCase() + ":", getUnwrappedUnlocalizedName(super.getUnlocalizedName()));
 	}
 	
-	
+	/**
+	 * Removes unlocalised name without 'tile.' at the beginning
+	 */
 	protected String getUnwrappedUnlocalizedName(String unlocalizedName)
 	{
 		return unlocalizedName.substring(unlocalizedName.indexOf(".") + 1);
 	}
 	
+	/**
+	 * 
+	 * @return Name
+	 */
 	public String getName()
 	{
 		return null;
 	}
 	
+	/**
+	 * Called when block placed. Starts tracking block.
+	 */
 	public IBlockState onBlockPlaced(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
     {
     	if (!worldIn.isRemote) 
@@ -64,9 +76,12 @@ public class BlockMaxwellCraft extends Block
 //				LogHelper.info(Test1.magnetTracker.getNumOfMagnets());
 			}
 		}
-    	return this.getStateFromMeta(meta);
+    	return this.getDefaultState();
     }
     
+	/**
+	 * Called when block is broken. Removes block from trackers.
+	 */
     @Override
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
     {

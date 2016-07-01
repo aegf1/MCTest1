@@ -32,6 +32,9 @@ public class ModBlocks
 	public static final BlockMaxwellCraft negCharge = new BlockNegCharge();
 	//Do this for every block
 
+	/**
+	 * Registers all blocks and itemblocks, and all block trackers
+	 */
 	public static void init()
 	{
 		GameRegistry.register(magnet.setRegistryName(magnet.getName()));				// Register name of each block, then register block
@@ -48,6 +51,9 @@ public class ModBlocks
 		MaxwellCraft.negChargeTracker = new NegChargeTracker();
 	}
 
+	/**
+	 * Registers all itemBlock renders
+	 */
 	public static void initRenders()
 	{
 		registerBlockItemRender(magnet);
@@ -56,6 +62,9 @@ public class ModBlocks
 		//Do this for every block
 	}
 
+	/**
+	 * Registers an itemBlock render
+	 */
 	@SideOnly(Side.CLIENT)
 	public static void registerBlockItemRender(BlockMaxwellCraft block)
 	{

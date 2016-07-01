@@ -25,6 +25,9 @@ public class ModItems
 	public static final ItemMaxwellCraft antiProton = new ItemAntiProton();
 		//Do this for every item
 	
+	/**
+	 * Registers all items
+	 */
 	public static void init()
 	{
 		proton.setRegistryName(proton.getName());
@@ -34,6 +37,9 @@ public class ModItems
 		//Do this for every item
 	}
 	
+	/**
+	 * Registers all item renders
+	 */
 	public static void initRenders()
 	{
 		registerItemRender(proton);
@@ -41,6 +47,9 @@ public class ModItems
 		//Do this for every item
 	}
 	
+	/**
+	 * Registers an item render
+	 */
 	@SideOnly(Side.CLIENT)
 	public static void registerItemRender(ItemMaxwellCraft item)
 	{

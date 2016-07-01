@@ -8,7 +8,11 @@ import com.JosephB.maxwellcraft.utility.physics.Vector3;
 import io.netty.buffer.ByteBuf;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
-
+/**
+ * Created in older MC version to sinc entity data between client + server. Now, not sure if it's needed, since old data system is gone.
+ * @author brownles
+ *
+ */
 public class ParticleDataMessage implements IMessage
 {
 	Vector3 position;

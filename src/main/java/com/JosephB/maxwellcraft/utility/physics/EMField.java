@@ -10,21 +10,26 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.Vec3i;
 
 /**
- * 
+ * Contains methods relavent to electric and magnetic fields
  * @author Joseph Brownless
  */
 public class EMField 
 {
-	private static Vector3 BDir = new Vector3(0,0,0);
-	private static double BStrength = 2D;
-	private static Vector3 EDir = new Vector3(1,0,0);
-	private static double EStrength = 0D;
-	
+	/**
+	 * Get electric field at a point
+	 * @param position Point
+	 * @return Electric field
+	 */
 	public static Vector3 getEField(Vector3 position)
 	{
 		return getTotalEFiedPointCharges(position);
 	}
 	
+	/**
+	 * Calculate total electric field at a point, due to all tracked posCharge and negCharge blocks
+	 * @param pos Point
+	 * @return Electric field
+	 */
 	public static Vector3 getTotalEFiedPointCharges(Vector3 pos)
 	{
 		Vector3 e = new Vector3(0,0,0);
@@ -55,6 +60,13 @@ public class EMField
 		return e;
 	}
 	
+	/**
+	 * Get electric field at a point due to a point charge
+	 * @param pos Point for field to be calculated
+	 * @param chargePos Position of point charge
+	 * @param charge Point charge
+	 * @return Electric field
+	 */
 	public static Vector3 getEFieldPointCharge(Vector3 pos, Vector3 chargePos, double charge)
 	{
 		// E = const*q/((r-R)^3) * (r-R)
@@ -63,6 +75,11 @@ public class EMField
 		return Vector3.scale(relPos, number);
 	}
 	
+	/**
+	 * Get magnetic field at a point
+	 * @param position Point
+	 * @return Magnetic field
+	 */
 	public static Vector3 getBField(Vector3 position)
 	{
 		return getTotalMagDipoleField(position);
@@ -71,11 +88,35 @@ public class EMField
 	}
 	
 	/**
-	 *  Calculates magnetic field at a point 'pos' due to a dipole with 'dipoleVector' at 'magnetPos'
+	 * Calculate total magnetic field at a point, due to all tracked magnet dipole blocks
+	 * @param pos Point
+	 * @return Magnetic field
+	 */
+	public static Vector3 getTotalMagDipoleField(Vector3 pos)
+	{
+		Vector3 b = new Vector3(0,0,0);
+		int[][] magnets = MaxwellCraft.magnetTracker.get2DArray();
+		if (magnets.length>=1) 
+		{
+//			System.out.println(magnets.length);
+//			System.out.println(magnets[0].length);
+			for (int i = 0; i < magnets.length; i++) 
+			{
+				Vector3 thisDir = new Vector3(((EnumFacing) BlockMagnet.getFacing(magnets[i][3])).getDirectionVec());
+				Vector3 thisMagPos = new Vector3(magnets[i][0]+0.5, magnets[i][1]+0.5, magnets[i][2]+0.5);
+				Vector3 thisB = magDipoleField(pos, thisMagPos, thisDir);
+				b.increaseBy(thisB);
+			} 
+		}
+		return b;
+	}
+	
+	/**
+	 *  Calculates magnetic field at a point due to a dipole
 	 * @param pos Position to calculate field at
 	 * @param magnetPos position of magnetic dipole
 	 * @param dipoleVector dipole vector of magnet
-	 * @return magnetic field due to dipole at that point
+	 * @return magnetic field
 	 */
 	public static Vector3 magDipoleField(Vector3 pos, Vector3 magnetPos, Vector3 dipoleVector)
 	{
@@ -96,25 +137,6 @@ public class EMField
 		v1.increaseBy(v2);									// v1 = 3(d.r)*r/(|r|^5) - d/(|r|^3)
 		v1.scaleBy(Reference.magDipFieldConst);
 		return v1;
-	}
-	
-	public static Vector3 getTotalMagDipoleField(Vector3 pos)
-	{
-		Vector3 b = new Vector3(0,0,0);
-		int[][] magnets = MaxwellCraft.magnetTracker.get2DArray();
-		if (magnets.length>=1) 
-		{
-//			System.out.println(magnets.length);
-//			System.out.println(magnets[0].length);
-			for (int i = 0; i < magnets.length; i++) 
-			{
-				Vector3 thisDir = new Vector3(((EnumFacing) BlockMagnet.getFacing(magnets[i][3])).getDirectionVec());
-				Vector3 thisMagPos = new Vector3(magnets[i][0]+0.5, magnets[i][1]+0.5, magnets[i][2]+0.5);
-				Vector3 thisB = magDipoleField(pos, thisMagPos, thisDir);
-				b.increaseBy(thisB);
-			} 
-		}
-		return b;
 	}
 	
 	/**
@@ -143,7 +165,6 @@ public class EMField
 	{
 		Vector3 force = E;								// F = E
 		force.increaseBy(Vector3.crossProduct(vel, B));	// F = E + v X B
-//		LogHelper.info(Vector3.crossProduct(vel, B).toString());
 		force.scaleBy(charge);							// F = q(E + v X B)
 		return force;
 	}

@@ -11,14 +11,19 @@ import net.minecraftforge.fml.common.gameevent.TickEvent.ServerTickEvent;
 import net.minecraftforge.fml.relauncher.Side;
 
 /**
- * 
+ * Contains methods (well, just 1 method atm) which listen to forge events and execute code.
  * @author Joseph Brownless
  */
 public class MaxwellCraftEventHandler
 {
-	private Minecraft mc;
 	private int ticks = 0;
 
+	/**
+	 * Executed every tick on the server side.
+	 * Verifies the contents of each tracker every second.
+	 * @param event Server tick event
+	 * @return true
+	 */
 	@SubscribeEvent
 	public boolean onServerTick(ServerTickEvent event)
 	{

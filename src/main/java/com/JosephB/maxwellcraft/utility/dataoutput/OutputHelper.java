@@ -14,7 +14,7 @@ import com.JosephB.maxwellcraft.utility.trackers.PosChargeTracker;
 import net.minecraft.util.EnumFacing;
 
 /**
- * 
+ * Outputs provided data to an external file
  * @author Joseph Brownless
  */
 public class OutputHelper 
@@ -23,6 +23,10 @@ public class OutputHelper
 	public static PrintWriter dataOutput;
 	public static int ticksRunning = 0;
 	
+	/**
+	 * Starts outputting entity position + momentum data every tick
+	 * @return true if wasn't running, false otherwise
+	 */
 	public static boolean startOutput()
 	{
 		if(!running)
@@ -85,6 +89,10 @@ public class OutputHelper
 		else {return false;}
 	}
 	
+	/**
+	 * Stop outputting data
+	 * @return true if was running
+	 */
 	public static boolean finishOutput()
 	{
 		if(running)
@@ -110,6 +118,11 @@ public class OutputHelper
 		return running;
 	}
 	
+	/**
+	 * Outputs a string to the file
+	 * @param string String to be output
+	 * @return True if was running
+	 */
 	public static boolean record(String string)
 	{
 		if(running && (string!=null))
@@ -121,6 +134,11 @@ public class OutputHelper
 		return running;
 	}
 	
+	/**
+	 * Outputs the components of a Vector3, along with the time since starting
+	 * @param point Point to be output
+	 * @return True if was running
+	 */
 	public static boolean record(Vector3 point)
 	{
 		if((point != null) && (Math.abs(point.magnitude()) > 1e-34) && (running))
@@ -132,6 +150,12 @@ public class OutputHelper
 		return running;
 	}
 	
+	/**
+	 * Outputs the components of 2 Vector3s, along with the time since starting
+	 * @param point1 First point to be output
+	 * @param point2 Second point to be output
+	 * @return True if was running
+	 */
 	public static boolean record2(Vector3 point1, Vector3 point2)
 	{
 		if((point1 != null) && (Math.abs(point1.magnitude()) > 1e-34) && (running) && (point2 != null) && (Math.abs(point2.magnitude()) > 1e-34))
@@ -143,11 +167,16 @@ public class OutputHelper
 		return running;
 	}
 	
+	/**
+	 * Outputs the components of 4 Vector3s, along with the time since starting
+	 * @return True if was running
+	 */
 	public static boolean record4(Vector3 point1, Vector3 point2, Vector3 point3, Vector3 point4)
 	{
 		if((running) && (point1 != null)  && (point2 != null) && (point3 != null)  && (point4 != null))
 		{
-			dataOutput.println((ticksRunning*0.05)+" "+point1.getX()+" "+point1.getY()+" "+point1.getZ()
+			dataOutput.println((ticksRunning*0.05)
+					+" "+point1.getX()+" "+point1.getY()+" "+point1.getZ()
 					+" "+point2.getX()+" "+point2.getY()+" "+point2.getZ()
 					+" "+point3.getX()+" "+point3.getY()+" "+point3.getZ()
 					+" "+point4.getX()+" "+point4.getY()+" "+point4.getZ());

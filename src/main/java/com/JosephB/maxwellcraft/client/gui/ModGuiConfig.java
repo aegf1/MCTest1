@@ -9,11 +9,15 @@ import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.client.config.GuiConfig;
 
 /**
- * 
+ * Creates config screen for mod.
  * @author Joseph Brownless
  */
 public class ModGuiConfig extends GuiConfig{
 	
+	/**
+	 * Creates config screen, in general catagory.
+	 * @param guiScreen
+	 */
 	public ModGuiConfig(GuiScreen guiScreen)
 	{
 		super(

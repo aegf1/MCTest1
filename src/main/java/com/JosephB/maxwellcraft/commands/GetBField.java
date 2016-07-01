@@ -15,12 +15,19 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 
 /**
- * 
+ * Defines command to get magnetic field at a point.
  * @author Joseph Brownless
  */
 public class GetBField implements ICommand
 {
+	/**
+	 * List of alternative names for command
+	 */
 	private List aliases;
+	
+	/**
+	 * Create command and define aliases
+	 */
 	public GetBField()
 	{
 		this.aliases = new ArrayList();
@@ -33,12 +40,18 @@ public class GetBField implements ICommand
 		return 0;
 	}
 
+	/**
+	 * @return command name
+	 */
 	@Override
 	public String getCommandName() 
 	{
 		return "getbfield";
 	}
 
+	/**
+	 * @return What is given to the user to describe how to use the command
+	 */
 	@Override
 	public String getCommandUsage(ICommandSender sender) 
 	{
@@ -46,12 +59,19 @@ public class GetBField implements ICommand
 		return "getbfield <x> <y> <z>";
 	}
 
+	/**
+	 * Get alternative names for command
+	 */
 	@Override
 	public List getCommandAliases() 
 	{
 		return aliases;
 	}
 
+	/**
+	 * Called when command is input by user.
+	 * Sends user message containing x,y,z components of magnetic field at provided coordinates
+	 */
 	@Override
 	public void execute(MinecraftServer server, ICommandSender sender, String[] args) throws CommandException
 	{
@@ -69,12 +89,18 @@ public class GetBField implements ICommand
 		
 	}
 
+	/**
+	 * Returns if particular argument is a username
+	 */
 	@Override
 	public boolean isUsernameIndex(String[] args, int index) 
 	{
 		return false;
 	}
 
+	/**
+	 * Checks if particular user can use command
+	 */
 	@Override
 	public boolean checkPermission(MinecraftServer server, ICommandSender sender) 
 	{

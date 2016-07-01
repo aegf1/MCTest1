@@ -23,22 +23,27 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 /**
- * 
+ * Represents blocks such as magnetic dipole, which have a 'top', 'bottom', and 4 identical sides.
  * @author Joseph Brownless
  */
 public class BlockRotatedPillerMaxwellCraft extends BlockMaxwellCraft
 {
+	/**
+	 * Creates the property of facing for this block type. Doesn't store the actual direction.
+	 */
 	public static final PropertyDirection FACING = PropertyDirection.create("facing");
-	private static final String __OBFID = "CL_00000302";
 	
 	/**
-	 * Constructor that lets you define block material
+	 * Constructor that lets you define block material.
+	 * Sets default facing to north, but actual facing is created when block is placed, using {@link #onBlockPlaced}
 	 * @param material
 	 */
 	public BlockRotatedPillerMaxwellCraft(Material material)
 	{
 		super(material);
 		this.setCreativeTab(CreativeTabMaxwellCraft.MaxwellCraft_Tab);
+		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
+		this.isBlockContainer = true;
 	}
 
 	/**
@@ -49,20 +54,12 @@ public class BlockRotatedPillerMaxwellCraft extends BlockMaxwellCraft
 		this(Material.IRON);
 	}
 	
-	@SideOnly(Side.CLIENT)
-    public BlockRenderLayer getBlockLayer()
-    {
-        return BlockRenderLayer.SOLID;
-    }
-	
-	
-/*	@Override
-	public int getRenderType()
-	{
-		return 3;
-	}
-*/
-	
+	/**
+	 * Converts metadata values into facing
+	 * 0-6 -> Down,Up,North,South,East,West,NULL
+	 * @param meta
+	 * @return Facing
+	 */
 	public static EnumFacing getFacing(int meta)
     {
         int j = meta & 7;
@@ -79,7 +76,7 @@ public class BlockRotatedPillerMaxwellCraft extends BlockMaxwellCraft
     }
 
     /**
-     * Convert the BlockState into the correct metadata value
+     * Convert the BlockState into the correct metadata value, based on the facing direction
      */
     @Override
     public int getMetaFromState(IBlockState state)
@@ -89,18 +86,28 @@ public class BlockRotatedPillerMaxwellCraft extends BlockMaxwellCraft
 		return i;
     }
 
+    /**
+     * Creates the state, and adds the 'facing' property
+     */
     @Override
     protected BlockStateContainer createBlockState()
     {
         return new BlockStateContainer(this, new IProperty[] {FACING});
     }
 
+    /**
+     * Creates an itemstack of this block
+     */
     @Override
     protected ItemStack createStackedBlock(IBlockState state)
     {
         return new ItemStack(Item.getItemFromBlock(this), 1, 0);
     }
 
+    /**
+     * Called when block is placed in world. Creates the state, and defines the facing direction using the direction the placer is facing.
+     * Also adds block to the trackers.
+     */
     @Override
     public IBlockState onBlockPlaced(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
     {
@@ -117,6 +124,9 @@ public class BlockRotatedPillerMaxwellCraft extends BlockMaxwellCraft
 		return state;
     }
     
+    /**
+     * Called when block is broken. Removes from trackers.
+     */
     @Override
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
     {
@@ -131,19 +141,28 @@ public class BlockRotatedPillerMaxwellCraft extends BlockMaxwellCraft
 		super.breakBlock(worldIn, pos, state);
     }
     
-    
+    /**
+     * Uses the facing direction of the placer to determin the facing direction of a placed block.
+     * If placer >2 blocks higher clicked block, places facing up.
+     * If placer below clicked block, places facing down.
+     * Otherwise, places facing placer.
+     * @param worldIn
+     * @param clickedBlock Block clicked on when placing
+     * @param entityIn Placer
+     * @return Facing of placed block
+     */
     public static EnumFacing getFacingFromEntity(World worldIn, BlockPos clickedBlock, EntityLivingBase entityIn)
     {
         if (MathHelper.abs((float)entityIn.posX - (float)clickedBlock.getX()) < 2.0F && MathHelper.abs((float)entityIn.posZ - (float)clickedBlock.getZ()) < 2.0F)
         {
-            double d0 = entityIn.posY + (double)entityIn.getEyeHeight();
+            double placerHeight = entityIn.posY + (double)entityIn.getEyeHeight();
 
-            if (d0 - (double)clickedBlock.getY() > 2.0D)
+            if (placerHeight - (double)clickedBlock.getY() > 2.0D)
             {
                 return EnumFacing.UP;
             }
 
-            if ((double)clickedBlock.getY() - d0 > 0.0D)
+            if ((double)clickedBlock.getY() - placerHeight > 0.0D)
             {
                 return EnumFacing.DOWN;
             }

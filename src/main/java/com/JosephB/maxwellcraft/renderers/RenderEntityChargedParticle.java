@@ -14,25 +14,33 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 
 /**
- * 
+ * Class defining renders for charged particle renders
  * @author Joseph Brownless
  */
 public class RenderEntityChargedParticle extends Render
 {
 	private float scale = 0.5F;
 	
-	
+	/**
+	 * Creates render using default minecraft rendermanager
+	 */
 	public RenderEntityChargedParticle()
 	{
 		super(Minecraft.getMinecraft().getRenderManager());
 	}
 	
+	/**
+	 * Creates render using given renderManager
+	 * @param renderManager
+	 */
 	public RenderEntityChargedParticle(RenderManager renderManager) 
 	{
 		super(renderManager);
 	}
 
-	
+	/**
+	 * @return The render texture
+	 */
 	@Override
 	protected ResourceLocation getEntityTexture(Entity entity) 
 	{
@@ -40,6 +48,16 @@ public class RenderEntityChargedParticle extends Render
 		return null;
 	}
 	
+	/**
+	 * Called every tick to render the charged particle.
+	 * Created drawing heavily from minecraft's egg render class
+	 * @param entity Entity to be rendered
+	 * @param x x-position of entity
+	 * @param y y-position of entity
+	 * @param z z-position of entity
+	 * @param entityYaw Yaw rotation of entity
+	 * @param partialTicks
+	 */
 	public void doRender(EntityChargedParticle entity, double x, double y, double z, float entityYaw, float partialTicks)
 	{
 		GlStateManager.pushMatrix();
@@ -84,8 +102,8 @@ public class RenderEntityChargedParticle extends Render
      * (Render<T extends Entity>) and this method has signature public void func_76986_a(T entity, double d, double d1,
      * double d2, float f, float f1). But JAD is pre 1.5 so doe
      */
-    public void doRender(Entity entity, double x, double y, double z, float p_76986_8_, float partialTicks)
+    public void doRender(Entity entity, double x, double y, double z, float yaw, float partialTicks)
     {
-        this.doRender((EntityChargedParticle)entity, x, y, z, p_76986_8_, partialTicks);
+        this.doRender((EntityChargedParticle)entity, x, y, z, yaw, partialTicks);
     }
 }

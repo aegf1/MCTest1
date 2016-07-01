@@ -18,13 +18,18 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 /**
- * 
+ * Block representing a positive electric charge, with the associated field.
+ * Contains a tile entity, to register and update its position to the tracker.
  * @author Joseph Brownless
  */
 public class BlockPosCharge extends BlockMaxwellCraft implements ITileEntityProvider
 {
 	private final String name = "PosCharge";
 	
+	/**
+	 * Default constructor.
+	 * Only called when initialising blocks. When block is actually placed, {@link BlockMaxwellCraft#onBlockPlaced} is called.
+	 */
 	public BlockPosCharge()
 	{
 		super(Material.IRON);
@@ -32,20 +37,27 @@ public class BlockPosCharge extends BlockMaxwellCraft implements ITileEntityProv
 		this.isBlockContainer = true;
 	}
 	
-	
+	/**
+	 * @return Block Name
+	 */
 	@Override
 	public String getName()
 	{
 		return name;
 	}
 
-
+	/**
+	 * @return Associated tile entity for this block
+	 */
 	@Override
 	public TileEntity createNewTileEntity(World worldIn, int meta) 
 	{
 		return (TileEntity) new TileEntityPosCharge();
 	}
 	
+	/**
+	 * Called when breaking block of this type. Removes tile entity.
+	 */
 	@Override
 	public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
 	{

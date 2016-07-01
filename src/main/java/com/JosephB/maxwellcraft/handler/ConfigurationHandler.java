@@ -11,6 +11,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 /**
+ * Manages the configuration menu (Under 'Mods' on the MC main menu, or 'Mod settings' in the pause menu)
  * 
  * @author Joseph Brownless
  */
@@ -18,6 +19,10 @@ public class ConfigurationHandler {
 
 	public static Configuration configuration;
 	
+	/**
+	 * Called upon launching minecraft. Loads the config file.
+	 * @param configFile
+	 */
 	public static void init(File configFile)
 	{
 		//Create configuration object from given config file
@@ -29,6 +34,10 @@ public class ConfigurationHandler {
 		
 	}
 
+	/**
+	 * Called when clicking 'Done' in config menu. Saves any changes to the config file, then loads the values again.
+	 * @param event
+	 */
     @SubscribeEvent
 	public void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent event)
 	{
@@ -40,6 +49,9 @@ public class ConfigurationHandler {
 		}
 	}
 	
+    /**
+     * Loads values from config file. If entries don't exist in file, creates them.
+     */
 	private static void loadConfiguration()
 	{		
 		Reference.magDipFieldConst = configuration.getFloat("Magnetic dipole constant", Configuration.CATEGORY_GENERAL, 5F, 
@@ -68,6 +80,9 @@ public class ConfigurationHandler {
 		LogHelper.info("Loading config");
 	}
 	
+	/**
+	 * Saves changes to config values to file.
+	 */
 	private static void saveConfiguration()
 	{
 		if (configuration.hasChanged())

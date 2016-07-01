@@ -15,7 +15,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 
 /**
- * 
+ * Item representing a throwable antiProton
  * @author Joseph Brownless
  */
 public class ItemAntiProton extends ItemMaxwellCraft
@@ -23,12 +23,18 @@ public class ItemAntiProton extends ItemMaxwellCraft
 	
 	private final String name = "AntiProton";
 	
+	/**
+	 * Create item
+	 */
 	public ItemAntiProton()
 	{
 		super();
 		this.setUnlocalizedName(name);
 	}
-
+	
+	/**
+	 * @return Name of item
+	 */
 	@Override
 	public String getName()
 	{
@@ -36,7 +42,7 @@ public class ItemAntiProton extends ItemMaxwellCraft
 	}
 	
 	/**
-     * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
+     * Called whenever this item is equipped and the right mouse button is pressed. 
      */
     public ActionResult<ItemStack> onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn, EnumHand hand)
     {

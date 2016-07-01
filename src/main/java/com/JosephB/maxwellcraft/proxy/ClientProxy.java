@@ -8,14 +8,17 @@ import net.minecraft.client.particle.Particle;
 import net.minecraft.world.World;
 
 /**
- * 
+ * Implements IProxy methods for use on client side
  * @author Joseph Brownless
  */
-public class ClientProxy extends CommonProxy 
+public class ClientProxy implements IProxy
 {
 
 	private static Minecraft mc = Minecraft.getMinecraft();
 	
+	/**
+	 * Spawn proton particle (fire texture)
+	 */
 	@Override
 	public void spawnProtonParticle(World world, double x, double y, double z, double vx, double vy, double vz)
 	{
@@ -23,6 +26,9 @@ public class ClientProxy extends CommonProxy
 		mc.effectRenderer.addEffect(proton);
 	}
 	
+	/**
+	 * Spawn antiProton particle (smoke texture)
+	 */
 	@Override
 	public void spawnAntiProtonParticle(World world, double x, double y, double z, double vx, double vy, double vz)
 	{

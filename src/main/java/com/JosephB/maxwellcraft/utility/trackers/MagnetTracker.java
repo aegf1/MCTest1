@@ -17,7 +17,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 /**
- * 
+ * Tracks the position and facing of every magnet in-world
  * @author Joseph Brownless
  */
 public class MagnetTracker
@@ -30,11 +30,11 @@ public class MagnetTracker
 	}
 	
 	/**
-	 * 
+	 * Adds a magnet to the list
 	 * @param x
 	 * @param y
 	 * @param z
-	 * @param state
+	 * @param state State containing facing
 	 * @return true if added successfully
 	 */
 	public boolean add(int x, int y, int z, IBlockState state)
@@ -47,8 +47,9 @@ public class MagnetTracker
 	}
 	
 	/**
+	 * Adds a magnet to the list
 	 * @param pos
-	 * @param state
+	 * @param state State containing facing
 	 * @return true if was added successfully
 	 */
 	public boolean add(BlockPos pos, IBlockState state)
@@ -57,7 +58,7 @@ public class MagnetTracker
 	}
 	
 	/**
-	 * 
+	 * Remove a magnet (position) from a list
 	 * @param x
 	 * @param y
 	 * @param z
@@ -77,7 +78,7 @@ public class MagnetTracker
 	}
 	
 	/**
-	 * 
+	 * Remove a magnet (position) from a list
 	 * @param pos
 	 * @return true if an entry with these coords is removed
 	 */
@@ -86,11 +87,19 @@ public class MagnetTracker
 		return remove(pos.getX(), pos.getY(), pos.getZ());
 	}
 	
+	/**
+	 * Get number of tracked magnets
+	 * @return
+	 */
 	public int getNumOfMagnets()
 	{
 		return magnets.size();
 	}
 	
+	/**
+	 * Check that every tracked location contains a magnet of the correct facing
+	 * @return
+	 */
 	public boolean verifyAllLocations()
 	{
 		int numRemoved = 0;
@@ -137,20 +146,20 @@ public class MagnetTracker
 		return arr;
 	}
 	
-	public Vector3 getTotalFacingVector()
-	{
-		Vector3 vec = new Vector3(0,0,0);
-		HashSet<MagnetInstance> magnets1 = new HashSet();
-		try {
-			magnets1 = new HashSet(magnets);
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-		for(MagnetInstance current: magnets1)
-		{
-			vec.increaseBy(current.getFacingVector());
-		}
-		return vec;
-	}
+//	public Vector3 getTotalFacingVector()
+//	{
+//		Vector3 vec = new Vector3(0,0,0);
+//		HashSet<MagnetInstance> magnets1 = new HashSet();
+//		try {
+//			magnets1 = new HashSet(magnets);
+//		} catch (Exception e) {
+//			// TODO: handle exception
+//		}
+//		for(MagnetInstance current: magnets1)
+//		{
+//			vec.increaseBy(current.getFacingVector());
+//		}
+//		return vec;
+//	}
 	
 }

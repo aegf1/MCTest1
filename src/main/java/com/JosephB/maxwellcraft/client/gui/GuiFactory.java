@@ -7,7 +7,8 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraftforge.fml.client.IModGuiFactory;
 
 /**
- * 
+ * Creates gui screens for mod. 
+ * Currently, only config screen
  * @author Joseph Brownless
  */
 public class GuiFactory implements IModGuiFactory{

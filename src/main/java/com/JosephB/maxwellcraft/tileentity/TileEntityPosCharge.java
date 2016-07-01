@@ -8,7 +8,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
 
 /**
- * 
+ * Tile entity contained in positive charge blocks. Keeps block location updated with tracker. 
+ * (Mainly useful when loading world with pre-existing blocks.
  * @author Joseph Brownless
  */
 public class TileEntityPosCharge extends TileEntity implements ITickable
@@ -18,10 +19,18 @@ public class TileEntityPosCharge extends TileEntity implements ITickable
 	
 	int ticks = 0;
 	
+	/**
+	 * 
+	 * @return Tile entity name
+	 */
 	public String getName() {
 		return name;
 	}
 
+	/**
+	 * Called every tick. Adds block location to tracker.
+	 * (Tracker adds it to list if it's not already there)
+	 */
 	public void update()
 	{
 		if(!worldObj.isRemote)

@@ -11,12 +11,21 @@ import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.IBlockState;
 
 /**
- * 
+ * Helps track blocks
  * @author Joseph Brownless
  */
 public class TrackerHelper 
 {
 
+	/**
+	 * Tracks a block at a position with a state. (Just magnets for now)
+	 * @param block
+	 * @param x
+	 * @param y
+	 * @param z
+	 * @param state
+	 * @return True if added to a tracker
+	 */
 	public static boolean track(Block block, int x, int y, int z, IBlockState state)
 	{
 		if(block instanceof BlockMagnet)
@@ -30,7 +39,14 @@ public class TrackerHelper
 		}
 	}
 
-
+	/**
+	 * Remove a block at a location from all trackers
+	 * @param block
+	 * @param x
+	 * @param y
+	 * @param z
+	 * @return True if removed successfully
+	 */
 	public static boolean remove(Block block, int x, int y, int z)
 	{
 		if(block instanceof BlockMagnet)
@@ -51,7 +67,15 @@ public class TrackerHelper
 		}
 	}
 
-
+	/**
+	 * Tracks a block at a position. 
+	 * @param block
+	 * @param x
+	 * @param y
+	 * @param z
+	 * @param state
+	 * @return True if added to a tracker
+	 */
 	public static boolean track(Block block, int x, int y, int z) 
 	{
 		if(block instanceof BlockPosCharge)
@@ -68,6 +92,9 @@ public class TrackerHelper
 		}
 	}
 	
+	/**
+	 * Verify the contents of all trackers
+	 */
 	public static void verifyAll()
 	{
 		MaxwellCraft.magnetTracker.verifyAllLocations();

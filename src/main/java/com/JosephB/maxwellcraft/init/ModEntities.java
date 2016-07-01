@@ -22,7 +22,10 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @GameRegistry.ObjectHolder(Reference.MOD_ID)
 public class ModEntities 
 {
-	
+	/**
+	 * Registers all entities
+	 * @param mod
+	 */
 	public static void init(Object mod)
 	{
 		EntityRegistry.registerModEntity(EntityThrownProton.class, "Proton", 1, mod, 200, 1, true );
@@ -31,6 +34,9 @@ public class ModEntities
 		//Do this for every entity
 	}
 	
+	/**
+	 * Registers all entity renderers
+	 */
 	@SideOnly(Side.CLIENT)
 	public static void initRenders()
 	{

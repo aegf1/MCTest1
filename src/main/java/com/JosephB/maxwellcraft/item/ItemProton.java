@@ -15,7 +15,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 
 /**
- * 
+ * Item representing a throwable Proton
  * @author Joseph Brownless
  */
 public class ItemProton extends ItemMaxwellCraft
@@ -23,12 +23,18 @@ public class ItemProton extends ItemMaxwellCraft
 	
 	private final String name = "Proton";
 	
+	/**
+	 * Create item
+	 */
 	public ItemProton()
 	{
 		super();
 		this.setUnlocalizedName(name);
 	}
 
+	/**
+	 * @return Name of item
+	 */
 	@Override
 	public String getName()
 	{

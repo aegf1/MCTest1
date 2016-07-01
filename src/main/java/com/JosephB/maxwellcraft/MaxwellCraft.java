@@ -26,28 +26,37 @@ import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.relauncher.Side;
 
 /**
- * Main mod file
+ * Main mod file. Triggers loading of all objects in mod.
  * @author Joseph Brownless
  */
 @Mod(modid= Reference.MOD_ID, name= Reference.MOD_NAME , version=Reference.VERSION, guiFactory = Reference.GUI_FACTORY_CLASS)
 public class MaxwellCraft 
 {
-
 	@Mod.Instance(Reference.MOD_ID)
 	public static MaxwellCraft Instance;
 
 	@SidedProxy(clientSide = Reference.CLIENT_PROXY_CLASS, serverSide = Reference.SERVER_PROXY_CLASS, modId= Reference.MOD_ID)
 	public static IProxy proxy;
 
-	//Do this for every block
+	/**
+	 * Create trackers for each block type.
+	 * Used to calculate forces on entities.
+	 * Initialised in {@link ModBlocks#init()}
+	 */
 	public static MagnetTracker magnetTracker;
-
 	public static PosChargeTracker posChargeTracker;
-
 	public static NegChargeTracker negChargeTracker;
 
+	/**
+	 * Unused?
+	 */
 	private int ticks = 0;
 
+	/**
+	 * Called in 1st phase of launching game
+	 * Initialise config menu, items, blocks, entities, tileEntities and entity renderers
+	 * @param event FML pre-initialisation event
+	 */
 	@Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent event)
 	{
@@ -70,7 +79,7 @@ public class MaxwellCraft
 		//Initialise all tile entities
 		ModTileEntities.init();
 
-		//Register Server tick handler (For magnet tracker refresher)
+		//Register Server tick handler (For trackers refresher)
 		FMLCommonHandler.instance().bus().register(new MaxwellCraftEventHandler());
 		
 		if(event.getSide() == Side.CLIENT)
@@ -80,6 +89,11 @@ public class MaxwellCraft
 		}
 	}
 
+	/**
+	 * Called in 2nd phase of launching game.
+	 * Initialises item + block renderers, and recipes.
+	 * @param event FML initialisation event
+	 */
 	@Mod.EventHandler
 	public void init(FMLInitializationEvent event)
 	{
@@ -100,6 +114,11 @@ public class MaxwellCraft
 		Recipes.init();
 	}
 
+	/**
+	 * Called in 3rd phase of launching game.
+	 * Does nothing right now.
+	 * @param event FML post-initialisation event
+	 */
 	@Mod.EventHandler
 	public void postInit(FMLPostInitializationEvent event)
 	{
@@ -108,6 +127,11 @@ public class MaxwellCraft
 		LogHelper.info("PostInit Stage");
 	}
 
+	/**
+	 * Called when loading a server.
+	 * Initialises server commands
+	 * @param event FML server starting event
+	 */
 	@Mod.EventHandler
 	public void serverLoad(FMLServerStartingEvent event)
 	{
