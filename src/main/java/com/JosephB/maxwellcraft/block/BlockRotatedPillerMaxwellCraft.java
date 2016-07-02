@@ -65,6 +65,16 @@ public class BlockRotatedPillerMaxwellCraft extends BlockMaxwellCraft
         int j = meta & 7;
         return j > 5 ? null : EnumFacing.getFront(j);
     }
+	
+	/**
+	 * Convert facing direction into the metadata value
+	 * @param facing
+	 * @return
+	 */
+	public static int getMeta(EnumFacing facing)
+	{
+		return facing.getIndex();
+	}
 
     /**
      * Convert the given metadata into a BlockState for this Block
@@ -112,16 +122,17 @@ public class BlockRotatedPillerMaxwellCraft extends BlockMaxwellCraft
     public IBlockState onBlockPlaced(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
     {
     	IBlockState state = this.getDefaultState().withProperty(FACING, getFacingFromEntity(worldIn, pos, placer));
+    	EnumFacing blockFacing = getFacingFromEntity(worldIn, pos, placer);
     	
     	if (!worldIn.isRemote) 
     	{
-			if(TrackerHelper.track(this, pos.getX(), pos.getY(), pos.getZ(), state))
+			if(TrackerHelper.track(this, pos.getX(), pos.getY(), pos.getZ(), blockFacing.getIndex()))
 			{
 //	    		LogHelper.info("Adding block to list. "+pos.getX()+", "+pos.getY()+", "+pos.getZ()+", "+state.getValue(PropertyDirection.create("facing")));
 //				LogHelper.info(Test1.magnetTracker.getNumOfMagnets());
 			}
 		}
-		return state;
+		return this.getDefaultState().withProperty(FACING, blockFacing);
     }
     
     /**

@@ -70,7 +70,7 @@ public class BlockMaxwellCraft extends Block
     {
     	if (!worldIn.isRemote) 
     	{
-			if(TrackerHelper.track(this, pos.getX(), pos.getY(), pos.getZ()))
+			if(TrackerHelper.track(this, pos.getX(), pos.getY(), pos.getZ(), meta))
 			{
 //	    		LogHelper.info("Adding block to list. "+pos.getX()+", "+pos.getY()+", "+pos.getZ()+", "+state.getValue(PropertyDirection.create("facing")));
 //				LogHelper.info(Test1.magnetTracker.getNumOfMagnets());

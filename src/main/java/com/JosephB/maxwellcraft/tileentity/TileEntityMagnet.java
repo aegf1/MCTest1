@@ -49,7 +49,7 @@ public class TileEntityMagnet extends TileEntity implements ITickable
 			
 			if(ticks==20 || ticks==0)
 			{
-				if(MaxwellCraft.magnetTracker.add(this.pos, ((BlockMagnet) this.getBlockType()).getStateFromMeta(this.getBlockMetadata())))
+				if(TrackerHelper.track(getBlockType(), this.getPos(), this.getBlockMetadata()))
 				{	// Change above to:
 					//	if(TrackerHelper.track(blockType, pos.getX(), pos.getY(), pos.getZ(), this.getBlockType().getStateFromMeta(getBlockMetadata())))
 

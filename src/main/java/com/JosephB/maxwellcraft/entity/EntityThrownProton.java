@@ -10,10 +10,10 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.World;
 
 /**
- * 
+ * Represents a thrown proton.
  * @author Joseph Brownless
  */
-public class EntityThrownProton extends EntityRelChargedParticle
+public class EntityThrownProton extends EntityChargedParticle
 {
 	private static double tickCountParticleSpawn = 0;
 	
@@ -55,7 +55,7 @@ public class EntityThrownProton extends EntityRelChargedParticle
 	{
 		super.onUpdate();
 		
-		if (tickCountParticleSpawn >= 2) 
+		if (tickCountParticleSpawn >= 3) 
 		{
 			MaxwellCraft.proxy.spawnProtonParticle(this.worldObj, posX, posY, posZ, 0, 0, 0);
 //			this.worldObj.spawnParticle(EnumParticleTypes.FLAME, this.posX, this.posY, this.posZ, 0, 0, 0, 0);

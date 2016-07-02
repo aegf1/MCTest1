@@ -2,13 +2,11 @@ package com.JosephB.maxwellcraft.init;
 
 import com.JosephB.maxwellcraft.MaxwellCraft;
 import com.JosephB.maxwellcraft.block.BlockMagnet;
+import com.JosephB.maxwellcraft.block.BlockMaxwellCraft;
 import com.JosephB.maxwellcraft.block.BlockNegCharge;
 import com.JosephB.maxwellcraft.block.BlockPosCharge;
-import com.JosephB.maxwellcraft.block.BlockMaxwellCraft;
 import com.JosephB.maxwellcraft.reference.Reference;
-import com.JosephB.maxwellcraft.utility.trackers.MagnetTracker;
-import com.JosephB.maxwellcraft.utility.trackers.NegChargeTracker;
-import com.JosephB.maxwellcraft.utility.trackers.PosChargeTracker;
+import com.JosephB.maxwellcraft.utility.trackers.BlockTracker;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderItem;
@@ -37,18 +35,22 @@ public class ModBlocks
 	 */
 	public static void init()
 	{
-		GameRegistry.register(magnet.setRegistryName(magnet.getName()));				// Register name of each block, then register block
-		GameRegistry.register(new ItemBlock(magnet).setRegistryName(magnet.getRegistryName()));	//Same for each itemblock
-		GameRegistry.register(posCharge.setRegistryName(posCharge.getName()));
-		GameRegistry.register(new ItemBlock(posCharge).setRegistryName(posCharge.getRegistryName()));
-		GameRegistry.register(negCharge.setRegistryName(negCharge.getName()));
-		GameRegistry.register(new ItemBlock(negCharge).setRegistryName(negCharge.getRegistryName()));
+		registerBlock(magnet);
+		registerBlock(posCharge);
+		registerBlock(negCharge);
 		
 		//Do this for every block
 
-		MaxwellCraft.magnetTracker = new MagnetTracker();
-		MaxwellCraft.posChargeTracker = new PosChargeTracker();
-		MaxwellCraft.negChargeTracker = new NegChargeTracker();
+		MaxwellCraft.magnetTracker = new BlockTracker(BlockMagnet.class, null);
+		MaxwellCraft.chargeTracker = new BlockTracker(BlockPosCharge.class, BlockNegCharge.class);
+	}
+	
+	private static void registerBlock(BlockMaxwellCraft block)
+	{
+		GameRegistry.register(block.setRegistryName(block.getName()));				// Register name of block, then register block
+		GameRegistry.register(new ItemBlock(block).setRegistryName(block.getRegistryName()));	//Same for each itemblock
+		
+		
 	}
 
 	/**

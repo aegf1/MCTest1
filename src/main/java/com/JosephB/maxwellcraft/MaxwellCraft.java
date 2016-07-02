@@ -1,6 +1,10 @@
 package com.JosephB.maxwellcraft;
 
-import com.JosephB.maxwellcraft.commands.*;
+import com.JosephB.maxwellcraft.commands.GetBField;
+import com.JosephB.maxwellcraft.commands.GetEField;
+import com.JosephB.maxwellcraft.commands.StartDataRecord;
+import com.JosephB.maxwellcraft.commands.StopDataRecord;
+import com.JosephB.maxwellcraft.commands.TestCommand;
 import com.JosephB.maxwellcraft.handler.ConfigurationHandler;
 import com.JosephB.maxwellcraft.handler.MaxwellCraftEventHandler;
 import com.JosephB.maxwellcraft.init.ModBlocks;
@@ -11,9 +15,7 @@ import com.JosephB.maxwellcraft.init.Recipes;
 import com.JosephB.maxwellcraft.proxy.IProxy;
 import com.JosephB.maxwellcraft.reference.Reference;
 import com.JosephB.maxwellcraft.utility.LogHelper;
-import com.JosephB.maxwellcraft.utility.trackers.MagnetTracker;
-import com.JosephB.maxwellcraft.utility.trackers.NegChargeTracker;
-import com.JosephB.maxwellcraft.utility.trackers.PosChargeTracker;
+import com.JosephB.maxwellcraft.utility.trackers.BlockTracker;
 
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.FMLCommonHandler;
@@ -43,9 +45,8 @@ public class MaxwellCraft
 	 * Used to calculate forces on entities.
 	 * Initialised in {@link ModBlocks#init()}
 	 */
-	public static MagnetTracker magnetTracker;
-	public static PosChargeTracker posChargeTracker;
-	public static NegChargeTracker negChargeTracker;
+	public static BlockTracker magnetTracker;
+	public static BlockTracker chargeTracker;
 
 	/**
 	 * Unused?

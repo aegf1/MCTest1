@@ -12,7 +12,7 @@ import net.minecraft.entity.Entity;
  * Render for thrown antiProtons
  * @author Joseph Brownless
  */
-public class RenderEntityAntiProton extends RenderEntityChargedParticle
+public class RenderEntityAntiProton extends RenderEntityMaxwellcraftParticle
 {
 	/**
 	 * Creates render using default minecraft rendermanager

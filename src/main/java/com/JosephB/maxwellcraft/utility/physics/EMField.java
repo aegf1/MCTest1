@@ -33,27 +33,18 @@ public class EMField
 	public static Vector3 getTotalEFiedPointCharges(Vector3 pos)
 	{
 		Vector3 e = new Vector3(0,0,0);
-		int[][] posCharges = MaxwellCraft.posChargeTracker.get2DArray();
-		if (posCharges.length>=1) 
+		int[][] charges = MaxwellCraft.chargeTracker.get2DArray();
+		if (charges.length>=1) 
 		{
 //			System.out.println(magnets.length);
 //			System.out.println(magnets[0].length);
-			for (int i = 0; i < posCharges.length; i++) 
+			for (int i = 0; i < charges.length; i++) 
 			{
-				Vector3 thisChargePos = new Vector3(posCharges[i][0]+0.5, posCharges[i][1]+0.5, posCharges[i][2]+0.5);
-				e.increaseBy(getEFieldPointCharge(pos, thisChargePos, 1D));
-			} 
-		}
-		
-		int[][] negCharges = MaxwellCraft.negChargeTracker.get2DArray();
-		if (negCharges.length>=1) 
-		{
-//			System.out.println(magnets.length);
-//			System.out.println(magnets[0].length);
-			for (int i = 0; i < negCharges.length; i++) 
-			{
-				Vector3 thisChargePos = new Vector3(negCharges[i][0]+0.5, negCharges[i][1]+0.5, negCharges[i][2]+0.5);
-				e.increaseBy(getEFieldPointCharge(pos, thisChargePos, -1D));
+				Vector3 thisChargePos = new Vector3(charges[i][0]+0.5, charges[i][1]+0.5, charges[i][2]+0.5);
+				int thisCharge = 0;
+				if(charges[i][3] == 1){ thisCharge = 1;} else if(charges[i][3] == 0){ thisCharge = -1;}
+				else {LogHelper.error("Invalid tracker entry");}
+				e.increaseBy(getEFieldPointCharge(pos, thisChargePos, thisCharge));
 			} 
 		}
 		

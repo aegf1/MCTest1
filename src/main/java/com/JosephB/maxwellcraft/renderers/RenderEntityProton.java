@@ -12,7 +12,7 @@ import net.minecraft.entity.Entity;
  * Render for thrown protons
  * @author Joseph Brownless
  */
-public class RenderEntityProton extends RenderEntityChargedParticle
+public class RenderEntityProton extends RenderEntityMaxwellcraftParticle
 {
 	/**
 	 * Creates render using default minecraft rendermanager
@@ -48,4 +48,6 @@ public class RenderEntityProton extends RenderEntityChargedParticle
 	{
 		return Minecraft.getMinecraft().getRenderItem().getItemModelMesher().getParticleIcon(ModItems.proton);
 	}
+	
+	
 }

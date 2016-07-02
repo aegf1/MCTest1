@@ -30,11 +30,15 @@ public class ModItems
 	 */
 	public static void init()
 	{
-		proton.setRegistryName(proton.getName());
-		GameRegistry.register(proton);
-		antiProton.setRegistryName(antiProton.getName());
-		GameRegistry.register(antiProton);
+		registerItem(proton);
+		registerItem(antiProton);
 		//Do this for every item
+	}
+	
+	private static void registerItem(ItemMaxwellCraft item)
+	{
+		item.setRegistryName(item.getName());
+		GameRegistry.register(item);
 	}
 	
 	/**
@@ -51,7 +55,7 @@ public class ModItems
 	 * Registers an item render
 	 */
 	@SideOnly(Side.CLIENT)
-	public static void registerItemRender(ItemMaxwellCraft item)
+	private static void registerItemRender(ItemMaxwellCraft item)
 	{
 		RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
 		

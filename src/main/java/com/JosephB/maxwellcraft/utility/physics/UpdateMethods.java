@@ -1,11 +1,11 @@
 package com.JosephB.maxwellcraft.utility.physics;
 
+import com.JosephB.maxwellcraft.entity.EntityMaxwellcraftParticle;
 import com.JosephB.maxwellcraft.entity.EntityChargedParticle;
-import com.JosephB.maxwellcraft.entity.EntityRelChargedParticle;
 import com.JosephB.maxwellcraft.reference.Reference;
 /**
  * Contains numerical update methods.
- * EC methods are no longer used, and RK4 methods are implemented better in {@link EntityRelChargedParticle}
+ * EC methods are no longer used, and RK4 methods are implemented better in {@link EntityChargedParticle}
  * @author Joseph Brownless
  *
  */
@@ -22,7 +22,7 @@ public class UpdateMethods
 		return Vector3.add(vel, Vector3.scale(acc, dt));	// v(n+1) = v(n) + a*t
 	}
 
-	public static Vector3[] updateManyTimesEC(EntityChargedParticle particle)
+	public static Vector3[] updateManyTimesEC(EntityMaxwellcraftParticle particle)
 	{
 		Vector3 thisPos = new Vector3(particle.posX, particle.posY, particle.posZ);
 		Vector3 thisVel = new Vector3(particle.motionX, particle.motionY, particle.motionZ);
@@ -43,7 +43,7 @@ public class UpdateMethods
 		return new Vector3[]{thisPos,thisVel};
 	}
 
-	public static Vector3[] updateRK4(EntityChargedParticle particle, Vector3 pos, Vector3 vel, double dt)
+	public static Vector3[] updateRK4(EntityMaxwellcraftParticle particle, Vector3 pos, Vector3 vel, double dt)
 	{
 		Vector3 startPos = new Vector3(pos);
 		Vector3 startVel = new Vector3(vel);
@@ -114,7 +114,7 @@ public class UpdateMethods
 		};
 	}
 	
-	public static Vector3[] updateManyTimesRK4(EntityChargedParticle particle)
+	public static Vector3[] updateManyTimesRK4(EntityMaxwellcraftParticle particle)
 	{
 		Vector3 thisPos = new Vector3(particle.posX, particle.posY, particle.posZ);
 		Vector3 thisVel = new Vector3(particle.motionX, particle.motionY, particle.motionZ);

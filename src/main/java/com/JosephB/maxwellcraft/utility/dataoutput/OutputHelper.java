@@ -9,7 +9,6 @@ import java.util.Calendar;
 import com.JosephB.maxwellcraft.MaxwellCraft;
 import com.JosephB.maxwellcraft.block.BlockMagnet;
 import com.JosephB.maxwellcraft.utility.physics.Vector3;
-import com.JosephB.maxwellcraft.utility.trackers.PosChargeTracker;
 
 import net.minecraft.util.EnumFacing;
 
@@ -42,29 +41,29 @@ public class OutputHelper
 				e.printStackTrace();
 			}
 	        
-	        dataOutput.println("PosCharges:");
-	        int[][] posCharges = MaxwellCraft.posChargeTracker.get2DArray();
-	        if (posCharges.length>=1) 
+	        int[][] charges = MaxwellCraft.chargeTracker.get2DArray();
+	        if (charges.length>=1) 
 			{
-//				System.out.println(magnets.length);
-//				System.out.println(magnets[0].length);
-				for (int i = 0; i < posCharges.length; i++) 
+		        dataOutput.println("PosCharges:");
+				for (int i = 0; i < charges.length; i++) 
 				{
-					dataOutput.println("("+(posCharges[i][0]+0.5)+", "+(posCharges[i][1]+0.5)+", "+(posCharges[i][2]+0.5)+")");
+					if(charges[i][3] == 1)
+					{
+						dataOutput.println("("+(charges[i][0]+0.5)+", "+(charges[i][1]+0.5)+", "+(charges[i][2]+0.5)+")");
+					}
+				} 
+				
+				dataOutput.println("NegCharges:");
+				for (int i = 0; i < charges.length; i++) 
+				{
+					if(charges[i][3] == 0)
+					{
+						dataOutput.println("("+(charges[i][0]+0.5)+", "+(charges[i][1]+0.5)+", "+(charges[i][2]+0.5)+")");
+					}
 				} 
 			}
 			
-	        dataOutput.println("NegCharges:");
-			int[][] negCharges = MaxwellCraft.negChargeTracker.get2DArray();
-			if (negCharges.length>=1) 
-			{
-//				System.out.println(magnets.length);
-//				System.out.println(magnets[0].length);
-				for (int i = 0; i < negCharges.length; i++) 
-				{
-					dataOutput.println("("+(negCharges[i][0]+0.5)+", "+(negCharges[i][1]+0.5)+", "+(negCharges[i][2]+0.5)+")");
-				} 
-			}
+	       
 			
 			dataOutput.println("Magnets: pos(x,y,z), direction(x,y,z) (towards north)");
 			int[][] magnets = MaxwellCraft.magnetTracker.get2DArray();
