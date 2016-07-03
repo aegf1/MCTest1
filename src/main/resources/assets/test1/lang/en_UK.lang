@@ -1,7 +1,0 @@
-# Item localizations
-item.test1:Proton.name=Proton
-item.test1:AntiProton.name=AntiProton
-tile.test1:Magnet.name=Magnet
-itemGroup.test1=First Test Mod
-tile.test1:PosCharge.name=Positive Charge
-tile.test1:NegCharge.name=Negative Charge

@@ -1,26 +1,10 @@
 package com.JosephB.maxwellcraft.entity;
 
-import java.util.Iterator;
-import java.util.List;
-
-import com.JosephB.maxwellcraft.MaxwellCraft;
-import com.JosephB.maxwellcraft.reference.Reference;
-import com.JosephB.maxwellcraft.utility.LogHelper;
-import com.JosephB.maxwellcraft.utility.dataoutput.OutputHelper;
 import com.JosephB.maxwellcraft.utility.physics.EMField;
 import com.JosephB.maxwellcraft.utility.physics.Vector3;
 
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.item.EntityArmorStand;
-import net.minecraft.entity.projectile.ProjectileHelper;
-import net.minecraft.network.datasync.DataParameter;
-import net.minecraft.network.datasync.DataSerializers;
-import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
-import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
-import net.minecraftforge.fml.common.Mod;
 
 /**
  * Represents a charged particle

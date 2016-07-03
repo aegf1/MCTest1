@@ -3,9 +3,9 @@
     {
         "facing=up": { "model": "maxwellcraft:magnet" },
         "facing=down": { "model": "maxwellcraft:magnet", "x": 180 },
-        "facing=east": { "model": "maxwellcraft:magnet_side", "y": 90 },
-        "facing=south": { "model": "maxwellcraft:magnet_side", "y": 180 },
-        "facing=west": { "model": "maxwellcraft:magnet_side", "y": 270 },
-        "facing=north": { "model": "maxwellcraft:magnet_side" }
+        "facing=north": { "model": "maxwellcraft:magnet", "x": 90 },
+        "facing=east": { "model": "maxwellcraft:magnet", "x": 90, "y": 90 },
+        "facing=south": { "model": "maxwellcraft:magnet", "x": 90, "y": 180 },
+        "facing=west": { "model": "maxwellcraft:magnet", "x": 90, "y": 270 }
     }
 }

@@ -2,11 +2,9 @@ package com.JosephB.maxwellcraft.entity;
 
 import com.JosephB.maxwellcraft.MaxwellCraft;
 import com.JosephB.maxwellcraft.reference.Reference;
-import com.JosephB.maxwellcraft.utility.LogHelper;
 import com.JosephB.maxwellcraft.utility.physics.Vector3;
 
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.World;
 
 /**
